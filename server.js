@@ -8,14 +8,10 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 
-// Serve the built React frontend from dist/
-app.use(express.static(path.join(__dirname, "dist")));
-
-// Proxy route — keeps your API key safe on the server
 app.post("/api/chat", async (req, res) => {
   const { model, max_tokens, system, messages } = req.body;
-
   try {
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -26,7 +22,6 @@ app.post("/api/chat", async (req, res) => {
       },
       body: JSON.stringify({ model, max_tokens, system, messages }),
     });
-
     const data = await response.json();
     res.json(data);
   } catch (err) {
@@ -35,9 +30,8 @@ app.post("/api/chat", async (req, res) => {
   }
 });
 
-// All other routes → serve the React app (handles client-side routing)
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

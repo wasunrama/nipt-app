@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>NIPT Genetic Counselling — ศูนย์จีโนมิกส์ทางการแพทย์</title>
+<title>NIPT Genetic Counselling — ศูนย์จีโนมฯ รามาธิบดี</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
@@ -50,10 +50,10 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
 /* ── Title gradient ── */
 .title-grad{background:linear-gradient(to right,#22d3ee,#60a5fa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-/* ── CMG Logo (unchanged) ── */
-#cmg-logo{display:flex;align-items:stretch;background:rgba(255,255,255,0.9);border-radius:10px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.4),inset 0 2px 0 rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.2);transform:translateZ(0)}
-#cmg-icon-block{background:#ffffff;padding:8px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid #e2e8f0;min-width:72px}
-#cmg-text-block{background:#f8fafc;padding:8px 16px;display:flex;flex-direction:column;justify-content:center}
+/* ── CMG Logo (Artsy Version) ── */
+#cmg-logo{display:flex;align-items:stretch;background:rgba(255,255,255,0.95);border-radius:12px;overflow:hidden;box-shadow:0 8px 25px rgba(0,0,0,0.25),inset 0 1px 1px rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.2);transform:translateZ(0);backdrop-filter:blur(10px)}
+#cmg-icon-block{background:linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);padding:10px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid rgba(0,0,0,0.06);min-width:76px}
+#cmg-text-block{background:rgba(255,255,255,0.6);padding:10px 18px;display:flex;flex-direction:column;justify-content:center}
 
 /* ── Main ── */
 #main{max-width:1200px;margin:0 auto;padding:32px 24px 100px;position:relative}
@@ -125,34 +125,40 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
       </div>
     </div>
 
-    <!-- CMG Logo — unchanged pixel-perfect -->
+    <!-- CMG Logo — Artsy / Modern Version -->
     <div id="cmg-logo">
       <div id="cmg-icon-block">
-        <svg width="48" height="40" viewBox="0 0 54 46" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 2 C7 6 3 10 6 14 C9 18 5 22 8 26 C11 30 7 34 10 38 C13 42 9 44 12 46" stroke="#0f766e" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <path d="M10 2 C7 6 11 10 8 14 C5 18 9 22 6 26 C3 30 7 34 4 38 C1 42 5 44 2 46" stroke="#10b981" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <line x1="4"  y1="6"  x2="10" y2="6"  stroke="#34d399" stroke-width="1" opacity=".7"/>
-          <line x1="7"  y1="12" x2="5"  y2="12" stroke="#34d399" stroke-width="1" opacity=".7"/>
-          <line x1="4"  y1="18" x2="10" y2="18" stroke="#34d399" stroke-width="1" opacity=".7"/>
-          <line x1="7"  y1="24" x2="5"  y2="24" stroke="#34d399" stroke-width="1" opacity=".7"/>
-          <line x1="4"  y1="30" x2="10" y2="30" stroke="#34d399" stroke-width="1" opacity=".7"/>
-          <line x1="7"  y1="36" x2="5"  y2="36" stroke="#34d399" stroke-width="1" opacity=".7"/>
-          <line x1="4"  y1="42" x2="10" y2="42" stroke="#34d399" stroke-width="1" opacity=".7"/>
-          <circle cx="26" cy="6"  r="4"   fill="#0369a1"/>
-          <path d="M22 10 L22 22 M26 10 L26 24 M30 10 L30 22 M22 22 L20 30 M22 22 L24 30 M30 22 L28 30 M30 22 L32 30" stroke="#0369a1" stroke-width="1.8" stroke-linecap="round"/>
-          <circle cx="38" cy="8"  r="3.5" fill="#0ea5e9"/>
-          <path d="M35 12 L35 22 M38 12 L38 24 M41 12 L41 22 M35 22 L33 29 M35 22 L37 29 M41 22 L39 29 M41 22 L43 29" stroke="#0ea5e9" stroke-width="1.8" stroke-linecap="round"/>
-          <circle cx="48" cy="12" r="2.8" fill="#14b8a6"/>
-          <path d="M46 15 L46 22 M48 15 L48 23 M50 15 L50 22 M46 22 L44.5 28 M46 22 L47.5 28 M50 22 L48.5 28 M50 22 L51.5 28" stroke="#14b8a6" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="14" y1="44" x2="53" y2="44" stroke="#cbd5e1" stroke-width="1"/>
+        <svg width="48" height="42" viewBox="0 0 54 46" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0px 4px 6px rgba(14,165,233,0.2))">
+          <defs>
+            <linearGradient id="artLife" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#0284c7"/>
+              <stop offset="50%" stop-color="#0ea5e9"/>
+              <stop offset="100%" stop-color="#2dd4bf"/>
+            </linearGradient>
+            <linearGradient id="artDNA" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#10b981"/>
+              <stop offset="50%" stop-color="#34d399"/>
+              <stop offset="100%" stop-color="#818cf8"/>
+            </linearGradient>
+          </defs>
+          <!-- Elegant DNA / Infinity Curves -->
+          <path d="M 27 42 C 5 30, 49 16, 27 4" fill="none" stroke="url(#artLife)" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M 27 42 C 49 30, 5 16, 27 4" fill="none" stroke="url(#artDNA)" stroke-width="4.5" stroke-linecap="round"/>
+          
+          <!-- Sparkles / Nodes -->
+          <circle cx="27" cy="23" r="3.5" fill="#ffffff" style="filter:drop-shadow(0 0 4px rgba(14,165,233,0.8))"/>
+          <circle cx="16" cy="13" r="2.5" fill="#2dd4bf"/>
+          <circle cx="38" cy="33" r="2.5" fill="#818cf8"/>
+          <circle cx="38" cy="13" r="2.5" fill="#34d399"/>
+          <circle cx="16" cy="33" r="2.5" fill="#0ea5e9"/>
         </svg>
-        <div style="font-size:6px;color:#334155;text-align:center;letter-spacing:.3px;margin-top:2px;font-family:'Kanit',sans-serif;font-weight:500;line-height:1.1">ศูนย์จีโนมิกส์<br/>ทางการแพทย์</div>
+        <div style="font-size:6.5px;color:#475569;text-align:center;letter-spacing:0.5px;margin-top:4px;font-family:'Kanit',sans-serif;font-weight:600;line-height:1.2;text-transform:uppercase">ศูนย์จีโนมฯ<br/>รามาธิบดี</div>
       </div>
       <div id="cmg-text-block">
-        <div style="font-size:15px;font-weight:800;color:#0f766e;font-family:'Inter',sans-serif;line-height:1.1;letter-spacing:-.5px">Genomics Medicine</div>
-        <div style="font-size:12px;font-weight:600;color:#059669;font-family:'Inter',sans-serif;line-height:1.2">The future starts now.</div>
-        <div style="margin-top:4px;padding-top:4px;border-top:1px solid #e2e8f0">
-          <div style="font-size:6px;color:#64748b;font-family:'Inter',sans-serif;letter-spacing:1px;text-transform:uppercase;font-weight:600">Center for Medical Genomics</div>
+        <div style="font-size:16px;font-weight:800;background:linear-gradient(to right, #0f766e, #0369a1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Inter',sans-serif;line-height:1.1;letter-spacing:-0.5px">Genomics Medicine</div>
+        <div style="font-size:12px;font-weight:600;color:#059669;font-family:'Inter',sans-serif;line-height:1.2;margin-top:2px">The future starts now.</div>
+        <div style="margin-top:6px;padding-top:6px;border-top:1px solid rgba(0,0,0,0.06)">
+          <div style="font-size:6.5px;color:#64748b;font-family:'Inter',sans-serif;letter-spacing:1.2px;text-transform:uppercase;font-weight:700">Center for Medical Genomics</div>
         </div>
       </div>
     </div>
@@ -242,7 +248,7 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
           <div id="loading-state">
             <div id="spinner"></div>
             <p style="margin-top:24px;color:#22d3ee;font-size:16px;font-weight:500">กำลังวิเคราะห์ข้อมูล...</p>
-            <p style="color:#64748b;font-size:13px;margin-top:4px">ประมวลผลโดย Claude AI</p>
+            <p style="color:#64748b;font-size:13px;margin-top:4px">ประมวลผลโดย AI</p>
           </div>
           <!-- Answer state -->
           <div id="answer-state">
@@ -316,7 +322,7 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
 <!-- Footer -->
 <footer id="footer">
   <p style="margin:0;font-size:12px;color:#64748b">
-    © ศูนย์จีโนมิกส์ทางการแพทย์ (Center for Medical Genomics) • ข้อมูลนี้เพื่อการศึกษา ไม่สามารถทดแทนการวินิจฉัยทางการแพทย์
+    © ศูนย์จีโนมฯ รามาธิบดี (Center for Medical Genomics) • ข้อมูลนี้เพื่อการศึกษา ไม่สามารถทดแทนการวินิจฉัยทางการแพทย์
   </p>
 </footer>
 
@@ -324,7 +330,7 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
      JAVASCRIPT
 ═══════════════════════════════ -->
 <script>
-/* ── Data (exact from React) ── */
+/* ── Data ── */
 const TOPICS = {
   "ความหมายของ NIPT":    { icon:"🧬", subtopics:["NIPT คืออะไร","หลักการทำงานของ NIPT","ความแตกต่างจาก invasive testing","ข้อบ่งชี้ในการตรวจ NIPT","Genetic counselor คืออะไร","พื้นฐานชีววิทยา: fetal fraction และ cell-free DNA"] },
   "การแปลผล NIPT":        { icon:"📊", subtopics:["ผล High Risk หมายความว่าอะไร","ผล Low Risk หมายความว่าอะไร","ผล No Call / Failed","PPV และ NPV คืออะไร","ความแม่นยำของการตรวจ"] },
@@ -334,7 +340,7 @@ const TOPICS = {
   "คำถามที่พบบ่อย":      { icon:"❓", subtopics:["ตรวจได้ตั้งแต่กี่สัปดาห์","ครรภ์แฝดตรวจได้หรือไม่","IVF มีผลต่อการตรวจหรือไม่","ผล NIPT บอกเพศทารกได้หรือไม่","ค่าใช้จ่ายและการเบิกจ่าย"] },
 };
 const QUICK = ["NIPT คืออะไร","Genetic counselor คืออะไร","พื้นฐานชีววิทยา: fetal fraction และ cell-free DNA","ผล High Risk หมายความว่าอะไร","ตรวจได้ตั้งแต่กี่สัปดาห์"];
-const SYSTEM = `คุณเป็น genetic counselor ผู้เชี่ยวชาญด้าน NIPT ประจำศูนย์จีโนมิกส์ทางการแพทย์
+const SYSTEM = `คุณเป็น genetic counselor ผู้เชี่ยวชาญด้าน NIPT ประจำศูนย์จีโนมฯ รามาธิบดี
 ให้คำปรึกษาเป็นภาษาไทยที่ชัดเจน เป็นวิทยาศาสตร์ และเข้าใจง่าย
 ใช้ข้อมูลทางการแพทย์ที่ถูกต้องและทันสมัย จัดรูปแบบให้อ่านง่าย
 ย้ำเสมอว่าควรปรึกษาแพทย์หรือ genetic counselor สำหรับกรณีเฉพาะบุคคล`;
@@ -343,8 +349,7 @@ let currentCategory = "";
 let currentTopic    = "";
 
 /* ══════════════════════════════════════════════
-   DNAHelix — exact port of React component
-   (Z-sorting, glow, blink sparkles, same params)
+   DNAHelix — 3D Spinning logic
 ══════════════════════════════════════════════ */
 class DNAHelix {
   constructor(canvas) {
@@ -352,14 +357,12 @@ class DNAHelix {
     this.ctx      = canvas.getContext("2d");
     this.W        = canvas.width;
     this.H        = canvas.height;
-    // Scale factors to match viewBox="0 0 300 400"
     this.scaleX   = this.W / 300;
     this.scaleY   = this.H / 400;
     this.time     = 0;
     this.raf      = null;
   }
 
-  /* translate from SVG coords to canvas coords */
   sx(x){ return x * this.scaleX; }
   sy(y){ return y * this.scaleY; }
   sw(w){ return w * this.scaleX; }
@@ -370,17 +373,14 @@ class DNAHelix {
 
     const numBases = 40;
     const radius   = 65;
-    const height   = 320;  // SVG units
+    const height   = 320; 
 
-    /* collect items exactly as React does */
     const items = [];
-
-    /* bg glow (z = -1000) */
     items.push({ z:-1000, type:"bgGlow" });
 
     for (let i = 0; i < numBases; i++) {
       const t  = (i / (numBases - 1)) * Math.PI * 5;
-      const y  = 40 + (i / (numBases - 1)) * height;   // SVG y
+      const y  = 40 + (i / (numBases - 1)) * height;   
       const a1 = t + time;
       const a2 = t + time + Math.PI;
       const x1 = Math.cos(a1) * radius;
@@ -392,14 +392,12 @@ class DNAHelix {
       const scale1 = (z1 + radius) / (radius * 2);
       const scale2 = (z2 + radius) / (radius * 2);
 
-      /* rungs every 2nd base */
       if (i % 2 === 0) {
         const zRung    = (z1 + z2) / 2;
         const rungScale = (scale1 + scale2) / 2;
         items.push({ z: zRung, type:"rung", cx1, cx2, y, rungScale });
       }
 
-      /* backbone */
       if (i > 0) {
         const pi   = i - 1;
         const pt   = (pi / (numBases - 1)) * Math.PI * 5;
@@ -418,14 +416,12 @@ class DNAHelix {
         items.push({ z:az2, type:"bone2", x1:pcx2, y1:py, x2:cx2, y2:y, s:s2 });
       }
 
-      /* dots */
       const blink1 = Math.sin(time * 5 + i) > 0.8 && scale1 > 0.8 ? 1.5 : 1;
       const blink2 = Math.sin(time * 5 + i + Math.PI) > 0.8 && scale2 > 0.8 ? 1.5 : 1;
       items.push({ z:z1+1, type:"dot1", cx:cx1, y, scale:scale1, blink:blink1 });
       items.push({ z:z2+1, type:"dot2", cx:cx2, y, scale:scale2, blink:blink2 });
     }
 
-    /* sparkles */
     for (let j = 0; j < 15; j++) {
       const py     = (time * 15 + j * 30) % 400;
       const px     = 150 + Math.sin(time * 0.5 + j * 123) * 120;
@@ -435,10 +431,8 @@ class DNAHelix {
       items.push({ z:pz, type:"sparkle", cx:px, y:py, scale:pScale, blink:pBlink });
     }
 
-    /* Z-sort ascending (back to front) */
     items.sort((a, b) => a.z - b.z);
 
-    /* draw each item */
     for (const it of items) {
       if (it.type === "bgGlow") {
         const grd = ctx.createRadialGradient(
@@ -616,24 +610,25 @@ function onCategoryChange() {
   });
 }
 
-/* ── Claude API (exponential backoff) ── */
-async function callClaude(userPrompt) {
+/* ── AI Chat Integration (Gemini Base Model) ── */
+async function callAI(userPrompt) {
   const delays = [1000, 2000, 4000, 8000, 16000];
+  const apiKey = ""; // API Key handled by environment
+
   for (let i = 0; i < 5; i++) {
     try {
-      const res = await fetch("/api/chat", {
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model:      "claude-sonnet-4-20250514",
-          max_tokens: 2048,
-          system:     SYSTEM,
-          messages:   [{ role: "user", content: userPrompt }],
+          contents: [{ parts: [{ text: userPrompt }] }],
+          systemInstruction: { parts: [{ text: SYSTEM }] }
         }),
       });
+
       if (res.ok) {
         const d = await res.json();
-        return d.content?.[0]?.text || "ไม่สามารถโหลดข้อมูลได้";
+        return d.candidates?.[0]?.content?.parts?.[0]?.text || "ไม่สามารถโหลดข้อมูลได้";
       }
       throw new Error("API Error");
     } catch {
@@ -691,7 +686,7 @@ async function askTopic(t, cat) {
   document.getElementById("panel-topic").textContent = t;
   showLoading();
   const prompt = cat ? `หมวด: ${cat}\nคำถาม: ${t}` : t;
-  const text   = await callClaude(prompt);
+  const text   = await callAI(prompt);
   showAnswer(fmt(text));
 }
 
@@ -724,7 +719,7 @@ async function handleSend() {
   ty.style.display = "flex";
   scrollEnd();
 
-  const answer = await callClaude(q);
+  const answer = await callAI(q);
 
   ty.style.display = "none";
 
@@ -743,8 +738,6 @@ async function handleSend() {
 function scrollEnd() {
   document.getElementById("chat-end").scrollIntoView({ behavior:"smooth" });
 }
-
-/* ── API Key อยู่ที่ server (Render.com) ── */
 
 /* ── Boot ── */
 window.addEventListener("DOMContentLoaded", () => {

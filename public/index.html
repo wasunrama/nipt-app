@@ -7,7 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-/* ── Reset & Base ── */
 *{box-sizing:border-box;margin:0;padding:0}
 body{min-height:100vh;background-color:#0f172a;background-image:radial-gradient(circle at 15% 50%,rgba(6,182,212,0.15),transparent 30%),radial-gradient(circle at 85% 30%,rgba(236,72,153,0.15),transparent 30%);font-family:'Kanit','Inter',sans-serif;color:#f1f5f9;overflow-x:hidden}
 select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
@@ -15,68 +14,38 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
 ::-webkit-scrollbar-track{background:rgba(0,0,0,0.1);border-radius:4px}
 ::-webkit-scrollbar-thumb{background:rgba(6,182,212,0.4);border-radius:4px}
 ::-webkit-scrollbar-thumb:hover{background:rgba(6,182,212,0.8)}
-
-/* ── Animations ── */
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @keyframes pulseGlow{0%,100%{opacity:.6}50%{opacity:1;filter:brightness(1.2)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes dotFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-
-/* ── Glass Panel ── */
-.glass-panel{
-  background:linear-gradient(135deg,rgba(255,255,255,0.06) 0%,rgba(255,255,255,0.01) 100%);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border:1px solid rgba(255,255,255,0.08);
-  border-top:1px solid rgba(255,255,255,0.15);
-  border-left:1px solid rgba(255,255,255,0.15);
-  box-shadow:0 8px 32px 0 rgba(0,0,0,0.3);
-  border-radius:16px;
-}
-
-/* ── Buttons ── */
+.glass-panel{background:linear-gradient(135deg,rgba(255,255,255,0.06) 0%,rgba(255,255,255,0.01) 100%);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);border-top:1px solid rgba(255,255,255,0.15);border-left:1px solid rgba(255,255,255,0.15);box-shadow:0 8px 32px 0 rgba(0,0,0,0.3);border-radius:16px}
 .glass-btn{transition:all .2s cubic-bezier(.4,0,.2,1);cursor:pointer;border:none;font-family:'Kanit','Inter',sans-serif}
 .glass-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.4);background:rgba(255,255,255,0.1)!important}
 .glass-btn:active{transform:translateY(0)}
 .topic-btn{transition:all .2s ease;cursor:pointer;border:none;font-family:'Kanit','Inter',sans-serif}
 .topic-btn:hover{background:rgba(6,182,212,0.15)!important;border-left-color:#06b6d4!important;padding-left:16px!important}
-
-/* ── Header ── */
 #header{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(15,23,42,0.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
 .grad-line{height:3px;background:linear-gradient(90deg,#06b6d4,#3b82f6,#ec4899)}
 #header-inner{max-width:1200px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
 #tabs-row{max-width:1200px;margin:0 auto;padding:0 24px 16px;display:flex;gap:12px}
-
-/* ── Title gradient ── */
 .title-grad{background:linear-gradient(to right,#22d3ee,#60a5fa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-
-/* ── CMG Logo (Artsy Version) ── */
 #cmg-logo{display:flex;align-items:stretch;background:rgba(255,255,255,0.95);border-radius:12px;overflow:hidden;box-shadow:0 8px 25px rgba(0,0,0,0.25),inset 0 1px 1px rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.2);transform:translateZ(0);backdrop-filter:blur(10px)}
-#cmg-icon-block{background:linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);padding:10px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid rgba(0,0,0,0.06);min-width:76px}
+#cmg-icon-block{background:linear-gradient(135deg,#ffffff 0%,#f8fafc 100%);padding:10px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid rgba(0,0,0,0.06);min-width:76px}
 #cmg-text-block{background:rgba(255,255,255,0.6);padding:10px 18px;display:flex;flex-direction:column;justify-content:center}
-
-/* ── Main ── */
 #main{max-width:1200px;margin:0 auto;padding:32px 24px 100px;position:relative}
 #guided-grid{display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:start}
 #sidebar{display:flex;flex-direction:column;gap:16px}
-
-/* ── DNA icon wrapper ── */
 #dna-header-wrap{width:60px;height:60px;animation:float 6s ease-in-out infinite}
 #dna-header-box{width:100%;height:100%;border-radius:16px;background:linear-gradient(135deg,rgba(6,182,212,0.1),rgba(236,72,153,0.1));border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 20px rgba(6,182,212,0.1)}
-
-/* ── Response panel ── */
 #response-panel{min-height:600px;display:flex;flex-direction:column;overflow:hidden}
 #panel-topbar{padding:16px 24px;background:rgba(0,0,0,0.2);border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:12px}
 #panel-body{padding:32px;flex:1;overflow-y:auto;display:flex;flex-direction:column}
-
-/* ── States ── */
 #empty-state{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:.7}
 #empty-dna{width:180px;height:240px;animation:float 6s ease-in-out infinite;opacity:.5}
 #loading-state{flex:1;display:none;flex-direction:column;align-items:center;justify-content:center;animation:pulseGlow 2s infinite}
 #spinner{width:64px;height:64px;border:3px solid rgba(6,182,212,0.2);border-top-color:#06b6d4;border-radius:50%;animation:spin 1s linear infinite}
 #answer-state{display:none;animation:fadeUp .5s cubic-bezier(.16,1,.3,1)}
-
-/* ── Chat ── */
 #chat-view{display:none}
 #chat-container{max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:20px;height:calc(100vh - 220px)}
 #chat-panel{flex:1;display:flex;flex-direction:column;overflow:hidden}
@@ -90,11 +59,7 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
 .typing-dot:nth-child(1){animation:dotFloat 1s ease-in-out 0s infinite}
 .typing-dot:nth-child(2){animation:dotFloat 1s ease-in-out .2s infinite}
 .typing-dot:nth-child(3){animation:dotFloat 1s ease-in-out .4s infinite}
-
-/* ── Footer ── */
 #footer{position:fixed;bottom:0;width:100%;padding:12px;background:rgba(2,6,23,0.8);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,0.05);text-align:center;z-index:40}
-
-/* ── Answer formatting ── */
 .ans-h{font-weight:600;color:#22d3ee;margin:16px 0 8px;font-size:16px}
 .ans-p{margin:6px 0;line-height:1.6}
 .ans-strong{color:#38bdf8;font-weight:500}
@@ -103,12 +68,9 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
 </head>
 <body>
 
-<!-- ═══ HEADER ═══ -->
 <header id="header">
   <div class="grad-line"></div>
   <div id="header-inner">
-
-    <!-- DNA icon + Title -->
     <div style="display:flex;align-items:center;gap:16px">
       <div id="dna-header-wrap">
         <div id="dna-header-box">
@@ -125,7 +87,7 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
       </div>
     </div>
 
-    <!-- CMG Logo — Artsy / Modern Version -->
+    <!-- CMG Logo -->
     <div id="cmg-logo">
       <div id="cmg-icon-block">
         <svg width="48" height="42" viewBox="0 0 54 46" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0px 4px 6px rgba(14,165,233,0.2))">
@@ -141,11 +103,8 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
               <stop offset="100%" stop-color="#818cf8"/>
             </linearGradient>
           </defs>
-          <!-- Elegant DNA / Infinity Curves -->
           <path d="M 27 42 C 5 30, 49 16, 27 4" fill="none" stroke="url(#artLife)" stroke-width="4.5" stroke-linecap="round"/>
           <path d="M 27 42 C 49 30, 5 16, 27 4" fill="none" stroke="url(#artDNA)" stroke-width="4.5" stroke-linecap="round"/>
-          
-          <!-- Sparkles / Nodes -->
           <circle cx="27" cy="23" r="3.5" fill="#ffffff" style="filter:drop-shadow(0 0 4px rgba(14,165,233,0.8))"/>
           <circle cx="16" cy="13" r="2.5" fill="#2dd4bf"/>
           <circle cx="38" cy="33" r="2.5" fill="#818cf8"/>
@@ -155,7 +114,7 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
         <div style="font-size:6.5px;color:#475569;text-align:center;letter-spacing:0.5px;margin-top:4px;font-family:'Kanit',sans-serif;font-weight:600;line-height:1.2;text-transform:uppercase">ศูนย์จีโนมฯ<br/>รามาธิบดี</div>
       </div>
       <div id="cmg-text-block">
-        <div style="font-size:16px;font-weight:800;background:linear-gradient(to right, #0f766e, #0369a1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Inter',sans-serif;line-height:1.1;letter-spacing:-0.5px">Genomics Medicine</div>
+        <div style="font-size:16px;font-weight:800;background:linear-gradient(to right,#0f766e,#0369a1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Inter',sans-serif;line-height:1.1;letter-spacing:-0.5px">Genomics Medicine</div>
         <div style="font-size:12px;font-weight:600;color:#059669;font-family:'Inter',sans-serif;line-height:1.2;margin-top:2px">The future starts now.</div>
         <div style="margin-top:6px;padding-top:6px;border-top:1px solid rgba(0,0,0,0.06)">
           <div style="font-size:6.5px;color:#64748b;font-family:'Inter',sans-serif;letter-spacing:1.2px;text-transform:uppercase;font-weight:700">Center for Medical Genomics</div>
@@ -164,7 +123,6 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
     </div>
   </div>
 
-  <!-- Tabs -->
   <div id="tabs-row" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
     <div style="max-width:1200px;margin:0 auto;padding:0 24px 16px;display:flex;gap:12px;width:100%">
       <button id="tab-guided" class="glass-btn" onclick="switchTab('guided')"
@@ -179,19 +137,10 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
   </div>
 </header>
 
-<!-- ═══════════════════════════════
-     MAIN
-═══════════════════════════════ -->
 <main id="main">
-
-  <!-- ── GUIDED MODE ── -->
   <div id="guided-view">
     <div id="guided-grid">
-
-      <!-- Sidebar -->
       <div id="sidebar">
-
-        <!-- Category dropdown -->
         <div class="glass-panel" style="padding:20px">
           <label style="font-size:12px;color:#64748b;font-weight:600;letter-spacing:1px;display:block;margin-bottom:12px">เลือกหมวดหมู่</label>
           <div style="position:relative">
@@ -209,13 +158,11 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
           </div>
         </div>
 
-        <!-- Subtopics (shown when category selected) -->
         <div id="subtopic-panel" class="glass-panel" style="padding:20px;display:none">
           <label style="font-size:12px;color:#64748b;font-weight:600;letter-spacing:1px;display:block;margin-bottom:12px">หัวข้อย่อย</label>
           <div id="subtopic-list" style="display:flex;flex-direction:column;gap:6px"></div>
         </div>
 
-        <!-- Quick access (shown when no category) -->
         <div id="quick-panel" style="position:relative;perspective:1000px">
           <div class="glass-panel" style="padding:20px;border-color:rgba(236,72,153,0.2)">
             <label style="font-size:12px;color:#f472b6;font-weight:600;letter-spacing:1px;display:block;margin-bottom:12px">⚡ เข้าถึงด่วน</label>
@@ -224,7 +171,6 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
         </div>
       </div>
 
-      <!-- Content panel -->
       <div class="glass-panel" id="response-panel">
         <div id="panel-topbar">
           <div style="display:flex;gap:6px">
@@ -234,9 +180,7 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
           </div>
           <span id="panel-topic" style="color:#94a3b8;font-size:14px"></span>
         </div>
-
         <div id="panel-body">
-          <!-- Empty state -->
           <div id="empty-state">
             <div id="empty-dna">
               <canvas id="dna-large" width="180" height="240" style="width:180px;height:240px;filter:drop-shadow(0px 4px 16px rgba(0,212,255,0.3))"></canvas>
@@ -244,13 +188,11 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
             <h3 style="color:#e2e8f0;font-size:20px;font-weight:500;margin-top:24px">เลือกหมวดหมู่และหัวข้อ</h3>
             <p style="color:#64748b;font-size:14px;margin-top:8px">เพื่อเริ่มการให้คำปรึกษา NIPT</p>
           </div>
-          <!-- Loading state -->
           <div id="loading-state">
             <div id="spinner"></div>
             <p style="margin-top:24px;color:#22d3ee;font-size:16px;font-weight:500">กำลังวิเคราะห์ข้อมูล...</p>
             <p style="color:#64748b;font-size:13px;margin-top:4px">ประมวลผลโดย AI</p>
           </div>
-          <!-- Answer state -->
           <div id="answer-state">
             <div id="answer-text" style="font-size:15px;color:#e2e8f0"></div>
             <div style="margin-top:40px;padding:16px;background:rgba(245,158,11,0.05);border-left:4px solid #f59e0b;border-radius:0 8px 8px 0">
@@ -264,21 +206,16 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
     </div>
   </div>
 
-  <!-- ── CHAT MODE ── -->
   <div id="chat-view">
     <div id="chat-container">
       <div class="glass-panel" id="chat-panel">
-
         <div id="chat-messages">
-          <!-- Empty prompt -->
           <div id="chat-empty" style="margin:auto;text-align:center;color:#64748b">
             <div style="font-size:48px;margin-bottom:16px">💬</div>
             <h3 style="font-size:18px;color:#cbd5e1;font-weight:500">สอบถามข้อมูล NIPT เพิ่มเติม</h3>
             <p style="font-size:14px;margin-top:8px">พิมพ์คำถามของคุณที่ช่องด้านล่าง</p>
           </div>
-          <!-- Messages injected here -->
           <div id="chat-msgs"></div>
-          <!-- Typing indicator -->
           <div id="typing" style="display:none;align-self:flex-start;padding:12px 16px;background:rgba(255,255,255,0.02);border-radius:16px;flex-direction:row;gap:8px">
             <div class="typing-dot"></div>
             <div class="typing-dot"></div>
@@ -286,9 +223,7 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
           </div>
           <div id="chat-end"></div>
         </div>
-
         <div id="chat-input-area">
-          <!-- Suggested chips -->
           <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
             <button class="glass-btn" onclick="setQ('NIPT กับ quad screen ต่างกันอย่างไร?')"
               style="padding:6px 14px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);border-radius:20px;color:#22d3ee;font-size:12px;font-family:'Kanit',sans-serif">
@@ -303,7 +238,6 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
               ผล No Call คืออะไร?
             </button>
           </div>
-          <!-- Input row -->
           <div style="display:flex;gap:12px">
             <input id="chat-input" type="text" placeholder="พิมพ์คำถามเกี่ยวกับ NIPT..."
               onkeydown="if(event.key==='Enter')handleSend()"
@@ -319,18 +253,13 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
   </div>
 </main>
 
-<!-- Footer -->
 <footer id="footer">
   <p style="margin:0;font-size:12px;color:#64748b">
     © ศูนย์จีโนมฯ รามาธิบดี (Center for Medical Genomics) • ข้อมูลนี้เพื่อการศึกษา ไม่สามารถทดแทนการวินิจฉัยทางการแพทย์
   </p>
 </footer>
 
-<!-- ═══════════════════════════════
-     JAVASCRIPT
-═══════════════════════════════ -->
 <script>
-/* ── Data ── */
 const TOPICS = {
   "ความหมายของ NIPT":    { icon:"🧬", subtopics:["NIPT คืออะไร","หลักการทำงานของ NIPT","ความแตกต่างจาก invasive testing","ข้อบ่งชี้ในการตรวจ NIPT","Genetic counselor คืออะไร","พื้นฐานชีววิทยา: fetal fraction และ cell-free DNA"] },
   "การแปลผล NIPT":        { icon:"📊", subtopics:["ผล High Risk หมายความว่าอะไร","ผล Low Risk หมายความว่าอะไร","ผล No Call / Failed","PPV และ NPV คืออะไร","ความแม่นยำของการตรวจ"] },
@@ -348,402 +277,235 @@ const SYSTEM = `คุณเป็น genetic counselor ผู้เชี่ย
 let currentCategory = "";
 let currentTopic    = "";
 
-/* ══════════════════════════════════════════════
-   DNAHelix — 3D Spinning logic
-══════════════════════════════════════════════ */
+/* ── DNA Helix ── */
 class DNAHelix {
   constructor(canvas) {
-    this.canvas   = canvas;
-    this.ctx      = canvas.getContext("2d");
-    this.W        = canvas.width;
-    this.H        = canvas.height;
-    this.scaleX   = this.W / 300;
-    this.scaleY   = this.H / 400;
-    this.time     = 0;
-    this.raf      = null;
+    this.canvas=canvas; this.ctx=canvas.getContext("2d");
+    this.W=canvas.width; this.H=canvas.height;
+    this.scaleX=this.W/300; this.scaleY=this.H/400;
+    this.time=0; this.raf=null;
   }
-
-  sx(x){ return x * this.scaleX; }
-  sy(y){ return y * this.scaleY; }
-  sw(w){ return w * this.scaleX; }
-
+  sx(x){return x*this.scaleX} sy(y){return y*this.scaleY} sw(w){return w*this.scaleX}
   draw() {
-    const { ctx, time, W, H } = this;
-    ctx.clearRect(0, 0, W, H);
-
-    const numBases = 40;
-    const radius   = 65;
-    const height   = 320; 
-
-    const items = [];
-    items.push({ z:-1000, type:"bgGlow" });
-
-    for (let i = 0; i < numBases; i++) {
-      const t  = (i / (numBases - 1)) * Math.PI * 5;
-      const y  = 40 + (i / (numBases - 1)) * height;   
-      const a1 = t + time;
-      const a2 = t + time + Math.PI;
-      const x1 = Math.cos(a1) * radius;
-      const z1 = Math.sin(a1) * radius;
-      const x2 = Math.cos(a2) * radius;
-      const z2 = Math.sin(a2) * radius;
-      const cx1 = 150 + x1;
-      const cx2 = 150 + x2;
-      const scale1 = (z1 + radius) / (radius * 2);
-      const scale2 = (z2 + radius) / (radius * 2);
-
-      if (i % 2 === 0) {
-        const zRung    = (z1 + z2) / 2;
-        const rungScale = (scale1 + scale2) / 2;
-        items.push({ z: zRung, type:"rung", cx1, cx2, y, rungScale });
+    const {ctx,time,W,H}=this;
+    ctx.clearRect(0,0,W,H);
+    const numBases=40,radius=65,height=320;
+    const items=[];
+    items.push({z:-1000,type:"bgGlow"});
+    for(let i=0;i<numBases;i++){
+      const t=(i/(numBases-1))*Math.PI*5,y=40+(i/(numBases-1))*height;
+      const a1=t+time,a2=t+time+Math.PI;
+      const x1=Math.cos(a1)*radius,z1=Math.sin(a1)*radius;
+      const x2=Math.cos(a2)*radius,z2=Math.sin(a2)*radius;
+      const cx1=150+x1,cx2=150+x2;
+      const scale1=(z1+radius)/(radius*2),scale2=(z2+radius)/(radius*2);
+      if(i%2===0){const zR=(z1+z2)/2,rS=(scale1+scale2)/2;items.push({z:zR,type:"rung",cx1,cx2,y,rungScale:rS});}
+      if(i>0){
+        const pi=i-1,pt=(pi/(numBases-1))*Math.PI*5,py=40+(pi/(numBases-1))*height;
+        const pa1=pt+time,pa2=pt+time+Math.PI;
+        const pcx1=150+Math.cos(pa1)*radius,pz1=Math.sin(pa1)*radius;
+        const pcx2=150+Math.cos(pa2)*radius,pz2=Math.sin(pa2)*radius;
+        const az1=(z1+pz1)/2,az2=(z2+pz2)/2;
+        items.push({z:az1,type:"bone1",x1:pcx1,y1:py,x2:cx1,y2:y,s:(az1+radius)/(radius*2)});
+        items.push({z:az2,type:"bone2",x1:pcx2,y1:py,x2:cx2,y2:y,s:(az2+radius)/(radius*2)});
       }
-
-      if (i > 0) {
-        const pi   = i - 1;
-        const pt   = (pi / (numBases - 1)) * Math.PI * 5;
-        const py   = 40 + (pi / (numBases - 1)) * height;
-        const pa1  = pt + time;
-        const pa2  = pt + time + Math.PI;
-        const pcx1 = 150 + Math.cos(pa1) * radius;
-        const pz1  = Math.sin(pa1) * radius;
-        const pcx2 = 150 + Math.cos(pa2) * radius;
-        const pz2  = Math.sin(pa2) * radius;
-        const az1  = (z1 + pz1) / 2;
-        const az2  = (z2 + pz2) / 2;
-        const s1   = (az1 + radius) / (radius * 2);
-        const s2   = (az2 + radius) / (radius * 2);
-        items.push({ z:az1, type:"bone1", x1:pcx1, y1:py, x2:cx1, y2:y, s:s1 });
-        items.push({ z:az2, type:"bone2", x1:pcx2, y1:py, x2:cx2, y2:y, s:s2 });
-      }
-
-      const blink1 = Math.sin(time * 5 + i) > 0.8 && scale1 > 0.8 ? 1.5 : 1;
-      const blink2 = Math.sin(time * 5 + i + Math.PI) > 0.8 && scale2 > 0.8 ? 1.5 : 1;
-      items.push({ z:z1+1, type:"dot1", cx:cx1, y, scale:scale1, blink:blink1 });
-      items.push({ z:z2+1, type:"dot2", cx:cx2, y, scale:scale2, blink:blink2 });
+      const blink1=Math.sin(time*5+i)>0.8&&scale1>0.8?1.5:1;
+      const blink2=Math.sin(time*5+i+Math.PI)>0.8&&scale2>0.8?1.5:1;
+      items.push({z:z1+1,type:"dot1",cx:cx1,y,scale:scale1,blink:blink1});
+      items.push({z:z2+1,type:"dot2",cx:cx2,y,scale:scale2,blink:blink2});
     }
-
-    for (let j = 0; j < 15; j++) {
-      const py     = (time * 15 + j * 30) % 400;
-      const px     = 150 + Math.sin(time * 0.5 + j * 123) * 120;
-      const pz     = Math.cos(time * 0.8 + j * 321) * 100;
-      const pScale = (pz + 100) / 200;
-      const pBlink = Math.sin(time * 8 + j * 45) > 0.6 ? 1 : 0.2;
-      items.push({ z:pz, type:"sparkle", cx:px, y:py, scale:pScale, blink:pBlink });
+    for(let j=0;j<15;j++){
+      const py=(time*15+j*30)%400,px=150+Math.sin(time*0.5+j*123)*120;
+      const pz=Math.cos(time*0.8+j*321)*100,pScale=(pz+100)/200;
+      items.push({z:pz,type:"sparkle",cx:px,y:py,scale:pScale,blink:Math.sin(time*8+j*45)>0.6?1:0.2});
     }
-
-    items.sort((a, b) => a.z - b.z);
-
-    for (const it of items) {
-      if (it.type === "bgGlow") {
-        const grd = ctx.createRadialGradient(
-          this.sx(150), this.sy(200), 0,
-          this.sx(150), this.sy(200), this.sx(120)
-        );
-        grd.addColorStop(0, "rgba(0,212,255,0.25)");
-        grd.addColorStop(1, "rgba(0,212,255,0)");
-        ctx.fillStyle = grd;
-        ctx.beginPath();
-        ctx.ellipse(this.sx(150), this.sy(200), this.sx(120), this.sy(180), 0, 0, Math.PI*2);
-        ctx.fill();
-
-      } else if (it.type === "rung") {
-        ctx.save();
-        ctx.strokeStyle = `rgba(255,255,255,${0.1 + it.rungScale * 0.7})`;
-        ctx.lineWidth   = this.sw(1 + it.rungScale * 2.5);
-        ctx.globalAlpha = 0.1 + it.rungScale * 0.7;
-        ctx.beginPath();
-        ctx.moveTo(this.sx(it.cx1), this.sy(it.y));
-        ctx.lineTo(this.sx(it.cx2), this.sy(it.y));
-        ctx.stroke();
-        ctx.restore();
-
-      } else if (it.type === "bone1") {
-        ctx.save();
-        ctx.shadowColor = "#00d4ff";
-        ctx.shadowBlur  = this.sw(5);
-        ctx.strokeStyle = `rgba(0,212,255,${0.2 + it.s * 0.8})`;
-        ctx.lineWidth   = this.sw(2 + it.s * 5);
-        ctx.lineCap     = "round";
-        ctx.beginPath();
-        ctx.moveTo(this.sx(it.x1), this.sy(it.y1));
-        ctx.lineTo(this.sx(it.x2), this.sy(it.y2));
-        ctx.stroke();
-        ctx.restore();
-
-      } else if (it.type === "bone2") {
-        ctx.save();
-        ctx.shadowColor = "#ff4da6";
-        ctx.shadowBlur  = this.sw(5);
-        ctx.strokeStyle = `rgba(255,77,166,${0.2 + it.s * 0.8})`;
-        ctx.lineWidth   = this.sw(2 + it.s * 5);
-        ctx.lineCap     = "round";
-        ctx.beginPath();
-        ctx.moveTo(this.sx(it.x1), this.sy(it.y1));
-        ctx.lineTo(this.sx(it.x2), this.sy(it.y2));
-        ctx.stroke();
-        ctx.restore();
-
-      } else if (it.type === "dot1") {
-        const r    = this.sw((1.5 + it.scale * 2) * it.blink);
-        const isBig = it.blink > 1;
-        ctx.save();
-        ctx.shadowColor = isBig ? "#ffffff" : "#00d4ff";
-        ctx.shadowBlur  = isBig ? this.sw(10) : this.sw(5);
-        ctx.fillStyle   = isBig ? "#ffffff" : `rgba(0,212,255,${0.4 + it.scale * 0.6})`;
-        ctx.globalAlpha = 0.4 + it.scale * 0.6;
-        ctx.beginPath();
-        ctx.arc(this.sx(it.cx), this.sy(it.y), r, 0, Math.PI*2);
-        ctx.fill();
-        ctx.restore();
-
-      } else if (it.type === "dot2") {
-        const r    = this.sw((1.5 + it.scale * 2) * it.blink);
-        const isBig = it.blink > 1;
-        ctx.save();
-        ctx.shadowColor = isBig ? "#ffffff" : "#ff4da6";
-        ctx.shadowBlur  = isBig ? this.sw(10) : this.sw(5);
-        ctx.fillStyle   = isBig ? "#ffffff" : `rgba(255,77,166,${0.4 + it.scale * 0.6})`;
-        ctx.globalAlpha = 0.4 + it.scale * 0.6;
-        ctx.beginPath();
-        ctx.arc(this.sx(it.cx), this.sy(it.y), r, 0, Math.PI*2);
-        ctx.fill();
-        ctx.restore();
-
-      } else if (it.type === "sparkle") {
-        const r = this.sw(1 + it.scale * 2.5);
-        ctx.save();
-        ctx.shadowColor = "#ffffff";
-        ctx.shadowBlur  = this.sw(10);
-        ctx.fillStyle   = "#ffffff";
-        ctx.globalAlpha = it.blink * it.scale * 0.8;
-        ctx.beginPath();
-        ctx.arc(this.sx(it.cx), this.sy(it.y), r, 0, Math.PI*2);
-        ctx.fill();
-        ctx.restore();
+    items.sort((a,b)=>a.z-b.z);
+    for(const it of items){
+      if(it.type==="bgGlow"){
+        const grd=ctx.createRadialGradient(this.sx(150),this.sy(200),0,this.sx(150),this.sy(200),this.sx(120));
+        grd.addColorStop(0,"rgba(0,212,255,0.25)");grd.addColorStop(1,"rgba(0,212,255,0)");
+        ctx.fillStyle=grd;ctx.beginPath();ctx.ellipse(this.sx(150),this.sy(200),this.sx(120),this.sy(180),0,0,Math.PI*2);ctx.fill();
+      } else if(it.type==="rung"){
+        ctx.save();ctx.strokeStyle=`rgba(255,255,255,${0.1+it.rungScale*0.7})`;ctx.lineWidth=this.sw(1+it.rungScale*2.5);ctx.globalAlpha=0.1+it.rungScale*0.7;
+        ctx.beginPath();ctx.moveTo(this.sx(it.cx1),this.sy(it.y));ctx.lineTo(this.sx(it.cx2),this.sy(it.y));ctx.stroke();ctx.restore();
+      } else if(it.type==="bone1"){
+        ctx.save();ctx.shadowColor="#00d4ff";ctx.shadowBlur=this.sw(5);ctx.strokeStyle=`rgba(0,212,255,${0.2+it.s*0.8})`;ctx.lineWidth=this.sw(2+it.s*5);ctx.lineCap="round";
+        ctx.beginPath();ctx.moveTo(this.sx(it.x1),this.sy(it.y1));ctx.lineTo(this.sx(it.x2),this.sy(it.y2));ctx.stroke();ctx.restore();
+      } else if(it.type==="bone2"){
+        ctx.save();ctx.shadowColor="#ff4da6";ctx.shadowBlur=this.sw(5);ctx.strokeStyle=`rgba(255,77,166,${0.2+it.s*0.8})`;ctx.lineWidth=this.sw(2+it.s*5);ctx.lineCap="round";
+        ctx.beginPath();ctx.moveTo(this.sx(it.x1),this.sy(it.y1));ctx.lineTo(this.sx(it.x2),this.sy(it.y2));ctx.stroke();ctx.restore();
+      } else if(it.type==="dot1"){
+        const r=this.sw((1.5+it.scale*2)*it.blink),isBig=it.blink>1;
+        ctx.save();ctx.shadowColor=isBig?"#ffffff":"#00d4ff";ctx.shadowBlur=isBig?this.sw(10):this.sw(5);
+        ctx.fillStyle=isBig?"#ffffff":`rgba(0,212,255,${0.4+it.scale*0.6})`;ctx.globalAlpha=0.4+it.scale*0.6;
+        ctx.beginPath();ctx.arc(this.sx(it.cx),this.sy(it.y),r,0,Math.PI*2);ctx.fill();ctx.restore();
+      } else if(it.type==="dot2"){
+        const r=this.sw((1.5+it.scale*2)*it.blink),isBig=it.blink>1;
+        ctx.save();ctx.shadowColor=isBig?"#ffffff":"#ff4da6";ctx.shadowBlur=isBig?this.sw(10):this.sw(5);
+        ctx.fillStyle=isBig?"#ffffff":`rgba(255,77,166,${0.4+it.scale*0.6})`;ctx.globalAlpha=0.4+it.scale*0.6;
+        ctx.beginPath();ctx.arc(this.sx(it.cx),this.sy(it.y),r,0,Math.PI*2);ctx.fill();ctx.restore();
+      } else if(it.type==="sparkle"){
+        const r=this.sw(1+it.scale*2.5);
+        ctx.save();ctx.shadowColor="#ffffff";ctx.shadowBlur=this.sw(10);ctx.fillStyle="#ffffff";ctx.globalAlpha=it.blink*it.scale*0.8;
+        ctx.beginPath();ctx.arc(this.sx(it.cx),this.sy(it.y),r,0,Math.PI*2);ctx.fill();ctx.restore();
       }
     }
   }
-
-  start() {
-    const loop = () => {
-      this.time += 0.02;
-      this.draw();
-      this.raf = requestAnimationFrame(loop);
-    };
-    this.raf = requestAnimationFrame(loop);
-  }
-  stop() { if (this.raf) cancelAnimationFrame(this.raf); }
+  start(){const loop=()=>{this.time+=0.02;this.draw();this.raf=requestAnimationFrame(loop)};this.raf=requestAnimationFrame(loop)}
+  stop(){if(this.raf)cancelAnimationFrame(this.raf)}
 }
 
-/* ── Init both DNA canvases ── */
-let dnaSmall, dnaLarge;
-function initDNA() {
-  dnaSmall = new DNAHelix(document.getElementById("dna-small"));
-  dnaSmall.start();
-  dnaLarge = new DNAHelix(document.getElementById("dna-large"));
-  dnaLarge.start();
+let dnaSmall,dnaLarge;
+function initDNA(){
+  dnaSmall=new DNAHelix(document.getElementById("dna-small"));dnaSmall.start();
+  dnaLarge=new DNAHelix(document.getElementById("dna-large"));dnaLarge.start();
 }
 
-/* ── Build quick-access list ── */
-function buildQuick() {
-  const list = document.getElementById("quick-list");
-  QUICK.forEach(q => {
-    const btn = document.createElement("button");
-    btn.className = "glass-btn";
-    btn.style.cssText = "width:100%;padding:12px 14px;text-align:left;border-radius:10px;font-size:13px;font-family:'Kanit',sans-serif;background:rgba(255,255,255,0.02);color:#e2e8f0;display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,0.05)";
-    btn.innerHTML = `<span>${q}</span><span style="color:#ec4899;font-size:16px">→</span>`;
-    btn.onclick   = () => askTopic(q, "");
+function buildQuick(){
+  const list=document.getElementById("quick-list");
+  QUICK.forEach(q=>{
+    const btn=document.createElement("button");
+    btn.className="glass-btn";
+    btn.style.cssText="width:100%;padding:12px 14px;text-align:left;border-radius:10px;font-size:13px;font-family:'Kanit',sans-serif;background:rgba(255,255,255,0.02);color:#e2e8f0;display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,0.05)";
+    btn.innerHTML=`<span>${q}</span><span style="color:#ec4899;font-size:16px">→</span>`;
+    btn.onclick=()=>askTopic(q,"");
     list.appendChild(btn);
   });
 }
 
-/* ── Tab switching ── */
-function switchTab(tab) {
-  const isGuided = tab === "guided";
-  document.getElementById("guided-view").style.display = isGuided ? "block" : "none";
-  document.getElementById("chat-view").style.display   = isGuided ? "none"  : "block";
-  const tg = document.getElementById("tab-guided");
-  const tc = document.getElementById("tab-chat");
-  if (isGuided) {
-    tg.style.background = "rgba(6,182,212,0.15)"; tg.style.color = "#22d3ee"; tg.style.boxShadow = "inset 0 0 0 1px rgba(6,182,212,0.4),0 4px 12px rgba(0,0,0,0.2)";
-    tc.style.background = "rgba(255,255,255,0.03)"; tc.style.color = "#94a3b8"; tc.style.boxShadow = "inset 0 0 0 1px rgba(255,255,255,0.05)";
+function switchTab(tab){
+  const isGuided=tab==="guided";
+  document.getElementById("guided-view").style.display=isGuided?"block":"none";
+  document.getElementById("chat-view").style.display=isGuided?"none":"block";
+  const tg=document.getElementById("tab-guided"),tc=document.getElementById("tab-chat");
+  if(isGuided){
+    tg.style.background="rgba(6,182,212,0.15)";tg.style.color="#22d3ee";tg.style.boxShadow="inset 0 0 0 1px rgba(6,182,212,0.4),0 4px 12px rgba(0,0,0,0.2)";
+    tc.style.background="rgba(255,255,255,0.03)";tc.style.color="#94a3b8";tc.style.boxShadow="inset 0 0 0 1px rgba(255,255,255,0.05)";
   } else {
-    tc.style.background = "rgba(6,182,212,0.15)"; tc.style.color = "#22d3ee"; tc.style.boxShadow = "inset 0 0 0 1px rgba(6,182,212,0.4),0 4px 12px rgba(0,0,0,0.2)";
-    tg.style.background = "rgba(255,255,255,0.03)"; tg.style.color = "#94a3b8"; tg.style.boxShadow = "inset 0 0 0 1px rgba(255,255,255,0.05)";
+    tc.style.background="rgba(6,182,212,0.15)";tc.style.color="#22d3ee";tc.style.boxShadow="inset 0 0 0 1px rgba(6,182,212,0.4),0 4px 12px rgba(0,0,0,0.2)";
+    tg.style.background="rgba(255,255,255,0.03)";tg.style.color="#94a3b8";tg.style.boxShadow="inset 0 0 0 1px rgba(255,255,255,0.05)";
   }
 }
 
-/* ── Category change ── */
-function onCategoryChange() {
-  const cat = document.getElementById("cat-select").value;
-  currentCategory = cat;
-  currentTopic    = "";
-  document.getElementById("panel-topic").textContent = "";
-  showEmpty();
-
-  if (!cat) {
-    document.getElementById("subtopic-panel").style.display = "none";
-    document.getElementById("quick-panel").style.display    = "block";
-    return;
+function onCategoryChange(){
+  const cat=document.getElementById("cat-select").value;
+  currentCategory=cat;currentTopic="";
+  document.getElementById("panel-topic").textContent="";showEmpty();
+  if(!cat){
+    document.getElementById("subtopic-panel").style.display="none";
+    document.getElementById("quick-panel").style.display="block";return;
   }
-  document.getElementById("quick-panel").style.display    = "none";
-  document.getElementById("subtopic-panel").style.display = "block";
-
-  const list = document.getElementById("subtopic-list");
-  list.innerHTML = "";
-  TOPICS[cat].subtopics.forEach(t => {
-    const btn = document.createElement("button");
-    btn.className = "topic-btn";
-    btn.textContent = t;
-    btn.dataset.t   = t;
-    btn.style.cssText = `width:100%;padding:10px 14px;text-align:left;border-radius:8px;font-size:14px;font-family:'Kanit',sans-serif;background:transparent;color:#cbd5e1;border-left:3px solid transparent;font-weight:400;outline:none`;
-    btn.onclick = () => {
-      document.querySelectorAll(".topic-btn").forEach(b => {
-        b.style.background = "transparent"; b.style.color = "#cbd5e1";
-        b.style.borderLeftColor = "transparent"; b.style.fontWeight = "400";
-      });
-      btn.style.background = "rgba(6,182,212,0.1)"; btn.style.color = "#22d3ee";
-      btn.style.borderLeftColor = "#06b6d4"; btn.style.fontWeight = "500";
-      askTopic(t, cat);
+  document.getElementById("quick-panel").style.display="none";
+  document.getElementById("subtopic-panel").style.display="block";
+  const list=document.getElementById("subtopic-list");
+  list.innerHTML="";
+  TOPICS[cat].subtopics.forEach(t=>{
+    const btn=document.createElement("button");
+    btn.className="topic-btn";btn.textContent=t;btn.dataset.t=t;
+    btn.style.cssText=`width:100%;padding:10px 14px;text-align:left;border-radius:8px;font-size:14px;font-family:'Kanit',sans-serif;background:transparent;color:#cbd5e1;border-left:3px solid transparent;font-weight:400;outline:none`;
+    btn.onclick=()=>{
+      document.querySelectorAll(".topic-btn").forEach(b=>{b.style.background="transparent";b.style.color="#cbd5e1";b.style.borderLeftColor="transparent";b.style.fontWeight="400"});
+      btn.style.background="rgba(6,182,212,0.1)";btn.style.color="#22d3ee";btn.style.borderLeftColor="#06b6d4";btn.style.fontWeight="500";
+      askTopic(t,cat);
     };
     list.appendChild(btn);
   });
 }
 
-/* ── AI Chat Integration (Gemini Base Model) ── */
+/* ── Claude API via server proxy ── */
 async function callAI(userPrompt) {
-  const delays = [1000, 2000, 4000, 8000, 16000];
-  const apiKey = ""; // API Key handled by environment
-
-  for (let i = 0; i < 5; i++) {
-    try {
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: userPrompt }] }],
-          systemInstruction: { parts: [{ text: SYSTEM }] }
-        }),
+  const delays=[1000,2000,4000,8000,16000];
+  for(let i=0;i<5;i++){
+    try{
+      const res=await fetch("/api/chat",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          model:"claude-sonnet-4-20250514",
+          max_tokens:2048,
+          system:SYSTEM,
+          messages:[{role:"user",content:userPrompt}]
+        })
       });
-
-      if (res.ok) {
-        const d = await res.json();
-        return d.candidates?.[0]?.content?.parts?.[0]?.text || "ไม่สามารถโหลดข้อมูลได้";
+      if(res.ok){
+        const d=await res.json();
+        return d.content?.[0]?.text||"ไม่สามารถโหลดข้อมูลได้";
       }
       throw new Error("API Error");
-    } catch {
-      if (i === 4) break;
-      await new Promise(r => setTimeout(r, delays[i]));
+    }catch{
+      if(i===4)break;
+      await new Promise(r=>setTimeout(r,delays[i]));
     }
   }
   return "ขออภัย ไม่สามารถเชื่อมต่อได้ในขณะนี้ โปรดลองใหม่อีกครั้ง";
 }
 
 /* ── Format markdown → HTML ── */
-function fmt(text) {
-  function inlineBold(s) {
-    return s.replace(/\*\*(.*?)\*\*/g, '<strong class="ans-strong">$1</strong>')
-            .replace(/\*\*/g, "");
+function fmt(text){
+  function inlineBold(s){
+    return s.replace(/\*\*(.*?)\*\*/g,'<strong class="ans-strong">$1</strong>').replace(/\*\*/g,"");
   }
-  return text.split("\n").map(line => {
-    const t = line.trim();
-    if (!t) return `<div style="height:8px"></div>`;
-    if (t.startsWith("### "))
-      return `<h4 class="ans-h" style="font-size:14px">${inlineBold(t.slice(4))}</h4>`;
-    if (t.startsWith("## "))
-      return `<h4 class="ans-h">${inlineBold(t.slice(3))}</h4>`;
-    if (t.startsWith("# "))
-      return `<h4 class="ans-h" style="font-size:17px">${inlineBold(t.slice(2))}</h4>`;
-    if (t.startsWith("- ") || t.startsWith("• "))
-      return `<li class="ans-li">${inlineBold(t.slice(2))}</li>`;
-    if (t.startsWith("* "))
-      return `<li class="ans-li">${inlineBold(t.slice(2))}</li>`;
+  return text.split("\n").map(line=>{
+    const t=line.trim();
+    if(!t) return `<div style="height:8px"></div>`;
+    if(t.startsWith("### ")) return `<h4 class="ans-h" style="font-size:14px">${inlineBold(t.slice(4))}</h4>`;
+    if(t.startsWith("## "))  return `<h4 class="ans-h">${inlineBold(t.slice(3))}</h4>`;
+    if(t.startsWith("# "))   return `<h4 class="ans-h" style="font-size:17px">${inlineBold(t.slice(2))}</h4>`;
+    if(t.startsWith("- ")||t.startsWith("• ")) return `<li class="ans-li">${inlineBold(t.slice(2))}</li>`;
+    if(t.startsWith("* "))   return `<li class="ans-li">${inlineBold(t.slice(2))}</li>`;
     return `<p class="ans-p">${inlineBold(t)}</p>`;
   }).join("");
 }
 
-/* ── State helpers ── */
-function showEmpty() {
-  document.getElementById("empty-state").style.display   = "flex";
-  document.getElementById("loading-state").style.display = "none";
-  document.getElementById("answer-state").style.display  = "none";
+function showEmpty(){
+  document.getElementById("empty-state").style.display="flex";
+  document.getElementById("loading-state").style.display="none";
+  document.getElementById("answer-state").style.display="none";
 }
-function showLoading() {
-  document.getElementById("empty-state").style.display   = "none";
-  document.getElementById("loading-state").style.display = "flex";
-  document.getElementById("answer-state").style.display  = "none";
+function showLoading(){
+  document.getElementById("empty-state").style.display="none";
+  document.getElementById("loading-state").style.display="flex";
+  document.getElementById("answer-state").style.display="none";
 }
-function showAnswer(html) {
-  document.getElementById("empty-state").style.display   = "none";
-  document.getElementById("loading-state").style.display = "none";
-  document.getElementById("answer-text").innerHTML        = html;
-  document.getElementById("answer-state").style.display  = "block";
+function showAnswer(html){
+  document.getElementById("empty-state").style.display="none";
+  document.getElementById("loading-state").style.display="none";
+  document.getElementById("answer-text").innerHTML=html;
+  document.getElementById("answer-state").style.display="block";
 }
 
-/* ── Guided mode ask ── */
-async function askTopic(t, cat) {
-  currentTopic = t;
-  document.getElementById("panel-topic").textContent = t;
+async function askTopic(t,cat){
+  currentTopic=t;
+  document.getElementById("panel-topic").textContent=t;
   showLoading();
-  const prompt = cat ? `หมวด: ${cat}\nคำถาม: ${t}` : t;
-  const text   = await callAI(prompt);
+  const prompt=cat?`หมวด: ${cat}\nคำถาม: ${t}`:t;
+  const text=await callAI(prompt);
   showAnswer(fmt(text));
 }
 
-/* ── Chat mode ── */
-function setQ(q) {
-  document.getElementById("chat-input").value = q;
+function setQ(q){
+  document.getElementById("chat-input").value=q;
   document.getElementById("chat-input").focus();
 }
 
-async function handleSend() {
-  const inp = document.getElementById("chat-input");
-  const q   = inp.value.trim();
-  if (!q) return;
-  inp.value     = "";
-  inp.disabled  = true;
-  const sendBtn = document.getElementById("send-btn");
-  sendBtn.style.opacity = "0.5";
-
-  document.getElementById("chat-empty").style.display = "none";
-
-  /* user bubble */
-  const msgs = document.getElementById("chat-msgs");
-  const uDiv = document.createElement("div");
-  uDiv.className = "chat-user-bubble";
-  uDiv.textContent = q;
-  msgs.appendChild(uDiv);
-
-  /* typing indicator */
-  const ty = document.getElementById("typing");
-  ty.style.display = "flex";
-  scrollEnd();
-
-  const answer = await callAI(q);
-
-  ty.style.display = "none";
-
-  /* AI bubble */
-  const aDiv = document.createElement("div");
-  aDiv.className   = "chat-ai-bubble";
-  aDiv.innerHTML   = fmt(answer);
-  msgs.appendChild(aDiv);
-
-  inp.disabled          = false;
-  sendBtn.style.opacity = "1";
-  inp.focus();
-  scrollEnd();
+async function handleSend(){
+  const inp=document.getElementById("chat-input");
+  const q=inp.value.trim();if(!q)return;
+  inp.value="";inp.disabled=true;
+  const sendBtn=document.getElementById("send-btn");sendBtn.style.opacity="0.5";
+  document.getElementById("chat-empty").style.display="none";
+  const msgs=document.getElementById("chat-msgs");
+  const uDiv=document.createElement("div");uDiv.className="chat-user-bubble";uDiv.textContent=q;msgs.appendChild(uDiv);
+  const ty=document.getElementById("typing");ty.style.display="flex";scrollEnd();
+  const answer=await callAI(q);
+  ty.style.display="none";
+  const aDiv=document.createElement("div");aDiv.className="chat-ai-bubble";aDiv.innerHTML=fmt(answer);msgs.appendChild(aDiv);
+  inp.disabled=false;sendBtn.style.opacity="1";inp.focus();scrollEnd();
 }
 
-function scrollEnd() {
-  document.getElementById("chat-end").scrollIntoView({ behavior:"smooth" });
-}
+function scrollEnd(){document.getElementById("chat-end").scrollIntoView({behavior:"smooth"})}
 
-/* ── Boot ── */
-window.addEventListener("DOMContentLoaded", () => {
-  buildQuick();
-  initDNA();
-});
+window.addEventListener("DOMContentLoaded",()=>{buildQuick();initDNA()});
 </script>
 </body>
 </html>

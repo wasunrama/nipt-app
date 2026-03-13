@@ -649,6 +649,12 @@ function fmt(text) {
   return text.split("\n").map(line => {
     if (!line.trim())
       return `<div style="height:8px"></div>`;
+    if (line.startsWith("### "))
+      return `<h4 class="ans-h" style="font-size:14px">${line.slice(4)}</h4>`;
+    if (line.startsWith("## "))
+      return `<h4 class="ans-h">${line.slice(3)}</h4>`;
+    if (line.startsWith("# "))
+      return `<h4 class="ans-h" style="font-size:17px">${line.slice(2)}</h4>`;
     if (line.startsWith("**") && line.endsWith("**"))
       return `<h4 class="ans-h">${line.replace(/\*\*/g,"")}</h4>`;
     if (line.includes("**"))

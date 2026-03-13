@@ -644,24 +644,25 @@ async function callClaude(userPrompt) {
   return "ขออภัย ไม่สามารถเชื่อมต่อได้ในขณะนี้ โปรดลองใหม่อีกครั้ง";
 }
 
-/* ── Format markdown → HTML (exact same logic as React fmt()) ── */
+/* ── Format markdown → HTML ── */
 function fmt(text) {
+  function inlineBold(s) {
+    // แปลง **xxx** → <strong> แล้ว strip ** ที่เหลือทั้งหมด
+    return s.replace(/\*\*(.*?)\*\*/g, '<strong class="ans-strong">$1</strong>')
+            .replace(/\*\*/g, "");
+  }
   return text.split("\n").map(line => {
     if (!line.trim())
       return `<div style="height:8px"></div>`;
     if (line.startsWith("### "))
-      return `<h4 class="ans-h" style="font-size:14px">${line.slice(4)}</h4>`;
+      return `<h4 class="ans-h" style="font-size:14px">${inlineBold(line.slice(4))}</h4>`;
     if (line.startsWith("## "))
-      return `<h4 class="ans-h">${line.slice(3)}</h4>`;
+      return `<h4 class="ans-h">${inlineBold(line.slice(3))}</h4>`;
     if (line.startsWith("# "))
-      return `<h4 class="ans-h" style="font-size:17px">${line.slice(2)}</h4>`;
-    if (line.startsWith("**") && line.endsWith("**"))
-      return `<h4 class="ans-h">${line.replace(/\*\*/g,"")}</h4>`;
-    if (line.includes("**"))
-      return `<p class="ans-p">${line.replace(/\*\*(.*?)\*\*/g,'<strong class="ans-strong">$1</strong>')}</p>`;
+      return `<h4 class="ans-h" style="font-size:17px">${inlineBold(line.slice(2))}</h4>`;
     if (line.startsWith("- ") || line.startsWith("• "))
-      return `<li class="ans-li">${line.slice(2)}</li>`;
-    return `<p class="ans-p">${line}</p>`;
+      return `<li class="ans-li">${inlineBold(line.slice(2))}</li>`;
+    return `<p class="ans-p">${inlineBold(line)}</p>`;
   }).join("");
 }
 

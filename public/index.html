@@ -19,39 +19,38 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
 @keyframes pulseGlow{0%,100%{opacity:.6}50%{opacity:1;filter:brightness(1.2)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes dotFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.glass-panel{background:linear-gradient(135deg,rgba(255,255,255,0.06) 0%,rgba(255,255,255,0.01) 100%);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);border-top:1px solid rgba(255,255,255,0.15);border-left:1px solid rgba(255,255,255,0.15);box-shadow:0 8px 32px 0 rgba(0,0,0,0.3);border-radius:16px}
-.glass-btn{transition:all .2s cubic-bezier(.4,0,.2,1);cursor:pointer;border:none;font-family:'Kanit','Inter',sans-serif}
+.glass-panel{background:linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.01));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);border-top:1px solid rgba(255,255,255,0.15);border-left:1px solid rgba(255,255,255,0.15);box-shadow:0 8px 32px rgba(0,0,0,0.3);border-radius:16px}
+.glass-btn{transition:all .2s ease;cursor:pointer;border:none;font-family:'Kanit','Inter',sans-serif}
 .glass-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.4);background:rgba(255,255,255,0.1)!important}
 .glass-btn:active{transform:translateY(0)}
 .topic-btn{transition:all .2s ease;cursor:pointer;border:none;font-family:'Kanit','Inter',sans-serif}
-.topic-btn:hover{background:rgba(6,182,212,0.15)!important;border-left-color:#06b6d4!important;padding-left:16px!important}
-#header{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(15,23,42,0.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+.topic-btn:hover{background:rgba(6,182,212,0.15)!important;border-left-color:#06b6d4!important}
 .grad-line{height:3px;background:linear-gradient(90deg,#06b6d4,#3b82f6,#ec4899)}
-#header-inner{max-width:1200px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-#tabs-row{max-width:1200px;margin:0 auto;padding:0 24px 16px;display:flex;gap:12px}
 .title-grad{background:linear-gradient(to right,#22d3ee,#60a5fa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-#cmg-logo{display:flex;align-items:stretch;background:rgba(255,255,255,0.95);border-radius:12px;overflow:hidden;box-shadow:0 8px 25px rgba(0,0,0,0.25),inset 0 1px 1px rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.2);transform:translateZ(0);backdrop-filter:blur(10px)}
-#cmg-icon-block{background:linear-gradient(135deg,#ffffff 0%,#f8fafc 100%);padding:10px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid rgba(0,0,0,0.06);min-width:76px}
+#header{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(15,23,42,0.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+#header-inner{max-width:1200px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+#tabs-row{max-width:1200px;margin:0 auto;padding:0 24px 16px;display:flex;gap:12px;flex-wrap:wrap}
+#cmg-logo{display:flex;align-items:stretch;background:rgba(255,255,255,0.95);border-radius:12px;overflow:hidden;box-shadow:0 8px 25px rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.2)}
+#cmg-icon-block{background:linear-gradient(135deg,#ffffff,#f8fafc);padding:10px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid rgba(0,0,0,0.06);min-width:76px}
 #cmg-text-block{background:rgba(255,255,255,0.6);padding:10px 18px;display:flex;flex-direction:column;justify-content:center}
-#main{max-width:1200px;margin:0 auto;padding:32px 24px 100px;position:relative}
+#main{max-width:1200px;margin:0 auto;padding:32px 24px 100px}
 #guided-grid{display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:start}
 #sidebar{display:flex;flex-direction:column;gap:16px}
-#dna-header-wrap{width:60px;height:60px;animation:float 6s ease-in-out infinite}
-#dna-header-box{width:100%;height:100%;border-radius:16px;background:linear-gradient(135deg,rgba(6,182,212,0.1),rgba(236,72,153,0.1));border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 20px rgba(6,182,212,0.1)}
-#response-panel{min-height:600px;display:flex;flex-direction:column;overflow:hidden}
-#panel-topbar{padding:16px 24px;background:rgba(0,0,0,0.2);border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:12px}
+#dna-header-wrap{width:60px;height:60px;animation:float 6s ease-in-out infinite;flex-shrink:0}
+#dna-header-box{width:100%;height:100%;border-radius:16px;background:linear-gradient(135deg,rgba(6,182,212,0.1),rgba(236,72,153,0.1));border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center}
+#response-panel{display:flex;flex-direction:column;min-height:500px}
+#panel-topbar{padding:16px 24px;background:rgba(0,0,0,0.2);border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:12px;border-radius:16px 16px 0 0}
 #panel-body{padding:32px;flex:1;overflow-y:auto;display:flex;flex-direction:column}
-#empty-state{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:.7}
-#empty-dna{width:180px;height:240px;animation:float 6s ease-in-out infinite;opacity:.5}
-#loading-state{flex:1;display:none;flex-direction:column;align-items:center;justify-content:center;animation:pulseGlow 2s infinite}
+#empty-state{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:.7;padding:40px 0}
+#loading-state{display:none;flex-direction:column;align-items:center;justify-content:center;padding:60px 0;animation:pulseGlow 2s infinite}
 #spinner{width:64px;height:64px;border:3px solid rgba(6,182,212,0.2);border-top-color:#06b6d4;border-radius:50%;animation:spin 1s linear infinite}
-#answer-state{display:none;animation:fadeUp .5s cubic-bezier(.16,1,.3,1)}
+#answer-state{display:none;flex-direction:column;animation:fadeUp .5s ease}
 #chat-view{display:none}
 #chat-container{max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:20px;height:calc(100vh - 220px)}
 #chat-panel{flex:1;display:flex;flex-direction:column;overflow:hidden}
 #chat-messages{flex:1;padding:24px;overflow-y:auto;display:flex;flex-direction:column;gap:16px}
 #chat-input-area{padding:20px;background:rgba(0,0,0,0.2);border-top:1px solid rgba(255,255,255,0.05)}
-.chat-user-bubble{align-self:flex-end;max-width:80%;background:linear-gradient(135deg,#0284c7,#2563eb);padding:12px 16px;border-radius:16px 16px 4px 16px;color:#fff;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+.chat-user-bubble{align-self:flex-end;max-width:80%;background:linear-gradient(135deg,#0284c7,#2563eb);padding:12px 16px;border-radius:16px 16px 4px 16px;color:#fff;font-size:14px}
 .chat-ai-bubble{align-self:flex-start;max-width:90%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);padding:16px 20px;border-radius:16px 16px 16px 4px;color:#e2e8f0;font-size:14px;line-height:1.6;animation:fadeUp .4s ease}
 .chat-ai-bubble p{margin:6px 0;line-height:1.6}
 .chat-ai-bubble li{margin-left:24px;margin-bottom:6px;list-style-type:circle;padding-left:8px}
@@ -64,43 +63,25 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
 .ans-p{margin:6px 0;line-height:1.6}
 .ans-strong{color:#38bdf8;font-weight:500}
 .ans-li{margin-left:24px;margin-bottom:6px;list-style-type:circle;padding-left:8px}
-
-/* ── Mobile Responsive ── */
+/* Mobile */
 @media(max-width:768px){
-  #header-inner{padding:12px 16px;gap:8px;flex-wrap:wrap}
-  #header-inner h1{font-size:16px!important}
-  #header-inner p{font-size:11px!important}
-  #dna-header-wrap{width:40px!important;height:40px!important}
-
-  /* โลโก้ — แสดงอยู่แต่เล็กลง */
+  #header-inner{padding:12px 16px;gap:8px}
+  #header-inner h1{font-size:18px!important}
   #cmg-logo{transform:scale(0.72);transform-origin:right center}
-
-  #tabs-row>div{padding:0 16px 12px}
+  #dna-header-wrap{width:44px!important;height:44px!important}
+  #tabs-row{padding:0 12px 12px}
   #tab-guided,#tab-chat{padding:8px 14px!important;font-size:13px!important}
   #main{padding:16px 12px 80px}
-
-  /* Sidebar อยู่บน คำตอบอยู่ล่าง */
-  #guided-grid{grid-template-columns:1fr!important;gap:16px}
-
-  /* ลบ min-height ออก ไม่งั้น content หายนอกจอ */
-  #response-panel{min-height:auto!important}
+  #guided-grid{grid-template-columns:1fr;gap:16px}
+  #response-panel{min-height:300px}
   #panel-body{padding:16px!important}
-  #sidebar{gap:12px}
-  .glass-panel{border-radius:12px}
-
-  /* Chat */
   #chat-container{height:calc(100vh - 180px)}
-  #chat-messages{padding:16px}
+  #chat-messages{padding:12px}
   #chat-input-area{padding:12px}
-  #chat-input-area>div:first-child button{font-size:11px!important;padding:5px 10px!important}
   .chat-user-bubble,.chat-ai-bubble{max-width:95%!important;font-size:13px!important}
-
-  /* ข้อความคำตอบ */
   #answer-text{font-size:14px!important}
-  .ans-h{font-size:15px}
-  #empty-dna{width:120px!important;height:160px!important}
 }
-
+</style>
 </head>
 <body>
 
@@ -110,38 +91,28 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
     <div style="display:flex;align-items:center;gap:16px">
       <div id="dna-header-wrap">
         <div id="dna-header-box">
-          <div style="width:40px;height:40px">
-            <canvas id="dna-small" width="40" height="54"></canvas>
-          </div>
+          <canvas id="dna-small" width="40" height="54"></canvas>
         </div>
       </div>
       <div>
-        <h1 class="title-grad" style="margin:0;font-size:24px;font-weight:700;font-family:'Inter',sans-serif;letter-spacing:-.5px">
-          NIPT Genetic Counselling
-        </h1>
-        <p style="margin:0;font-size:13px;color:#94a3b8;font-weight:400">ระบบให้คำปรึกษาการตรวจคัดกรองโครโมโซมทารกในครรภ์</p>
+        <h1 class="title-grad" style="font-size:24px;font-weight:700;font-family:'Inter',sans-serif;letter-spacing:-.5px">NIPT Genetic Counselling</h1>
+        <p style="font-size:13px;color:#94a3b8;font-weight:400">ระบบให้คำปรึกษาการตรวจคัดกรองโครโมโซมทารกในครรภ์</p>
       </div>
     </div>
-
-    <!-- CMG Logo -->
     <div id="cmg-logo">
       <div id="cmg-icon-block">
-        <svg width="48" height="42" viewBox="0 0 54 46" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0px 4px 6px rgba(14,165,233,0.2))">
+        <svg width="48" height="42" viewBox="0 0 54 46" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="artLife" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#0284c7"/>
-              <stop offset="50%" stop-color="#0ea5e9"/>
-              <stop offset="100%" stop-color="#2dd4bf"/>
+            <linearGradient id="g1" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#0284c7"/><stop offset="50%" stop-color="#0ea5e9"/><stop offset="100%" stop-color="#2dd4bf"/>
             </linearGradient>
-            <linearGradient id="artDNA" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#10b981"/>
-              <stop offset="50%" stop-color="#34d399"/>
-              <stop offset="100%" stop-color="#818cf8"/>
+            <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#10b981"/><stop offset="50%" stop-color="#34d399"/><stop offset="100%" stop-color="#818cf8"/>
             </linearGradient>
           </defs>
-          <path d="M 27 42 C 5 30, 49 16, 27 4" fill="none" stroke="url(#artLife)" stroke-width="4.5" stroke-linecap="round"/>
-          <path d="M 27 42 C 49 30, 5 16, 27 4" fill="none" stroke="url(#artDNA)" stroke-width="4.5" stroke-linecap="round"/>
-          <circle cx="27" cy="23" r="3.5" fill="#ffffff" style="filter:drop-shadow(0 0 4px rgba(14,165,233,0.8))"/>
+          <path d="M 27 42 C 5 30, 49 16, 27 4" fill="none" stroke="url(#g1)" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M 27 42 C 49 30, 5 16, 27 4" fill="none" stroke="url(#g2)" stroke-width="4.5" stroke-linecap="round"/>
+          <circle cx="27" cy="23" r="3.5" fill="#ffffff"/>
           <circle cx="16" cy="13" r="2.5" fill="#2dd4bf"/>
           <circle cx="38" cy="33" r="2.5" fill="#818cf8"/>
           <circle cx="38" cy="13" r="2.5" fill="#34d399"/>
@@ -150,26 +121,19 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
         <div style="font-size:6.5px;color:#475569;text-align:center;letter-spacing:0.5px;margin-top:4px;font-family:'Kanit',sans-serif;font-weight:600;line-height:1.2;text-transform:uppercase">ศูนย์จีโนมฯ<br/>รามาธิบดี</div>
       </div>
       <div id="cmg-text-block">
-        <div style="font-size:16px;font-weight:800;background:linear-gradient(to right,#0f766e,#0369a1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Inter',sans-serif;line-height:1.1;letter-spacing:-0.5px">Genomics Medicine</div>
-        <div style="font-size:12px;font-weight:600;color:#059669;font-family:'Inter',sans-serif;line-height:1.2;margin-top:2px">The future starts now.</div>
-        <div style="margin-top:6px;padding-top:6px;border-top:1px solid rgba(0,0,0,0.06)">
-          <div style="font-size:6.5px;color:#64748b;font-family:'Inter',sans-serif;letter-spacing:1.2px;text-transform:uppercase;font-weight:700">Center for Medical Genomics</div>
-        </div>
+        <div style="font-size:16px;font-weight:800;background:linear-gradient(to right,#0f766e,#0369a1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Inter',sans-serif;letter-spacing:-0.5px">Genomics Medicine</div>
+        <div style="font-size:12px;font-weight:600;color:#059669;font-family:'Inter',sans-serif;margin-top:2px">The future starts now.</div>
+        <div style="margin-top:6px;padding-top:6px;border-top:1px solid rgba(0,0,0,0.06);font-size:6.5px;color:#64748b;font-family:'Inter',sans-serif;letter-spacing:1.2px;text-transform:uppercase;font-weight:700">Center for Medical Genomics</div>
       </div>
     </div>
   </div>
-
-  <div id="tabs-row" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px 16px;display:flex;gap:12px;width:100%">
-      <button id="tab-guided" class="glass-btn" onclick="switchTab('guided')"
-        style="padding:10px 24px;border-radius:10px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;background:rgba(6,182,212,0.15);color:#22d3ee;box-shadow:inset 0 0 0 1px rgba(6,182,212,0.4),0 4px 12px rgba(0,0,0,0.2)">
-        <span style="font-size:16px">📑</span> เมนูหัวข้อ
-      </button>
-      <button id="tab-chat" class="glass-btn" onclick="switchTab('chat')"
-        style="padding:10px 24px;border-radius:10px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.03);color:#94a3b8;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.05)">
-        <span style="font-size:16px">💬</span> ถามอิสระ
-      </button>
-    </div>
+  <div id="tabs-row">
+    <button id="tab-guided" class="glass-btn" onclick="switchTab('guided')" style="padding:10px 24px;border-radius:10px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;background:rgba(6,182,212,0.15);color:#22d3ee;box-shadow:inset 0 0 0 1px rgba(6,182,212,0.4)">
+      <span>📑</span> เมนูหัวข้อ
+    </button>
+    <button id="tab-chat" class="glass-btn" onclick="switchTab('chat')" style="padding:10px 24px;border-radius:10px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.03);color:#94a3b8;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.05)">
+      <span>💬</span> ถามอิสระ
+    </button>
   </div>
 </header>
 
@@ -180,30 +144,25 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
         <div class="glass-panel" style="padding:20px">
           <label style="font-size:12px;color:#64748b;font-weight:600;letter-spacing:1px;display:block;margin-bottom:12px">เลือกหมวดหมู่</label>
           <div style="position:relative">
-            <select id="cat-select" onchange="onCategoryChange()"
-              style="width:100%;padding:12px 16px;background:rgba(15,23,42,0.6);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#f1f5f9;font-size:14px;font-family:'Kanit',sans-serif;outline:none;cursor:pointer;box-shadow:inset 0 2px 4px rgba(0,0,0,0.2)">
+            <select id="cat-select" onchange="onCategoryChange()" style="width:100%;padding:12px 16px;background:rgba(15,23,42,0.6);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#f1f5f9;font-size:14px;font-family:'Kanit',sans-serif;outline:none;cursor:pointer">
               <option value="" style="background:#0f172a">-- กรุณาเลือก --</option>
-              <option value="ความหมายของ NIPT"    style="background:#0f172a">🧬 ความหมายของ NIPT</option>
-              <option value="การแปลผล NIPT"        style="background:#0f172a">📊 การแปลผล NIPT</option>
-              <option value="โครโมโซมที่ตรวจพบ"   style="background:#0f172a">🔬 โครโมโซมที่ตรวจพบ</option>
+              <option value="ความหมายของ NIPT" style="background:#0f172a">🧬 ความหมายของ NIPT</option>
+              <option value="การแปลผล NIPT" style="background:#0f172a">📊 การแปลผล NIPT</option>
+              <option value="โครโมโซมที่ตรวจพบ" style="background:#0f172a">🔬 โครโมโซมที่ตรวจพบ</option>
               <option value="ขั้นตอนหลังผลผิดปกติ" style="background:#0f172a">🏥 ขั้นตอนหลังผลผิดปกติ</option>
-              <option value="ข้อจำกัดของ NIPT"    style="background:#0f172a">⚠️ ข้อจำกัดของ NIPT</option>
-              <option value="คำถามที่พบบ่อย"      style="background:#0f172a">❓ คำถามที่พบบ่อย</option>
+              <option value="ข้อจำกัดของ NIPT" style="background:#0f172a">⚠️ ข้อจำกัดของ NIPT</option>
+              <option value="คำถามที่พบบ่อย" style="background:#0f172a">❓ คำถามที่พบบ่อย</option>
             </select>
             <div style="position:absolute;right:16px;top:50%;transform:translateY(-50%);pointer-events:none;color:#64748b">▼</div>
           </div>
         </div>
-
         <div id="subtopic-panel" class="glass-panel" style="padding:20px;display:none">
           <label style="font-size:12px;color:#64748b;font-weight:600;letter-spacing:1px;display:block;margin-bottom:12px">หัวข้อย่อย</label>
           <div id="subtopic-list" style="display:flex;flex-direction:column;gap:6px"></div>
         </div>
-
-        <div id="quick-panel" style="position:relative;perspective:1000px">
-          <div class="glass-panel" style="padding:20px;border-color:rgba(236,72,153,0.2)">
-            <label style="font-size:12px;color:#f472b6;font-weight:600;letter-spacing:1px;display:block;margin-bottom:12px">⚡ เข้าถึงด่วน</label>
-            <div id="quick-list" style="display:flex;flex-direction:column;gap:8px"></div>
-          </div>
+        <div id="quick-panel" class="glass-panel" style="padding:20px;border-color:rgba(236,72,153,0.2)">
+          <label style="font-size:12px;color:#f472b6;font-weight:600;letter-spacing:1px;display:block;margin-bottom:12px">⚡ เข้าถึงด่วน</label>
+          <div id="quick-list" style="display:flex;flex-direction:column;gap:8px"></div>
         </div>
       </div>
 
@@ -218,9 +177,7 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
         </div>
         <div id="panel-body">
           <div id="empty-state">
-            <div id="empty-dna">
-              <canvas id="dna-large" width="180" height="240" style="width:180px;height:240px;filter:drop-shadow(0px 4px 16px rgba(0,212,255,0.3))"></canvas>
-            </div>
+            <canvas id="dna-large" width="180" height="240" style="width:180px;height:240px;opacity:.5;filter:drop-shadow(0 4px 16px rgba(0,212,255,0.3))"></canvas>
             <h3 style="color:#e2e8f0;font-size:20px;font-weight:500;margin-top:24px">เลือกหมวดหมู่และหัวข้อ</h3>
             <p style="color:#64748b;font-size:14px;margin-top:8px">เพื่อเริ่มการให้คำปรึกษา NIPT</p>
           </div>
@@ -231,9 +188,9 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
           </div>
           <div id="answer-state">
             <div id="answer-text" style="font-size:15px;color:#e2e8f0"></div>
-            <div style="margin-top:40px;padding:16px;background:rgba(245,158,11,0.05);border-left:4px solid #f59e0b;border-radius:0 8px 8px 0">
+            <div style="margin-top:32px;padding:16px;background:rgba(245,158,11,0.05);border-left:4px solid #f59e0b;border-radius:0 8px 8px 0">
               <p style="color:#fbbf24;font-size:13px;margin:0;display:flex;align-items:center;gap:8px">
-                <span style="font-size:18px">⚠️</span> ข้อมูลนี้จัดทำเพื่อการศึกษาเบื้องต้น ไม่สามารถทดแทนการวินิจฉัยของแพทย์ได้
+                <span>⚠️</span> ข้อมูลนี้จัดทำเพื่อการศึกษาเบื้องต้น ไม่สามารถทดแทนการวินิจฉัยของแพทย์ได้
               </p>
             </div>
           </div>
@@ -246,42 +203,26 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
     <div id="chat-container">
       <div class="glass-panel" id="chat-panel">
         <div id="chat-messages">
-          <div id="chat-empty" style="margin:auto;text-align:center;color:#64748b">
+          <div id="chat-empty" style="margin:auto;text-align:center;color:#64748b;padding:40px 0">
             <div style="font-size:48px;margin-bottom:16px">💬</div>
             <h3 style="font-size:18px;color:#cbd5e1;font-weight:500">สอบถามข้อมูล NIPT เพิ่มเติม</h3>
             <p style="font-size:14px;margin-top:8px">พิมพ์คำถามของคุณที่ช่องด้านล่าง</p>
           </div>
           <div id="chat-msgs"></div>
           <div id="typing" style="display:none;align-self:flex-start;padding:12px 16px;background:rgba(255,255,255,0.02);border-radius:16px;flex-direction:row;gap:8px">
-            <div class="typing-dot"></div>
-            <div class="typing-dot"></div>
-            <div class="typing-dot"></div>
+            <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
           </div>
           <div id="chat-end"></div>
         </div>
         <div id="chat-input-area">
-          <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
-            <button class="glass-btn" onclick="setQ('NIPT กับ quad screen ต่างกันอย่างไร?')"
-              style="padding:6px 14px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);border-radius:20px;color:#22d3ee;font-size:12px;font-family:'Kanit',sans-serif">
-              NIPT กับ quad screen ต่างกันอย่างไร?
-            </button>
-            <button class="glass-btn" onclick="setQ('ครรภ์แฝดตรวจได้ไหม?')"
-              style="padding:6px 14px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);border-radius:20px;color:#22d3ee;font-size:12px;font-family:'Kanit',sans-serif">
-              ครรภ์แฝดตรวจได้ไหม?
-            </button>
-            <button class="glass-btn" onclick="setQ('ผล No Call คืออะไร?')"
-              style="padding:6px 14px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);border-radius:20px;color:#22d3ee;font-size:12px;font-family:'Kanit',sans-serif">
-              ผล No Call คืออะไร?
-            </button>
+          <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+            <button class="glass-btn" onclick="setQ('NIPT กับ quad screen ต่างกันอย่างไร?')" style="padding:6px 14px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);border-radius:20px;color:#22d3ee;font-size:12px">NIPT กับ quad screen ต่างกันอย่างไร?</button>
+            <button class="glass-btn" onclick="setQ('ครรภ์แฝดตรวจได้ไหม?')" style="padding:6px 14px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);border-radius:20px;color:#22d3ee;font-size:12px">ครรภ์แฝดตรวจได้ไหม?</button>
+            <button class="glass-btn" onclick="setQ('ผล No Call คืออะไร?')" style="padding:6px 14px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);border-radius:20px;color:#22d3ee;font-size:12px">ผล No Call คืออะไร?</button>
           </div>
           <div style="display:flex;gap:12px">
-            <input id="chat-input" type="text" placeholder="พิมพ์คำถามเกี่ยวกับ NIPT..."
-              onkeydown="if(event.key==='Enter')handleSend()"
-              style="flex:1;padding:14px 20px;background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.1);border-radius:12px;color:#f8fafc;font-size:14px;font-family:'Kanit',sans-serif;outline:none;box-shadow:inset 0 2px 4px rgba(0,0,0,0.2)"/>
-            <button id="send-btn" class="glass-btn" onclick="handleSend()"
-              style="padding:0 24px;background:linear-gradient(135deg,#06b6d4,#2563eb);border-radius:12px;color:#fff;font-weight:500;font-size:14px;font-family:'Kanit',sans-serif;min-height:48px">
-              ส่งข้อความ
-            </button>
+            <input id="chat-input" type="text" placeholder="พิมพ์คำถามเกี่ยวกับ NIPT..." onkeydown="if(event.key==='Enter')handleSend()" style="flex:1;padding:14px 20px;background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.1);border-radius:12px;color:#f8fafc;font-size:14px;font-family:'Kanit',sans-serif;outline:none"/>
+            <button id="send-btn" class="glass-btn" onclick="handleSend()" style="padding:0 24px;background:linear-gradient(135deg,#06b6d4,#2563eb);border-radius:12px;color:#fff;font-weight:500;font-size:14px;min-height:48px">ส่งข้อความ</button>
           </div>
         </div>
       </div>
@@ -290,206 +231,176 @@ select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
 </main>
 
 <footer id="footer">
-  <p style="margin:0;font-size:12px;color:#64748b">
-    © ศูนย์จีโนมฯ รามาธิบดี (Center for Medical Genomics) • ข้อมูลนี้เพื่อการศึกษา ไม่สามารถทดแทนการวินิจฉัยทางการแพทย์
-  </p>
+  <p style="font-size:12px;color:#64748b">© ศูนย์จีโนมฯ รามาธิบดี (Center for Medical Genomics) • ข้อมูลนี้เพื่อการศึกษา ไม่สามารถทดแทนการวินิจฉัยทางการแพทย์</p>
 </footer>
 
 <script>
 const TOPICS = {
-  "ความหมายของ NIPT":    { icon:"🧬", subtopics:["NIPT คืออะไร","หลักการทำงานของ NIPT","ความแตกต่างจาก invasive testing","ข้อบ่งชี้ในการตรวจ NIPT","Genetic counselor คืออะไร","พื้นฐานชีววิทยา: fetal fraction และ cell-free DNA"] },
-  "การแปลผล NIPT":        { icon:"📊", subtopics:["ผล High Risk หมายความว่าอะไร","ผล Low Risk หมายความว่าอะไร","ผล No Call / Failed","PPV และ NPV คืออะไร","ความแม่นยำของการตรวจ"] },
-  "โครโมโซมที่ตรวจพบ":   { icon:"🔬", subtopics:["Trisomy 21 (Down syndrome)","Trisomy 18 (Edwards syndrome)","Trisomy 13 (Patau syndrome)","Sex chromosome aneuploidies","Microdeletions","Rare autosomal trisomies"] },
-  "ขั้นตอนหลังผลผิดปกติ":{ icon:"🏥", subtopics:["ควรทำอะไรต่อเมื่อผล High Risk","Amniocentesis คืออะไร","CVS คืออะไร","การตัดสินใจหลังการตรวจยืนยัน","การส่งต่อผู้เชี่ยวชาญ"] },
-  "ข้อจำกัดของ NIPT":    { icon:"⚠️", subtopics:["False positive และ false negative","Vanishing twin syndrome","Confined placental mosaicism","Maternal malignancy","กรณีที่ NIPT ไม่เหมาะสม"] },
-  "คำถามที่พบบ่อย":      { icon:"❓", subtopics:["ตรวจได้ตั้งแต่กี่สัปดาห์","ครรภ์แฝดตรวจได้หรือไม่","IVF มีผลต่อการตรวจหรือไม่","ผล NIPT บอกเพศทารกได้หรือไม่","ค่าใช้จ่ายและการเบิกจ่าย"] },
+  "ความหมายของ NIPT":    { subtopics:["NIPT คืออะไร","หลักการทำงานของ NIPT","ความแตกต่างจาก invasive testing","ข้อบ่งชี้ในการตรวจ NIPT","Genetic counselor คืออะไร","พื้นฐานชีววิทยา: fetal fraction และ cell-free DNA"] },
+  "การแปลผล NIPT":       { subtopics:["ผล High Risk หมายความว่าอะไร","ผล Low Risk หมายความว่าอะไร","ผล No Call / Failed","PPV และ NPV คืออะไร","ความแม่นยำของการตรวจ"] },
+  "โครโมโซมที่ตรวจพบ":  { subtopics:["Trisomy 21 (Down syndrome)","Trisomy 18 (Edwards syndrome)","Trisomy 13 (Patau syndrome)","Sex chromosome aneuploidies","Microdeletions","Rare autosomal trisomies"] },
+  "ขั้นตอนหลังผลผิดปกติ":{ subtopics:["ควรทำอะไรต่อเมื่อผล High Risk","Amniocentesis คืออะไร","CVS คืออะไร","การตัดสินใจหลังการตรวจยืนยัน","การส่งต่อผู้เชี่ยวชาญ"] },
+  "ข้อจำกัดของ NIPT":   { subtopics:["False positive และ false negative","Vanishing twin syndrome","Confined placental mosaicism","Maternal malignancy","กรณีที่ NIPT ไม่เหมาะสม"] },
+  "คำถามที่พบบ่อย":     { subtopics:["ตรวจได้ตั้งแต่กี่สัปดาห์","ครรภ์แฝดตรวจได้หรือไม่","IVF มีผลต่อการตรวจหรือไม่","ผล NIPT บอกเพศทารกได้หรือไม่","ค่าใช้จ่ายและการเบิกจ่าย"] }
 };
 const QUICK = ["NIPT คืออะไร","Genetic counselor คืออะไร","พื้นฐานชีววิทยา: fetal fraction และ cell-free DNA","ผล High Risk หมายความว่าอะไร","ตรวจได้ตั้งแต่กี่สัปดาห์"];
-const SYSTEM = `คุณเป็น genetic counselor ผู้เชี่ยวชาญด้าน NIPT ประจำศูนย์จีโนมฯ รามาธิบดี
-ให้คำปรึกษาเป็นภาษาไทยที่ชัดเจน เป็นวิทยาศาสตร์ และเข้าใจง่าย
-ใช้ข้อมูลทางการแพทย์ที่ถูกต้องและทันสมัย จัดรูปแบบให้อ่านง่าย
-ย้ำเสมอว่าควรปรึกษาแพทย์หรือ genetic counselor สำหรับกรณีเฉพาะบุคคล`;
+const SYSTEM = "คุณเป็น genetic counselor ผู้เชี่ยวชาญด้าน NIPT ประจำศูนย์จีโนมฯ รามาธิบดี ให้คำปรึกษาเป็นภาษาไทยที่ชัดเจน เป็นวิทยาศาสตร์ และเข้าใจง่าย ใช้ข้อมูลทางการแพทย์ที่ถูกต้องและทันสมัย จัดรูปแบบให้อ่านง่าย ย้ำเสมอว่าควรปรึกษาแพทย์หรือ genetic counselor สำหรับกรณีเฉพาะบุคคล";
 
-let currentCategory = "";
-let currentTopic    = "";
-
-/* ── DNA Helix ── */
+/* DNA Animation */
 class DNAHelix {
-  constructor(canvas) {
-    this.canvas=canvas; this.ctx=canvas.getContext("2d");
-    this.W=canvas.width; this.H=canvas.height;
-    this.scaleX=this.W/300; this.scaleY=this.H/400;
-    this.time=0; this.raf=null;
+  constructor(canvas){
+    this.canvas=canvas;this.ctx=canvas.getContext("2d");
+    this.W=canvas.width;this.H=canvas.height;
+    this.scaleX=this.W/300;this.scaleY=this.H/400;
+    this.time=0;this.raf=null;
   }
-  sx(x){return x*this.scaleX} sy(y){return y*this.scaleY} sw(w){return w*this.scaleX}
-  draw() {
-    const {ctx,time,W,H}=this;
+  sx(x){return x*this.scaleX}
+  sy(y){return y*this.scaleY}
+  sw(w){return w*this.scaleX}
+  draw(){
+    var ctx=this.ctx,time=this.time,W=this.W,H=this.H;
     ctx.clearRect(0,0,W,H);
-    const numBases=40,radius=65,height=320;
-    const items=[];
+    var numBases=40,radius=65,height=320,items=[];
     items.push({z:-1000,type:"bgGlow"});
-    for(let i=0;i<numBases;i++){
-      const t=(i/(numBases-1))*Math.PI*5,y=40+(i/(numBases-1))*height;
-      const a1=t+time,a2=t+time+Math.PI;
-      const x1=Math.cos(a1)*radius,z1=Math.sin(a1)*radius;
-      const x2=Math.cos(a2)*radius,z2=Math.sin(a2)*radius;
-      const cx1=150+x1,cx2=150+x2;
-      const scale1=(z1+radius)/(radius*2),scale2=(z2+radius)/(radius*2);
-      if(i%2===0){const zR=(z1+z2)/2,rS=(scale1+scale2)/2;items.push({z:zR,type:"rung",cx1,cx2,y,rungScale:rS});}
+    for(var i=0;i<numBases;i++){
+      var t=(i/(numBases-1))*Math.PI*5,y=40+(i/(numBases-1))*height;
+      var a1=t+time,a2=t+time+Math.PI;
+      var x1=Math.cos(a1)*radius,z1=Math.sin(a1)*radius;
+      var x2=Math.cos(a2)*radius,z2=Math.sin(a2)*radius;
+      var cx1=150+x1,cx2=150+x2;
+      var s1=(z1+radius)/(radius*2),s2=(z2+radius)/(radius*2);
+      if(i%2===0){var zR=(z1+z2)/2,rS=(s1+s2)/2;items.push({z:zR,type:"rung",cx1:cx1,cx2:cx2,y:y,rungScale:rS});}
       if(i>0){
-        const pi=i-1,pt=(pi/(numBases-1))*Math.PI*5,py=40+(pi/(numBases-1))*height;
-        const pa1=pt+time,pa2=pt+time+Math.PI;
-        const pcx1=150+Math.cos(pa1)*radius,pz1=Math.sin(pa1)*radius;
-        const pcx2=150+Math.cos(pa2)*radius,pz2=Math.sin(pa2)*radius;
-        const az1=(z1+pz1)/2,az2=(z2+pz2)/2;
+        var pi=i-1,pt=(pi/(numBases-1))*Math.PI*5,py=40+(pi/(numBases-1))*height;
+        var pa1=pt+time,pa2=pt+time+Math.PI;
+        var pcx1=150+Math.cos(pa1)*radius,pz1=Math.sin(pa1)*radius;
+        var pcx2=150+Math.cos(pa2)*radius,pz2=Math.sin(pa2)*radius;
+        var az1=(z1+pz1)/2,az2=(z2+pz2)/2;
         items.push({z:az1,type:"bone1",x1:pcx1,y1:py,x2:cx1,y2:y,s:(az1+radius)/(radius*2)});
         items.push({z:az2,type:"bone2",x1:pcx2,y1:py,x2:cx2,y2:y,s:(az2+radius)/(radius*2)});
       }
-      const blink1=Math.sin(time*5+i)>0.8&&scale1>0.8?1.5:1;
-      const blink2=Math.sin(time*5+i+Math.PI)>0.8&&scale2>0.8?1.5:1;
-      items.push({z:z1+1,type:"dot1",cx:cx1,y,scale:scale1,blink:blink1});
-      items.push({z:z2+1,type:"dot2",cx:cx2,y,scale:scale2,blink:blink2});
+      var b1=Math.sin(time*5+i)>0.8&&s1>0.8?1.5:1;
+      var b2=Math.sin(time*5+i+Math.PI)>0.8&&s2>0.8?1.5:1;
+      items.push({z:z1+1,type:"dot1",cx:cx1,y:y,scale:s1,blink:b1});
+      items.push({z:z2+1,type:"dot2",cx:cx2,y:y,scale:s2,blink:b2});
     }
-    for(let j=0;j<15;j++){
-      const py=(time*15+j*30)%400,px=150+Math.sin(time*0.5+j*123)*120;
-      const pz=Math.cos(time*0.8+j*321)*100,pScale=(pz+100)/200;
-      items.push({z:pz,type:"sparkle",cx:px,y:py,scale:pScale,blink:Math.sin(time*8+j*45)>0.6?1:0.2});
-    }
-    items.sort((a,b)=>a.z-b.z);
-    for(const it of items){
+    items.sort(function(a,b){return a.z-b.z;});
+    for(var k=0;k<items.length;k++){
+      var it=items[k];
       if(it.type==="bgGlow"){
-        const grd=ctx.createRadialGradient(this.sx(150),this.sy(200),0,this.sx(150),this.sy(200),this.sx(120));
+        var grd=ctx.createRadialGradient(this.sx(150),this.sy(200),0,this.sx(150),this.sy(200),this.sx(120));
         grd.addColorStop(0,"rgba(0,212,255,0.25)");grd.addColorStop(1,"rgba(0,212,255,0)");
         ctx.fillStyle=grd;ctx.beginPath();ctx.ellipse(this.sx(150),this.sy(200),this.sx(120),this.sy(180),0,0,Math.PI*2);ctx.fill();
       } else if(it.type==="rung"){
-        ctx.save();ctx.strokeStyle=`rgba(255,255,255,${0.1+it.rungScale*0.7})`;ctx.lineWidth=this.sw(1+it.rungScale*2.5);ctx.globalAlpha=0.1+it.rungScale*0.7;
+        ctx.save();ctx.strokeStyle="rgba(255,255,255,"+(0.1+it.rungScale*0.7)+")";ctx.lineWidth=this.sw(1+it.rungScale*2.5);ctx.globalAlpha=0.1+it.rungScale*0.7;
         ctx.beginPath();ctx.moveTo(this.sx(it.cx1),this.sy(it.y));ctx.lineTo(this.sx(it.cx2),this.sy(it.y));ctx.stroke();ctx.restore();
       } else if(it.type==="bone1"){
-        ctx.save();ctx.shadowColor="#00d4ff";ctx.shadowBlur=this.sw(5);ctx.strokeStyle=`rgba(0,212,255,${0.2+it.s*0.8})`;ctx.lineWidth=this.sw(2+it.s*5);ctx.lineCap="round";
+        ctx.save();ctx.shadowColor="#00d4ff";ctx.shadowBlur=this.sw(5);ctx.strokeStyle="rgba(0,212,255,"+(0.2+it.s*0.8)+")";ctx.lineWidth=this.sw(2+it.s*5);ctx.lineCap="round";
         ctx.beginPath();ctx.moveTo(this.sx(it.x1),this.sy(it.y1));ctx.lineTo(this.sx(it.x2),this.sy(it.y2));ctx.stroke();ctx.restore();
       } else if(it.type==="bone2"){
-        ctx.save();ctx.shadowColor="#ff4da6";ctx.shadowBlur=this.sw(5);ctx.strokeStyle=`rgba(255,77,166,${0.2+it.s*0.8})`;ctx.lineWidth=this.sw(2+it.s*5);ctx.lineCap="round";
+        ctx.save();ctx.shadowColor="#ff4da6";ctx.shadowBlur=this.sw(5);ctx.strokeStyle="rgba(255,77,166,"+(0.2+it.s*0.8)+")";ctx.lineWidth=this.sw(2+it.s*5);ctx.lineCap="round";
         ctx.beginPath();ctx.moveTo(this.sx(it.x1),this.sy(it.y1));ctx.lineTo(this.sx(it.x2),this.sy(it.y2));ctx.stroke();ctx.restore();
-      } else if(it.type==="dot1"){
-        const r=this.sw((1.5+it.scale*2)*it.blink),isBig=it.blink>1;
-        ctx.save();ctx.shadowColor=isBig?"#ffffff":"#00d4ff";ctx.shadowBlur=isBig?this.sw(10):this.sw(5);
-        ctx.fillStyle=isBig?"#ffffff":`rgba(0,212,255,${0.4+it.scale*0.6})`;ctx.globalAlpha=0.4+it.scale*0.6;
-        ctx.beginPath();ctx.arc(this.sx(it.cx),this.sy(it.y),r,0,Math.PI*2);ctx.fill();ctx.restore();
-      } else if(it.type==="dot2"){
-        const r=this.sw((1.5+it.scale*2)*it.blink),isBig=it.blink>1;
-        ctx.save();ctx.shadowColor=isBig?"#ffffff":"#ff4da6";ctx.shadowBlur=isBig?this.sw(10):this.sw(5);
-        ctx.fillStyle=isBig?"#ffffff":`rgba(255,77,166,${0.4+it.scale*0.6})`;ctx.globalAlpha=0.4+it.scale*0.6;
-        ctx.beginPath();ctx.arc(this.sx(it.cx),this.sy(it.y),r,0,Math.PI*2);ctx.fill();ctx.restore();
-      } else if(it.type==="sparkle"){
-        const r=this.sw(1+it.scale*2.5);
-        ctx.save();ctx.shadowColor="#ffffff";ctx.shadowBlur=this.sw(10);ctx.fillStyle="#ffffff";ctx.globalAlpha=it.blink*it.scale*0.8;
+      } else if(it.type==="dot1"||it.type==="dot2"){
+        var color=it.type==="dot1"?"#00d4ff":"#ff4da6";
+        var r=this.sw((1.5+it.scale*2)*it.blink),isBig=it.blink>1;
+        ctx.save();ctx.shadowColor=isBig?"#ffffff":color;ctx.shadowBlur=isBig?this.sw(10):this.sw(5);
+        ctx.fillStyle=isBig?"#ffffff":color;ctx.globalAlpha=0.4+it.scale*0.6;
         ctx.beginPath();ctx.arc(this.sx(it.cx),this.sy(it.y),r,0,Math.PI*2);ctx.fill();ctx.restore();
       }
     }
   }
-  start(){const loop=()=>{this.time+=0.02;this.draw();this.raf=requestAnimationFrame(loop)};this.raf=requestAnimationFrame(loop)}
-  stop(){if(this.raf)cancelAnimationFrame(this.raf)}
+  start(){var self=this;function loop(){self.time+=0.02;self.draw();self.raf=requestAnimationFrame(loop);}self.raf=requestAnimationFrame(loop);}
+  stop(){if(this.raf)cancelAnimationFrame(this.raf);}
 }
 
-let dnaSmall,dnaLarge;
 function initDNA(){
-  dnaSmall=new DNAHelix(document.getElementById("dna-small"));dnaSmall.start();
-  dnaLarge=new DNAHelix(document.getElementById("dna-large"));dnaLarge.start();
+  var cs=document.getElementById("dna-small");
+  var cl=document.getElementById("dna-large");
+  if(cs)new DNAHelix(cs).start();
+  if(cl)new DNAHelix(cl).start();
 }
 
 function buildQuick(){
-  const list=document.getElementById("quick-list");
-  QUICK.forEach(q=>{
-    const btn=document.createElement("button");
+  var list=document.getElementById("quick-list");
+  QUICK.forEach(function(q){
+    var btn=document.createElement("button");
     btn.className="glass-btn";
     btn.style.cssText="width:100%;padding:12px 14px;text-align:left;border-radius:10px;font-size:13px;font-family:'Kanit',sans-serif;background:rgba(255,255,255,0.02);color:#e2e8f0;display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,0.05)";
-    btn.innerHTML=`<span>${q}</span><span style="color:#ec4899;font-size:16px">→</span>`;
-    btn.onclick=()=>askTopic(q,"");
+    btn.innerHTML="<span>"+q+"</span><span style='color:#ec4899;font-size:16px'>→</span>";
+    btn.onclick=function(){askTopic(q,"");};
     list.appendChild(btn);
   });
 }
 
 function switchTab(tab){
-  const isGuided=tab==="guided";
+  var isGuided=tab==="guided";
   document.getElementById("guided-view").style.display=isGuided?"block":"none";
   document.getElementById("chat-view").style.display=isGuided?"none":"block";
-  const tg=document.getElementById("tab-guided"),tc=document.getElementById("tab-chat");
+  var tg=document.getElementById("tab-guided"),tc=document.getElementById("tab-chat");
   if(isGuided){
-    tg.style.background="rgba(6,182,212,0.15)";tg.style.color="#22d3ee";tg.style.boxShadow="inset 0 0 0 1px rgba(6,182,212,0.4),0 4px 12px rgba(0,0,0,0.2)";
-    tc.style.background="rgba(255,255,255,0.03)";tc.style.color="#94a3b8";tc.style.boxShadow="inset 0 0 0 1px rgba(255,255,255,0.05)";
+    tg.style.background="rgba(6,182,212,0.15)";tg.style.color="#22d3ee";
+    tc.style.background="rgba(255,255,255,0.03)";tc.style.color="#94a3b8";
   } else {
-    tc.style.background="rgba(6,182,212,0.15)";tc.style.color="#22d3ee";tc.style.boxShadow="inset 0 0 0 1px rgba(6,182,212,0.4),0 4px 12px rgba(0,0,0,0.2)";
-    tg.style.background="rgba(255,255,255,0.03)";tg.style.color="#94a3b8";tg.style.boxShadow="inset 0 0 0 1px rgba(255,255,255,0.05)";
+    tc.style.background="rgba(6,182,212,0.15)";tc.style.color="#22d3ee";
+    tg.style.background="rgba(255,255,255,0.03)";tg.style.color="#94a3b8";
   }
 }
 
 function onCategoryChange(){
-  const cat=document.getElementById("cat-select").value;
-  currentCategory=cat;currentTopic="";
-  document.getElementById("panel-topic").textContent="";showEmpty();
+  var cat=document.getElementById("cat-select").value;
+  document.getElementById("panel-topic").textContent="";
+  showEmpty();
   if(!cat){
     document.getElementById("subtopic-panel").style.display="none";
-    document.getElementById("quick-panel").style.display="block";return;
+    document.getElementById("quick-panel").style.display="block";
+    return;
   }
   document.getElementById("quick-panel").style.display="none";
   document.getElementById("subtopic-panel").style.display="block";
-  const list=document.getElementById("subtopic-list");
+  var list=document.getElementById("subtopic-list");
   list.innerHTML="";
-  TOPICS[cat].subtopics.forEach(t=>{
-    const btn=document.createElement("button");
-    btn.className="topic-btn";btn.textContent=t;btn.dataset.t=t;
-    btn.style.cssText=`width:100%;padding:10px 14px;text-align:left;border-radius:8px;font-size:14px;font-family:'Kanit',sans-serif;background:transparent;color:#cbd5e1;border-left:3px solid transparent;font-weight:400;outline:none`;
-    btn.onclick=()=>{
-      document.querySelectorAll(".topic-btn").forEach(b=>{b.style.background="transparent";b.style.color="#cbd5e1";b.style.borderLeftColor="transparent";b.style.fontWeight="400"});
-      btn.style.background="rgba(6,182,212,0.1)";btn.style.color="#22d3ee";btn.style.borderLeftColor="#06b6d4";btn.style.fontWeight="500";
+  TOPICS[cat].subtopics.forEach(function(t){
+    var btn=document.createElement("button");
+    btn.className="topic-btn";
+    btn.textContent=t;
+    btn.style.cssText="width:100%;padding:10px 14px;text-align:left;border-radius:8px;font-size:14px;font-family:'Kanit',sans-serif;background:transparent;color:#cbd5e1;border-left:3px solid transparent;outline:none";
+    btn.onclick=function(){
+      document.querySelectorAll(".topic-btn").forEach(function(b){b.style.background="transparent";b.style.color="#cbd5e1";b.style.borderLeftColor="transparent";});
+      btn.style.background="rgba(6,182,212,0.1)";btn.style.color="#22d3ee";btn.style.borderLeftColor="#06b6d4";
       askTopic(t,cat);
     };
     list.appendChild(btn);
   });
 }
 
-/* ── Claude API via server proxy ── */
-async function callAI(userPrompt) {
-  const delays=[1000,2000,4000,8000,16000];
-  for(let i=0;i<5;i++){
-    try{
-      const res=await fetch("/api/chat",{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({
-          model:"claude-sonnet-4-20250514",
-          max_tokens:2048,
-          system:SYSTEM,
-          messages:[{role:"user",content:userPrompt}]
-        })
-      });
-      if(res.ok){
-        const d=await res.json();
-        return d.content?.[0]?.text||"ไม่สามารถโหลดข้อมูลได้";
-      }
-      throw new Error("API Error");
-    }catch{
-      if(i===4)break;
-      await new Promise(r=>setTimeout(r,delays[i]));
+async function callAI(userPrompt){
+  try{
+    var res=await fetch("/api/chat",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({model:"claude-sonnet-4-5",max_tokens:2048,system:SYSTEM,messages:[{role:"user",content:userPrompt}]})
+    });
+    if(res.ok){
+      var d=await res.json();
+      return (d.content&&d.content[0]&&d.content[0].text)||"ไม่สามารถโหลดข้อมูลได้";
     }
+    return "เกิดข้อผิดพลาด ("+res.status+") โปรดลองใหม่";
+  }catch(e){
+    console.error("callAI error:",e);
+    return "ไม่สามารถเชื่อมต่อได้ โปรดตรวจสอบการเชื่อมต่อและลองใหม่";
   }
-  return "ขออภัย ไม่สามารถเชื่อมต่อได้ในขณะนี้ โปรดลองใหม่อีกครั้ง";
 }
 
-/* ── Format markdown → HTML ── */
 function fmt(text){
-  function inlineBold(s){
-    return s.replace(/\*\*(.*?)\*\*/g,'<strong class="ans-strong">$1</strong>').replace(/\*\*/g,"");
-  }
-  return text.split("\n").map(line=>{
-    const t=line.trim();
-    if(!t) return `<div style="height:8px"></div>`;
-    if(t.startsWith("### ")) return `<h4 class="ans-h" style="font-size:14px">${inlineBold(t.slice(4))}</h4>`;
-    if(t.startsWith("## "))  return `<h4 class="ans-h">${inlineBold(t.slice(3))}</h4>`;
-    if(t.startsWith("# "))   return `<h4 class="ans-h" style="font-size:17px">${inlineBold(t.slice(2))}</h4>`;
-    if(t.startsWith("- ")||t.startsWith("• ")) return `<li class="ans-li">${inlineBold(t.slice(2))}</li>`;
-    if(t.startsWith("* "))   return `<li class="ans-li">${inlineBold(t.slice(2))}</li>`;
-    return `<p class="ans-p">${inlineBold(t)}</p>`;
+  return text.split("\n").map(function(line){
+    var t=line.trim();
+    if(!t)return "<div style='height:8px'></div>";
+    t=t.replace(/\*\*(.*?)\*\*/g,"<strong class='ans-strong'>$1</strong>");
+    if(t.startsWith("### "))return "<h4 class='ans-h' style='font-size:14px'>"+t.slice(4)+"</h4>";
+    if(t.startsWith("## "))return "<h4 class='ans-h'>"+t.slice(3)+"</h4>";
+    if(t.startsWith("# "))return "<h4 class='ans-h' style='font-size:17px'>"+t.slice(2)+"</h4>";
+    if(t.startsWith("- ")||t.startsWith("• ")||t.startsWith("* "))return "<li class='ans-li'>"+t.slice(2)+"</li>";
+    return "<p class='ans-p'>"+t+"</p>";
   }).join("");
 }
 
@@ -507,15 +418,14 @@ function showAnswer(html){
   document.getElementById("empty-state").style.display="none";
   document.getElementById("loading-state").style.display="none";
   document.getElementById("answer-text").innerHTML=html;
-  document.getElementById("answer-state").style.display="block";
+  document.getElementById("answer-state").style.display="flex";
 }
 
 async function askTopic(t,cat){
-  currentTopic=t;
   document.getElementById("panel-topic").textContent=t;
   showLoading();
-  const prompt=cat?`หมวด: ${cat}\nคำถาม: ${t}`:t;
-  const text=await callAI(prompt);
+  var prompt=cat?"หมวด: "+cat+"\nคำถาม: "+t:t;
+  var text=await callAI(prompt);
   showAnswer(fmt(text));
 }
 
@@ -525,23 +435,24 @@ function setQ(q){
 }
 
 async function handleSend(){
-  const inp=document.getElementById("chat-input");
-  const q=inp.value.trim();if(!q)return;
+  var inp=document.getElementById("chat-input");
+  var q=inp.value.trim();
+  if(!q)return;
   inp.value="";inp.disabled=true;
-  const sendBtn=document.getElementById("send-btn");sendBtn.style.opacity="0.5";
+  var sendBtn=document.getElementById("send-btn");sendBtn.style.opacity="0.5";
   document.getElementById("chat-empty").style.display="none";
-  const msgs=document.getElementById("chat-msgs");
-  const uDiv=document.createElement("div");uDiv.className="chat-user-bubble";uDiv.textContent=q;msgs.appendChild(uDiv);
-  const ty=document.getElementById("typing");ty.style.display="flex";scrollEnd();
-  const answer=await callAI(q);
+  var msgs=document.getElementById("chat-msgs");
+  var uDiv=document.createElement("div");uDiv.className="chat-user-bubble";uDiv.textContent=q;msgs.appendChild(uDiv);
+  var ty=document.getElementById("typing");ty.style.display="flex";
+  document.getElementById("chat-end").scrollIntoView({behavior:"smooth"});
+  var answer=await callAI(q);
   ty.style.display="none";
-  const aDiv=document.createElement("div");aDiv.className="chat-ai-bubble";aDiv.innerHTML=fmt(answer);msgs.appendChild(aDiv);
-  inp.disabled=false;sendBtn.style.opacity="1";inp.focus();scrollEnd();
+  var aDiv=document.createElement("div");aDiv.className="chat-ai-bubble";aDiv.innerHTML=fmt(answer);msgs.appendChild(aDiv);
+  inp.disabled=false;sendBtn.style.opacity="1";inp.focus();
+  document.getElementById("chat-end").scrollIntoView({behavior:"smooth"});
 }
 
-function scrollEnd(){document.getElementById("chat-end").scrollIntoView({behavior:"smooth"})}
-
-window.addEventListener("DOMContentLoaded",()=>{buildQuick();initDNA()});
+window.addEventListener("DOMContentLoaded",function(){buildQuick();initDNA();});
 </script>
 </body>
 </html>

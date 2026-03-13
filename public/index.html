@@ -1,681 +1,746 @@
 <!DOCTYPE html>
 <html lang="th">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NIPT Genetic Counselling</title>
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  </head>
-  <body style="margin:0;padding:0;">
-    <div id="root"></div>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>NIPT Genetic Counselling — ศูนย์จีโนมิกส์ทางการแพทย์</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ── Reset & Base ── */
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;background-color:#0f172a;background-image:radial-gradient(circle at 15% 50%,rgba(6,182,212,0.15),transparent 30%),radial-gradient(circle at 85% 30%,rgba(236,72,153,0.15),transparent 30%);font-family:'Kanit','Inter',sans-serif;color:#f1f5f9;overflow-x:hidden}
+select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:rgba(0,0,0,0.1);border-radius:4px}
+::-webkit-scrollbar-thumb{background:rgba(6,182,212,0.4);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:rgba(6,182,212,0.8)}
 
-    <script type="text/babel">
-      const { useState } = React;
+/* ── Animations ── */
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes pulseGlow{0%,100%{opacity:.6}50%{opacity:1;filter:brightness(1.2)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes dotFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
-      const TOPICS = {
-        "ความหมายของ NIPT": {
-          icon: "🧬",
-          subtopics: [
-            "NIPT คืออะไร",
-            "หลักการทำงานของ NIPT",
-            "พื้นฐานชีววิทยา: fetal fraction และ cell-free DNA",
-            "ความแตกต่างจาก invasive testing",
-            "ข้อบ่งชี้ในการตรวจ NIPT",
-          ],
-        },
-        "การแปลผล NIPT": {
-          icon: "📊",
-          subtopics: [
-            "ผล High Risk หมายความว่าอะไร",
-            "ผล Low Risk หมายความว่าอะไร",
-            "ผล No Call / Inconclusive คืออะไร",
-            "PPV และ NPV คืออะไร",
-            "Sensitivity, Specificity และ Residual Risk",
-            "เหตุใด T21/T18/T13 แม่นยำกว่า SCA",
-            "ความแม่นยำของการตรวจ",
-          ],
-        },
-        "โครโมโซมที่ตรวจพบ": {
-          icon: "🔬",
-          subtopics: [
-            "Trisomy 21 (Down syndrome)",
-            "Trisomy 18 (Edwards syndrome)",
-            "Trisomy 13 (Patau syndrome)",
-            "Sex chromosome aneuploidies",
-            "Microdeletions",
-            "Rare autosomal trisomies",
-          ],
-        },
-        "ขั้นตอนหลังผลผิดปกติ": {
-          icon: "🏥",
-          subtopics: [
-            "ควรทำอะไรต่อเมื่อผล High Risk",
-            "Amniocentesis คืออะไร",
-            "CVS คืออะไร",
-            "บทบาทของ Ultrasound ในการคัดกรอง",
-            "การตัดสินใจหลังการตรวจยืนยัน",
-            "การส่งต่อผู้เชี่ยวชาญ",
-          ],
-        },
-        "ข้อจำกัดของ NIPT": {
-          icon: "⚠️",
-          subtopics: [
-            "สาเหตุของ false positive ใน NIPT",
-            "สาเหตุของ false negative ใน NIPT",
-            "ผล No Call / Inconclusive คืออะไร",
-            "ปัจจัยที่มีผลต่อ fetal fraction",
-            "Vanishing twin syndrome",
-            "Confined placental mosaicism",
-            "Maternal malignancy",
-            "กรณีที่ NIPT ไม่เหมาะสม",
-          ],
-        },
-        "การให้คำปรึกษาทางพันธุกรรม": {
-          icon: "👩‍⚕️",
-          subtopics: [
-            "Genetic counselor คืออะไร",
-            "การให้คำปรึกษาก่อนตรวจ NIPT",
-            "การให้คำปรึกษาหลังตรวจ (ผล Low Risk)",
-            "การให้คำปรึกษาหลังตรวจ (ผล High Risk)",
-            "การให้คำปรึกษากรณี False Negative",
-            "Informed Consent ใน NIPT",
-          ],
-        },
-        "เทคนิคและห้องปฏิบัติการ": {
-          icon: "⚙️",
-          subtopics: [
-            "NIPT กับ NGS: low-pass และ targeted library",
-            "เทคนิคอื่น: Vanadis, SNP-based, digital PCR",
-            "Manual vs Automation Workflow",
-            "การวิเคราะห์ความคุ้มค่า (ROI) ของ NIPT",
-          ],
-        },
-        "คำถามที่พบบ่อย": {
-          icon: "❓",
-          subtopics: [
-            "ตรวจได้ตั้งแต่กี่สัปดาห์",
-            "ครรภ์แฝดและ Vanishing Twin",
-            "IVF มีผลต่อการตรวจหรือไม่",
-            "การตรวจ NIPT ของ สปสช.",
-            "ผล NIPT บอกเพศทารกได้หรือไม่",
-            "ค่าใช้จ่ายและการเบิกจ่าย",
-          ],
-        },
-      };
+/* ── Glass Panel ── */
+.glass-panel{
+  background:linear-gradient(135deg,rgba(255,255,255,0.06) 0%,rgba(255,255,255,0.01) 100%);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.08);
+  border-top:1px solid rgba(255,255,255,0.15);
+  border-left:1px solid rgba(255,255,255,0.15);
+  box-shadow:0 8px 32px 0 rgba(0,0,0,0.3);
+  border-radius:16px;
+}
 
-      const KNOWLEDGE_BASE = {
-        "NIPT คืออะไร": `NIPT (Non-Invasive Prenatal Testing) คือการตรวจคัดกรองโครโมโซมของทารกในครรภ์ โดยการวิเคราะห์ cell-free fetal DNA (cffDNA) ที่ลอยอยู่ในกระแสเลือดมารดา
-**วิธีการตรวจ:** เจาะเลือดมารดาเพียง 10 ml ไม่มีความเสี่ยงต่อทารก
-**สามารถตรวจพบ:**
-- Trisomy 21, 18, 13
-- Sex chromosome abnormalities
-- บางแพ็กเกจรวม microdeletions
-**ช่วงเวลาที่เหมาะสม:** ตั้งแต่อายุครรภ์ 10 สัปดาห์ขึ้นไป
-⚠️ **สำคัญ:** NIPT เป็น screening test ไม่ใช่ diagnostic test ผลผิดปกติต้องยืนยันด้วย invasive testing`,
+/* ── Buttons ── */
+.glass-btn{transition:all .2s cubic-bezier(.4,0,.2,1);cursor:pointer;border:none;font-family:'Kanit','Inter',sans-serif}
+.glass-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.4);background:rgba(255,255,255,0.1)!important}
+.glass-btn:active{transform:translateY(0)}
+.topic-btn{transition:all .2s ease;cursor:pointer;border:none;font-family:'Kanit','Inter',sans-serif}
+.topic-btn:hover{background:rgba(6,182,212,0.15)!important;border-left-color:#06b6d4!important;padding-left:16px!important}
 
-        "พื้นฐานชีววิทยา: fetal fraction และ cell-free DNA": `**Cell-free DNA และ Fetal Fraction**
-NIPT อาศัยการวิเคราะห์ชิ้นส่วน DNA อิสระ (cell-free DNA) ในพลาสมาของมารดา ซึ่งประกอบด้วย:
-- **DNA ของมารดา** เป็นส่วนใหญ่
-- **DNA จากรก (placenta-derived cfDNA)** ซึ่งใช้เป็นตัวแทนของทารกทางอ้อม
-⚠️ **ข้อควรเข้าใจ:** cfDNA ที่วิเคราะห์ใน NIPT ส่วนใหญ่เป็น placenta-derived DNA ไม่ใช่ DNA ของตัวทารกโดยตรงทั้งหมด
-**Fetal Fraction คืออะไร:**
-สัดส่วนของ cfDNA ที่มาจากรกต่อ cfDNA ทั้งหมดในพลาสมา
-- เป็นตัวแปรสำคัญต่อความเชื่อมั่นและความแม่นยำของผล
-- ค่าขั้นต่ำที่ยอมรับได้คือ ≥4%
-- เมื่อ fetal fraction ต่ำ โอกาสเกิด no-call, inconclusive หรือ false negative เพิ่มขึ้นอย่างมีนัยสำคัญ`,
+/* ── Header ── */
+#header{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(15,23,42,0.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+.grad-line{height:3px;background:linear-gradient(90deg,#06b6d4,#3b82f6,#ec4899)}
+#header-inner{max-width:1200px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+#tabs-row{max-width:1200px;margin:0 auto;padding:0 24px 16px;display:flex;gap:12px}
 
-        "ปัจจัยที่มีผลต่อ fetal fraction": `**ปัจจัยที่ทำให้ Fetal Fraction เปลี่ยนแปลง**
-Fetal fraction ไม่คงที่ ขึ้นกับปัจจัยหลายประการ:
-**ปัจจัยที่ทำให้ fetal fraction เพิ่มขึ้น:**
-- อายุครรภ์มากขึ้น (โดยเฉพาะหลัง 10 สัปดาห์)
-**ปัจจัยที่ทำให้ fetal fraction ลดลง:**
-- BMI สูง / น้ำหนักตัวมาก (maternal cfDNA เจือปนมาก)
-- ครรภ์แฝด
-- การตั้งครรภ์จาก IVF
-- ยาบางชนิด
-- ภาวะภูมิคุ้มกันผิดปกติ
-- ความผิดปกติของรก
-**ผลที่ตามมาเมื่อ fetal fraction ต่ำ:**
-- โอกาสได้ผล no-call หรือ inconclusive สูงขึ้น
-- ความแม่นยำของผลลดลง
-- เพิ่มความเสี่ยง false negative
-💡 **แนวทาง:** ก่อนส่งตรวจ ควรประเมิน BMI, อายุครรภ์ และปัจจัยเสี่ยงที่อาจทำให้ fetal fraction ต่ำ`,
+/* ── Title gradient ── */
+.title-grad{background:linear-gradient(to right,#22d3ee,#60a5fa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-        "ผล High Risk หมายความว่าอะไร": `ผล **High Risk** หมายความว่า พบสัญญาณของ chromosomal abnormality ในตัวอย่างเลือด
-**สิ่งที่ต้องเข้าใจ:**
-- ❌ ไม่ได้หมายความว่าทารกผิดปกติแน่นอน
-- ✅ หมายความว่าควรตรวจยืนยันด้วย invasive testing
-**Positive Predictive Value (PPV):**
-- Trisomy 21: PPV ~90% (ขึ้นกับอายุมารดา)
-- Trisomy 18: PPV ~70-80%
-- Trisomy 13: PPV ~40-50%
-**ขั้นตอนต่อไป:**
-1. พบแพทย์เพื่อปรึกษาผล
-2. พิจารณา amniocentesis หรือ CVS
-3. รับคำปรึกษาจาก genetic counselor
-💙 ผล high risk ก่อให้เกิดความวิตกกังวล — ควรขอความช่วยเหลือด้านจิตใจด้วย`,
+/* ── CMG Logo (unchanged) ── */
+#cmg-logo{display:flex;align-items:stretch;background:rgba(255,255,255,0.9);border-radius:10px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.4),inset 0 2px 0 rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.2);transform:translateZ(0)}
+#cmg-icon-block{background:#ffffff;padding:8px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid #e2e8f0;min-width:72px}
+#cmg-text-block{background:#f8fafc;padding:8px 16px;display:flex;flex-direction:column;justify-content:center}
 
-        "ผล No Call / Inconclusive คืออะไร": `**ผล No-Call / Inconclusive / Non-Reportable หมายความว่าอะไร**
-ผลลักษณะนี้หมายถึงห้องปฏิบัติการ**ไม่สามารถออกรายงานอย่างมั่นใจได้**
-**สาเหตุที่พบบ่อย:**
-- **Fetal fraction ต่ำ** — พบบ่อยที่สุด
-- ปัญหาก่อนวิเคราะห์: เก็บตัวอย่างไม่เหมาะสม, ขนส่งล่าช้า, ตัวอย่างเสื่อมสภาพ
-- ปัญหาระหว่างวิเคราะห์: extraction failure, library failure, sequencing failure
-- ปัญหาหลังวิเคราะห์: คุณภาพข้อมูลไม่ผ่านเกณฑ์ หรือ algorithm สรุปผลไม่ได้
-**แนวทางจัดการ:**
-1. ทบทวนสาเหตุร่วมกับแพทย์
-2. ประเมิน ultrasound ประกอบ
-3. พิจารณาเจาะเลือดซ้ำหลัง 2 สัปดาห์
-4. หาก no-call ซ้ำหรือ ultrasound ผิดปกติ — พิจารณา invasive testing โดยตรง
-⚠️ **สำคัญ:** ผล no-call ไม่ได้แปลว่าทารกปกติ บางกรณีสัมพันธ์กับความเสี่ยง aneuploidy ที่สูงกว่าประชากรทั่วไป`,
+/* ── Main ── */
+#main{max-width:1200px;margin:0 auto;padding:32px 24px 100px;position:relative}
+#guided-grid{display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:start}
+#sidebar{display:flex;flex-direction:column;gap:16px}
 
-        "Sensitivity, Specificity และ Residual Risk": `**ความเข้าใจเชิงสถิติสำหรับ NIPT**
-**Sensitivity:** ความสามารถตรวจพบรายที่ผิดปกติจริง
-**Specificity:** ความสามารถแยกรายที่ปกติจริง
-**PPV (Positive Predictive Value):** เมื่อผลบวก โอกาสที่ทารกจะผิดปกติจริง
-**NPV (Negative Predictive Value):** เมื่อผลลบ โอกาสที่ทารกจะปกติจริง
-⚠️ **จุดสำคัญ:** PPV เปลี่ยนแปลงตามความชุกของโรคและ prior risk ของผู้ตั้งครรภ์ ผล high-risk จึงไม่ได้มีความหมายเท่ากันในทุกคน
-**Residual Risk:**
-ผล "ความเสี่ยงต่ำ" ยังมี residual risk เหลืออยู่เสมอ — ไม่ใช่การรับประกัน 100%
-**ค่าโดยประมาณ:**
-| ภาวะ | Sensitivity | Specificity | PPV (อายุ >35 ปี) |
-|------|-------------|-------------|-------------------|
-| T21 | >99% | >99.9% | ~90% |
-| T18 | ~97% | >99.9% | ~70-80% |
-| T13 | ~90% | >99.9% | ~40-50% |
-📌 NIPT คือ screening ไม่ใช่ diagnosis — การตัดสินใจทางคลินิกต้องไม่อาศัยผล NIPT เพียงอย่างเดียว`,
+/* ── DNA icon wrapper ── */
+#dna-header-wrap{width:60px;height:60px;animation:float 6s ease-in-out infinite}
+#dna-header-box{width:100%;height:100%;border-radius:16px;background:linear-gradient(135deg,rgba(6,182,212,0.1),rgba(236,72,153,0.1));border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 20px rgba(6,182,212,0.1)}
 
-        "เหตุใด T21/T18/T13 แม่นยำกว่า SCA": `**ทำไม Trisomy 21/18/13 จึงแม่นยำกว่า Sex Chromosome Aneuploidies**
-**กลุ่ม Autosomal Trisomy (T21, T18, T13) มีข้อได้เปรียบหลายประการ:**
-- ฐานข้อมูลสะสมมากกว่า
-- รูปแบบสัญญาณทางชีวสถิติชัดเจนกว่า
-- กรอบการตีความทางคลินิกตรงไปตรงมากว่า
-**กลุ่ม SCA มีความท้าทายมากกว่า:**
-- ความชุกของโรคต่ำกว่า → PPV ต่ำกว่า
-- ภาวะ mosaicism พบบ่อยกว่า
-- Maternal mosaicism หรือ maternal sex chromosome abnormality แทรกซ้อน
-- Phenotype แปรผันกว้างมาก
-- **Monosomy X** มี false positive สูงเป็นพิเศษ และ PPV ต่ำที่สุดในกลุ่มนี้
-💡 **ข้อแนะนำ:** หาก NIPT รายงาน SCA ควรปรึกษา genetic counselor ก่อนตัดสินใจทางคลินิก และยืนยันด้วย invasive testing เสมอ`,
+/* ── Response panel ── */
+#response-panel{min-height:600px;display:flex;flex-direction:column;overflow:hidden}
+#panel-topbar{padding:16px 24px;background:rgba(0,0,0,0.2);border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:12px}
+#panel-body{padding:32px;flex:1;overflow-y:auto;display:flex;flex-direction:column}
 
-        "Trisomy 21 (Down syndrome)": `**Down Syndrome (Trisomy 21)**
-**พันธุกรรม:** โครโมโซมคู่ที่ 21 เกินมา 1 แท่ง (47 แท่งแทน 46 แท่ง)
-**ความถี่:** ~1/700 การคลอด (เพิ่มตามอายุมารดา)
-**ลักษณะทางคลินิก:**
-- ระดับสติปัญญาต่ำกว่าปกติ (mild-moderate)
-- ลักษณะหน้าตาเฉพาะ
-- โรคหัวใจพิการแต่กำเนิด ~40-50%
-- ความเสี่ยงต่อมะเร็งเม็ดเลือดขาวสูงขึ้น
-**อายุขัย:** ปัจจุบันมักมีชีวิตยืนยาวถึง 60+ ปี
-**NIPT Sensitivity:** >99% | **Specificity:** >99.9%
-📌 การวินิจฉัยยืนยันต้องทำ karyotype จาก amniocentesis หรือ CVS`,
+/* ── States ── */
+#empty-state{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:.7}
+#empty-dna{width:180px;height:240px;animation:float 6s ease-in-out infinite;opacity:.5}
+#loading-state{flex:1;display:none;flex-direction:column;align-items:center;justify-content:center;animation:pulseGlow 2s infinite}
+#spinner{width:64px;height:64px;border:3px solid rgba(6,182,212,0.2);border-top-color:#06b6d4;border-radius:50%;animation:spin 1s linear infinite}
+#answer-state{display:none;animation:fadeUp .5s cubic-bezier(.16,1,.3,1)}
 
-        "Amniocentesis คืออะไร": `**Amniocentesis** คือการเจาะดูดน้ำคร่ำเพื่อตรวจโครโมโซมทารก
-**วิธีการ:**
-- ใช้เข็มเจาะผ่านหน้าท้องมารดาภายใต้ ultrasound guidance
-- ดูดน้ำคร่ำ ~15-20 ml
-- ส่งตรวจ karyotype / microarray / FISH
-**เวลาที่เหมาะ:** อายุครรภ์ 15-20 สัปดาห์
-**ผลการตรวจ:**
-- Karyotype: 2-3 สัปดาห์
-- FISH/QF-PCR: 2-3 วัน (โครโมโซมหลัก)
-**ความเสี่ยง:**
-- แท้งบัตร ~0.1-0.3% (1/500-1000)
-- Infection, bleeding (พบน้อยมาก)
-**ความแม่นยำ:** ~99.5% สำหรับ chromosomal abnormalities`,
+/* ── Chat ── */
+#chat-view{display:none}
+#chat-container{max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:20px;height:calc(100vh - 220px)}
+#chat-panel{flex:1;display:flex;flex-direction:column;overflow:hidden}
+#chat-messages{flex:1;padding:24px;overflow-y:auto;display:flex;flex-direction:column;gap:16px}
+#chat-input-area{padding:20px;background:rgba(0,0,0,0.2);border-top:1px solid rgba(255,255,255,0.05)}
+.chat-user-bubble{align-self:flex-end;max-width:80%;background:linear-gradient(135deg,#0284c7,#2563eb);padding:12px 16px;border-radius:16px 16px 4px 16px;color:#fff;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+.chat-ai-bubble{align-self:flex-start;max-width:90%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);padding:16px 20px;border-radius:16px 16px 16px 4px;color:#e2e8f0;font-size:14px;line-height:1.6;animation:fadeUp .4s ease}
+.chat-ai-bubble p{margin:6px 0;line-height:1.6}
+.chat-ai-bubble li{margin-left:24px;margin-bottom:6px;list-style-type:circle;padding-left:8px}
+.typing-dot{width:8px;height:8px;background:#06b6d4;border-radius:50%}
+.typing-dot:nth-child(1){animation:dotFloat 1s ease-in-out 0s infinite}
+.typing-dot:nth-child(2){animation:dotFloat 1s ease-in-out .2s infinite}
+.typing-dot:nth-child(3){animation:dotFloat 1s ease-in-out .4s infinite}
 
-        "บทบาทของ Ultrasound ในการคัดกรอง": `**Ultrasound: องค์ประกอบสำคัญของการคัดกรองก่อนคลอด**
-Ultrasound ไม่ได้เป็นเพียงการตรวจเสริม แต่เป็น**ส่วนสำคัญที่ขาดไม่ได้**ของระบบการคัดกรองก่อนคลอด
-**บทบาทของ Ultrasound:**
-- ยืนยันอายุครรภ์และจำนวนทารก
-- ยืนยันการมีชีวิตของทารก
-- ตรวจความผิดปกติทางกายวิภาค
-- ประเมินสัญญาณที่อาจบ่งชี้โครโมโซมผิดปกติ (เช่น nuchal translucency)
-**กรณีที่ต้องระวังเป็นพิเศษ:**
-- หาก ultrasound พบความผิดปกติชัดเจน → ผล NIPT "ความเสี่ยงต่ำ" ไม่ควรใช้ยุติการสืบค้น เพราะ NIPT ไม่ครอบคลุมความผิดปกติทุกชนิด
-- หาก NIPT ผลบวก → ควรทำ detailed ultrasound และยืนยันด้วย invasive testing ก่อนตัดสินใจทางคลินิก
-📌 การใช้ NIPT และ Ultrasound ร่วมกันให้ประสิทธิภาพการคัดกรองที่ดีที่สุด`,
+/* ── Footer ── */
+#footer{position:fixed;bottom:0;width:100%;padding:12px;background:rgba(2,6,23,0.8);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,0.05);text-align:center;z-index:40}
 
-        "ตรวจได้ตั้งแต่กี่สัปดาห์": `**ช่วงเวลาที่เหมาะสมสำหรับ NIPT**
-**อายุครรภ์ขั้นต่ำ:** 10 สัปดาห์ (บางแล็บ 9 สัปดาห์)
-**เหตุผล:** ต้องการ fetal fraction ≥4% จึงจะแปลผลได้น่าเชื่อถือ
-- Fetal fraction เพิ่มขึ้นตามอายุครรภ์
-- ที่ 10 สัปดาห์: fetal fraction ~10%
-- ที่ 20 สัปดาห์: fetal fraction ~20%
-**ช่วงที่ดีที่สุด:** 10-13 สัปดาห์ (ร่วมกับ first trimester screening)
-**กรณี No Call:** อาจเกิดจาก fetal fraction ต่ำเกินไป ควรตรวจซ้ำหลัง 2 สัปดาห์
-**ไม่มีอายุครรภ์สูงสุด** — ตรวจได้ตลอดการตั้งครรภ์`,
+/* ── Answer formatting ── */
+.ans-h{font-weight:600;color:#22d3ee;margin:16px 0 8px;font-size:16px}
+.ans-p{margin:6px 0;line-height:1.6}
+.ans-strong{color:#38bdf8;font-weight:500}
+.ans-li{margin-left:24px;margin-bottom:6px;list-style-type:circle;padding-left:8px}
+</style>
+</head>
+<body>
 
-        "สาเหตุของ false positive ใน NIPT": `**สาเหตุของ False Positive ใน NIPT**
-False positive หมายถึงผลบ่งชี้ความเสี่ยงสูง แต่ทารกจริงปกติ
-**สาเหตุที่พบ:**
-- **Confined Placental Mosaicism (CPM):** รกมีโครโมโซมผิดปกติ แต่ทารกจริงปกติ (พบบ่อยที่สุด)
-- **Vanishing Twin:** DNA จากครรภ์ที่หยุดพัฒนายังหลั่งเข้ากระแสเลือดมารดาได้อีกหลายสัปดาห์
-- **Maternal Mosaicism:** มารดามีโครโมโซมผิดปกติในระดับ mosaicism
-- **Maternal Copy-Number Variation**
-- **Maternal Malignancy:** เนื้องอกหรือมะเร็งของมารดาบางชนิด
-- ข้อผิดพลาดทางเทคนิคหรือการวิเคราะห์ข้อมูล
-**กลุ่ม SCA false positive สูงเป็นพิเศษ:**
-- ความชุกต่ำ + mosaicism สูง + รบกวนจากโครโมโซมเพศมารดา → PPV ต่ำกว่า autosomal trisomies มาก โดยเฉพาะ monosomy X
-⚠️ ผล high-risk ต้องยืนยันด้วย invasive testing ก่อนตัดสินใจทางคลินิกเสมอ`,
+<!-- ═══════════════════════════════
+     HEADER  (exact from React)
+═══════════════════════════════ -->
+<header id="header">
+  <div class="grad-line"></div>
+  <div id="header-inner">
 
-        "สาเหตุของ false negative ใน NIPT": `**สาเหตุของ False Negative ใน NIPT**
-False negative หมายถึงผลบ่งชี้ความเสี่ยงต่ำ แต่ทารกจริงผิดปกติ
-**สาเหตุที่พบ:**
-- **Fetal fraction ต่ำ** — สำคัญที่สุด ทำให้สัญญาณความผิดปกติไม่เด่นพอ
-- **Placental mosaicism ระดับต่ำ** — รกและทารกมีความไม่สอดคล้องกัน
-- **ครรภ์แฝด (dizygotic twins)** — ทารกปกติอาจกลบสัญญาณจากทารกที่ผิดปกติ
-- Sequencing depth ไม่เพียงพอ
-- Algorithm ไม่สามารถแยกสัญญาณได้ชัดเจน
-- ความผิดปกติที่อยู่นอกขอบเขตของ assay ที่ใช้
-📌 **ข้อควรจำ:** ผล "ความเสี่ยงต่ำ" ไม่ใช่การยืนยันว่าทารกปกติทุกประการ แต่เป็นเพียงการลดโอกาสของความผิดปกติในขอบเขตที่การทดสอบครอบคลุม`,
+    <!-- DNA icon + Title -->
+    <div style="display:flex;align-items:center;gap:16px">
+      <div id="dna-header-wrap">
+        <div id="dna-header-box">
+          <div style="width:40px;height:40px">
+            <canvas id="dna-small" width="40" height="54"></canvas>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h1 class="title-grad" style="margin:0;font-size:24px;font-weight:700;font-family:'Inter',sans-serif;letter-spacing:-.5px">
+          NIPT Genetic Counselling
+        </h1>
+        <p style="margin:0;font-size:13px;color:#94a3b8;font-weight:400">ระบบให้คำปรึกษาการตรวจคัดกรองโครโมโซมทารกในครรภ์</p>
+      </div>
+    </div>
 
-        "ครรภ์แฝดและ Vanishing Twin": `**ครรภ์แฝดและ Vanishing Twin กับ NIPT**
-**ครรภ์แฝด:**
-- NIPT ยังมีประโยชน์ โดยเฉพาะ trisomy 21 ซึ่งมีประสิทธิภาพใกล้เคียง singleton มากกว่าการตรวจแบบ serum screening ดั้งเดิม
-- ความซับซ้อนสูงกว่า: fetal fraction ของทารกแต่ละคนไม่เท่ากัน
-- Dizygotic twin: ทารกปกติอาจทำให้สัญญาณจากทารกผิดปกติลดลง → เพิ่มความเสี่ยง false negative
-- โอกาส test failure สูงกว่าครรภ์เดี่ยว
-**Vanishing Twin:**
-- เป็นสาเหตุสำคัญของ false positive
-- DNA จากครรภ์ที่หยุดพัฒนายังคงหลั่งเข้าสู่กระแสเลือดมารดาได้อีกหลายสัปดาห์
-- ควรซักประวัติและใช้ ultrasound ประกอบอย่างละเอียดก่อนแปลผล NIPT ในรายที่มีประวัติครรภ์แฝด`,
+    <!-- CMG Logo — unchanged pixel-perfect -->
+    <div id="cmg-logo">
+      <div id="cmg-icon-block">
+        <svg width="48" height="40" viewBox="0 0 54 46" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 2 C7 6 3 10 6 14 C9 18 5 22 8 26 C11 30 7 34 10 38 C13 42 9 44 12 46" stroke="#0f766e" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M10 2 C7 6 11 10 8 14 C5 18 9 22 6 26 C3 30 7 34 4 38 C1 42 5 44 2 46" stroke="#10b981" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <line x1="4"  y1="6"  x2="10" y2="6"  stroke="#34d399" stroke-width="1" opacity=".7"/>
+          <line x1="7"  y1="12" x2="5"  y2="12" stroke="#34d399" stroke-width="1" opacity=".7"/>
+          <line x1="4"  y1="18" x2="10" y2="18" stroke="#34d399" stroke-width="1" opacity=".7"/>
+          <line x1="7"  y1="24" x2="5"  y2="24" stroke="#34d399" stroke-width="1" opacity=".7"/>
+          <line x1="4"  y1="30" x2="10" y2="30" stroke="#34d399" stroke-width="1" opacity=".7"/>
+          <line x1="7"  y1="36" x2="5"  y2="36" stroke="#34d399" stroke-width="1" opacity=".7"/>
+          <line x1="4"  y1="42" x2="10" y2="42" stroke="#34d399" stroke-width="1" opacity=".7"/>
+          <circle cx="26" cy="6"  r="4"   fill="#0369a1"/>
+          <path d="M22 10 L22 22 M26 10 L26 24 M30 10 L30 22 M22 22 L20 30 M22 22 L24 30 M30 22 L28 30 M30 22 L32 30" stroke="#0369a1" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="38" cy="8"  r="3.5" fill="#0ea5e9"/>
+          <path d="M35 12 L35 22 M38 12 L38 24 M41 12 L41 22 M35 22 L33 29 M35 22 L37 29 M41 22 L39 29 M41 22 L43 29" stroke="#0ea5e9" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="48" cy="12" r="2.8" fill="#14b8a6"/>
+          <path d="M46 15 L46 22 M48 15 L48 23 M50 15 L50 22 M46 22 L44.5 28 M46 22 L47.5 28 M50 22 L48.5 28 M50 22 L51.5 28" stroke="#14b8a6" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="14" y1="44" x2="53" y2="44" stroke="#cbd5e1" stroke-width="1"/>
+        </svg>
+        <div style="font-size:6px;color:#334155;text-align:center;letter-spacing:.3px;margin-top:2px;font-family:'Kanit',sans-serif;font-weight:500;line-height:1.1">ศูนย์จีโนมิกส์<br/>ทางการแพทย์</div>
+      </div>
+      <div id="cmg-text-block">
+        <div style="font-size:15px;font-weight:800;color:#0f766e;font-family:'Inter',sans-serif;line-height:1.1;letter-spacing:-.5px">Genomics Medicine</div>
+        <div style="font-size:12px;font-weight:600;color:#059669;font-family:'Inter',sans-serif;line-height:1.2">The future starts now.</div>
+        <div style="margin-top:4px;padding-top:4px;border-top:1px solid #e2e8f0">
+          <div style="font-size:6px;color:#64748b;font-family:'Inter',sans-serif;letter-spacing:1px;text-transform:uppercase;font-weight:600">Center for Medical Genomics</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        "Genetic counselor คืออะไร": `**Genetic Counselor คือใคร และมีบทบาทอย่างไร**
-Genetic counselor คือบุคลากรวิชาชีพที่มีความรู้ทั้งด้าน**พันธุศาสตร์การแพทย์**และ**การให้คำปรึกษา**
-**บทบาทหลัก:**
-- รวบรวมประวัติส่วนบุคคลและประวัติครอบครัว
-- ประเมินความเสี่ยง
-- อธิบายทางเลือกของการตรวจคัดกรองและการตรวจวินิจฉัย
-- ช่วยแปลผลทางพันธุกรรม
-- สนับสนุนให้ผู้รับบริการตัดสินใจบนพื้นฐานของข้อมูลที่ถูกต้อง
-**ในบริบทสูติกรรม:**
-- ให้คำปรึกษาก่อนตรวจ NIPT
-- อธิบายข้อจำกัดของ NIPT และ false positive/negative/no-call
-- สื่อสารผลตรวจและวางแผนการตรวจยืนยัน
-- ทำงานร่วมกับสูติแพทย์ เวชศาสตร์มารดาและทารกในครรภ์ นักพันธุศาสตร์คลินิก และห้องปฏิบัติการ
-💙 Genetic counselor ช่วยให้ผู้รับบริการตัดสินใจสอดคล้องกับคุณค่าและบริบทของตนเอง`,
+  <!-- Tabs -->
+  <div id="tabs-row">
+    <button id="tab-guided" class="glass-btn" onclick="switchTab('guided')"
+      style="padding:10px 24px;border-radius:10px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;background:rgba(6,182,212,0.15);color:#22d3ee;box-shadow:inset 0 0 0 1px rgba(6,182,212,0.4),0 4px 12px rgba(0,0,0,0.2)">
+      <span style="font-size:16px">📑</span> เมนูหัวข้อ
+    </button>
+    <button id="tab-chat" class="glass-btn" onclick="switchTab('chat')"
+      style="padding:10px 24px;border-radius:10px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.03);color:#94a3b8;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.05)">
+      <span style="font-size:16px">💬</span> ถามอิสระ
+    </button>
+  </div>
+</header>
 
-        "การให้คำปรึกษาก่อนตรวจ NIPT": `**Pre-test Genetic Counseling สำหรับ NIPT**
-ก่อนตรวจ ผู้รับบริการควรได้รับข้อมูลครบถ้วนในประเด็นต่อไปนี้:
-**สิ่งที่ต้องอธิบาย:**
-- NIPT เป็น screening ไม่ใช่ diagnosis
-- โรคที่ตรวจพบได้ และตรวจไม่ได้
-- ความเป็นไปได้ของ false positive, false negative, no-call
-- ผลที่อาจพบโดยไม่คาดคิดจากมารดา (เช่น maternal malignancy)
-- ทางเลือกอื่น: serum screening, ultrasound, invasive diagnostic testing
-**สิทธิของผู้รับบริการ:**
-- เลือกรับหรือไม่รับผลบางประเภท (เช่น SCA)
-- มีเวลาตัดสินใจบนพื้นฐานของข้อมูล ไม่ใช่เพียงลงนามยินยอม
-⚠️ การให้ความยินยอมควรเป็น**กระบวนการของการทำความเข้าใจ** ไม่ใช่เพียงการลงลายมือชื่อในเอกสาร`,
+<!-- ═══════════════════════════════
+     MAIN
+═══════════════════════════════ -->
+<main id="main">
 
-        "การให้คำปรึกษาหลังตรวจ (ผล Low Risk)": `**Post-test Counseling: ผล Screen Negative / Low Risk**
-เมื่อผลตรวจไม่พบความเสี่ยง ควรสื่อสารอย่างสมดุลดังนี้:
-**สิ่งที่ต้องอธิบาย:**
-- ผลนี้คือ "screen negative" หรือ "low risk" — ช่วยลดโอกาสของความผิดปกติในขอบเขตที่ทดสอบ
-- **ไม่ใช่การยืนยันว่าทารกปกติทุกประการ** — ยังคงมี residual risk เหลืออยู่
-- NIPT ไม่ครอบคลุมความผิดปกติทุกชนิด
-- ยังต้องติดตามครรภ์ตามมาตรฐาน โดยเฉพาะ ultrasound ตามช่วงเวลาที่เหมาะสม
-💡 ควรอธิบาย residual risk อย่างสมดุล — **ไม่สร้างความตื่นตระหนก แต่ก็ไม่สร้างความมั่นใจเกินจริง**`,
+  <!-- ── GUIDED MODE ── -->
+  <div id="guided-view">
+    <div id="guided-grid">
 
-        "การให้คำปรึกษาหลังตรวจ (ผล High Risk)": `**Post-test Counseling: ผล Screen Positive / High Risk**
-เมื่อผลตรวจบ่งชี้ความเสี่ยงสูง ควรดำเนินการดังนี้:
-**ขั้นตอนการให้คำปรึกษา:**
-1. อธิบายว่าเป็นผลคัดกรองเชิงสถิติ — ไม่ใช่คำวินิจฉัย
-2. ย้ำถึงค่า PPV ตามโรคและอายุมารดา
-3. อธิบายความจำเป็นของการตรวจยืนยัน (CVS หรือ amniocentesis)
-4. ประเมิน ultrasound ประกอบก่อนตัดสินใจ
-5. สนับสนุนด้านจิตใจ — ผล high risk ก่อให้เกิดความวิตกกังวลอย่างมาก
-**ทางเลือกที่ต้องนำเสนอ:**
-- การตรวจยืนยันด้วย invasive testing
-- การปรึกษาผู้เชี่ยวชาญเพิ่มเติม (MFM, นักพันธุศาสตร์คลินิก)
-- ทางเลือกในการจัดการครรภ์หลังยืนยันผล
-💙 การตัดสินใจทั้งหมดควรเป็นของผู้รับบริการ บนพื้นฐานข้อมูลที่ครบถ้วนและการสนับสนุนที่เพียงพอ`,
+      <!-- Sidebar -->
+      <div id="sidebar">
 
-        "การให้คำปรึกษากรณี False Negative": `**การให้คำปรึกษากรณี False Negative**
-กรณีที่ทารกเกิดมามีความผิดปกติ ทั้งที่ผล NIPT ก่อนคลอดไม่พบความเสี่ยง:
-**หลักการสื่อสาร:**
-- ใช้ความระมัดระวังอย่างยิ่ง — ต้องตรงไปตรงมาแต่เห็นอกเห็นใจ
-- อธิบายว่า NIPT ไม่ใช่การตรวจวินิจฉัย และ false negative เกิดขึ้นได้จากข้อจำกัดทางชีววิทยาและเทคนิค
-**สาเหตุที่ควรอธิบาย:**
-- Fetal fraction ต่ำ
-- Mosaicism
-- ความแตกต่างระหว่างรกกับทารก
-- ขอบเขตของการตรวจที่จำกัด
-**สิ่งที่ต้องดำเนินการ:**
-- ทบทวนกระบวนการตรวจ
-- อธิบายข้อเท็จจริงทางวิทยาศาสตร์อย่างชัดเจน
-- **ดูแลด้านจิตใจของครอบครัวเป็นสำคัญ** — ไม่ใช่เพียงอธิบายเชิงเทคนิคเท่านั้น`,
+        <!-- Category dropdown -->
+        <div class="glass-panel" style="padding:20px">
+          <label style="font-size:12px;color:#64748b;font-weight:600;letter-spacing:1px;display:block;margin-bottom:12px">เลือกหมวดหมู่</label>
+          <div style="position:relative">
+            <select id="cat-select" onchange="onCategoryChange()"
+              style="width:100%;padding:12px 16px;background:rgba(15,23,42,0.6);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#f1f5f9;font-size:14px;font-family:'Kanit',sans-serif;outline:none;cursor:pointer;box-shadow:inset 0 2px 4px rgba(0,0,0,0.2)">
+              <option value="" style="background:#0f172a">-- กรุณาเลือก --</option>
+              <option value="ความหมายของ NIPT"    style="background:#0f172a">🧬 ความหมายของ NIPT</option>
+              <option value="การแปลผล NIPT"        style="background:#0f172a">📊 การแปลผล NIPT</option>
+              <option value="โครโมโซมที่ตรวจพบ"   style="background:#0f172a">🔬 โครโมโซมที่ตรวจพบ</option>
+              <option value="ขั้นตอนหลังผลผิดปกติ" style="background:#0f172a">🏥 ขั้นตอนหลังผลผิดปกติ</option>
+              <option value="ข้อจำกัดของ NIPT"    style="background:#0f172a">⚠️ ข้อจำกัดของ NIPT</option>
+              <option value="คำถามที่พบบ่อย"      style="background:#0f172a">❓ คำถามที่พบบ่อย</option>
+            </select>
+            <div style="position:absolute;right:16px;top:50%;transform:translateY(-50%);pointer-events:none;color:#64748b">▼</div>
+          </div>
+        </div>
 
-        "Informed Consent ใน NIPT": `**Informed Consent ที่ควรมีใน NIPT**
-เอกสารยินยอมควรครอบคลุมอย่างน้อย 3 ประเด็นสำคัญ:
-**ประเด็นที่ 1: ความเข้าใจในลักษณะของการตรวจ**
-ผู้รับบริการเข้าใจว่า NIPT เป็นการตรวจคัดกรอง ไม่ใช่การตรวจวินิจฉัย
-**ประเด็นที่ 2: การเลือกรับผลบางประเภท**
-ผู้รับบริการประสงค์หรือไม่ประสงค์จะรับรายงานผลบางประเภท เช่น SCA หรือ incidental findings
-**ประเด็นที่ 3: การนำข้อมูลไปใช้**
-ผู้รับบริการยินยอมหรือไม่ยินยอมให้นำข้อมูลผลตรวจ (ที่ผ่านการตัดข้อมูลระบุตัวตนออกแล้ว) ไปใช้เพื่อการวิจัย การประกันคุณภาพ และการพัฒนาบริการ
-⚠️ **หลักการสำคัญ:** การให้ความยินยอมควรเป็นกระบวนการของ**การทำความเข้าใจ** ไม่ใช่เพียงการลงลายมือชื่อในเอกสาร`,
+        <!-- Subtopics (shown when category selected) -->
+        <div id="subtopic-panel" class="glass-panel" style="padding:20px;display:none">
+          <label style="font-size:12px;color:#64748b;font-weight:600;letter-spacing:1px;display:block;margin-bottom:12px">หัวข้อย่อย</label>
+          <div id="subtopic-list" style="display:flex;flex-direction:column;gap:6px"></div>
+        </div>
 
-        "NIPT กับ NGS: low-pass และ targeted library": `**เทคนิค NGS ที่ใช้ใน NIPT**
-**Low-pass Whole-genome Sequencing (Massively Parallel Sequencing):**
-- อ่านลำดับทั่วทั้งจีโนมในระดับความลึกต่ำ
-- ใช้การนับจำนวนชิ้นส่วนอ่านจากแต่ละโครโมโซม
-- เพื่อตรวจหาความไม่สมดุลของปริมาณ (copy number imbalance)
-- **ข้อดี:** ครอบคลุมกว้าง ยืดหยุ่น
-**Targeted / Capture Library:**
-- เลือกจับเฉพาะบริเวณหรือโครโมโซมเป้าหมายก่อนอ่านลำดับ
-- **ข้อดี:** ลดภาระข้อมูล เหมาะกับการออกแบบ assay เฉพาะทาง
-⚠️ **ข้อควรระวัง:** ประสิทธิภาพจริงขึ้นกับ chemistry, sequencing depth, bioinformatics pipeline และการควบคุมคุณภาพของแต่ละห้องปฏิบัติการ ไม่ใช่เพียงชนิด library เพียงอย่างเดียว`,
+        <!-- Quick access (shown when no category) -->
+        <div id="quick-panel" style="position:relative;perspective:1000px">
+          <div class="glass-panel" style="padding:20px;border-color:rgba(236,72,153,0.2)">
+            <label style="font-size:12px;color:#f472b6;font-weight:600;letter-spacing:1px;display:block;margin-bottom:12px">⚡ เข้าถึงด่วน</label>
+            <div id="quick-list" style="display:flex;flex-direction:column;gap:8px"></div>
+          </div>
+        </div>
+      </div>
 
-        "เทคนิคอื่น: Vanadis, SNP-based, digital PCR": `**แพลตฟอร์มทางเลือกสำหรับ NIPT**
-**Vanadis System:**
-- ใช้หลัก rolling circle amplification และการนับสัญญาณเชิงดิจิทัล
-- ลดการพึ่งพา PCR และ sequencing
-**SNP-based NIPT:**
-- ใช้ข้อมูล polymorphism เพื่อแยกสัญญาณของมารดาและทารก
-- จุดเด่น: ประเมิน zygosity ในครรภ์แฝด, บางภาวะที่ NGS ทำได้ยากกว่า
-**Digital PCR:**
-- ศักยภาพสูงสำหรับเป้าหมายเฉพาะหรือสัญญาณปริมาณต่ำมาก
-- ยังไม่ใช่แพลตฟอร์มหลักสำหรับการคัดกรอง aneuploidy แบบ routine
-**การเลือกเทคโนโลยี:** ควรพิจารณาทั้งความแม่นยำ ต้นทุน TAT ความสามารถด้าน automation และบริบทของระบบบริการ`,
+      <!-- Content panel -->
+      <div class="glass-panel" id="response-panel">
+        <div id="panel-topbar">
+          <div style="display:flex;gap:6px">
+            <div style="width:12px;height:12px;border-radius:50%;background:#ef4444"></div>
+            <div style="width:12px;height:12px;border-radius:50%;background:#f59e0b"></div>
+            <div style="width:12px;height:12px;border-radius:50%;background:#10b981"></div>
+          </div>
+          <span id="panel-topic" style="color:#94a3b8;font-size:14px"></span>
+        </div>
 
-        "Manual vs Automation Workflow": `**Manual vs Automation Workflow ในการตรวจ NIPT**
-**Manual Workflow:**
-- ข้อดี: ยืดหยุ่น ต้นทุนการลงทุนเริ่มต้นต่ำกว่า
-- ข้อเสีย: ความแปรปรวนระหว่างผู้ปฏิบัติงาน, เสี่ยงต่อการปนเปื้อน, คอขวดเมื่อปริมาณตัวอย่างสูง
-**Automation Workflow:**
-- ข้อดี: ความสม่ำเสมอสูง, ลด human error, เพิ่ม throughput, ควบคุมคุณภาพเป็นระบบ เหมาะกับงานระดับบริการขนาดใหญ่
-- ข้อเสีย: ต้นทุนการลงทุนสูง
-**การประเมินก่อนลงทุน Automation:**
-- จำนวนตัวอย่างจริงต่อวัน
-- ค่าเสื่อมราคาและค่า reagent
-- TAT ที่ต้องการ
-- Repeat rate และ no-call rate
-- ภาระบุคลากรของห้องปฏิบัติการ`,
-
-        "การวิเคราะห์ความคุ้มค่า (ROI) ของ NIPT": `**การวิเคราะห์ความคุ้มค่าทางเศรษฐศาสตร์ (ROI) ของ NIPT**
-**มิติทางคลินิกและระบบสุขภาพ:**
-- ลดการตรวจ invasive ที่ไม่จำเป็น
-- ลด false positive จากการคัดกรองแบบเดิม
-- ลดภาระค่าใช้จ่ายต่อเนื่องจากการดูแลผู้ป่วยระยะยาว
-- ลดการเจาะเลือดซ้ำ
-- ลดภาระงานของระบบส่งต่อ
-**ต้นทุนที่ต้องนำมาคำนวณ:**
-- ค่าเครื่องมือและค่าเสื่อมราคา
-- ค่าบุคลากรและ reagent
-- ค่าเก็บและขนส่งตัวอย่าง
-- ค่าควบคุมคุณภาพ
-- ต้นทุนจาก no-call หรือ redraw rate
-**ประโยชน์ที่วัดได้:**
-- ปริมาณงานที่เพิ่มขึ้น
-- TAT ที่สั้นลง
-- ความสามารถรองรับบริการระดับประเทศ`,
-
-        "การตรวจ NIPT ของ สปสช.": `**นโยบาย สปสช. กับการตรวจ NIPT**
-**ขอบเขตที่ สปสช. สนับสนุน:**
-โดยทั่วไปมุ่งเน้นการคัดกรองความผิดปกติของโครโมโซมกลุ่มหลัก ได้แก่:
-- Trisomy 21 (Down syndrome)
-- Trisomy 18 (Edwards syndrome)
-- Trisomy 13 (Patau syndrome)
-**กรณี Sex Chromosome Aneuploidy (SCA):**
-ควรแยกเป็นประเด็นเฉพาะของการให้ข้อมูลและความยินยอม เนื่องจาก:
-- ความซับซ้อนด้านการแปลผล
-- ปัญหาด้านจริยธรรม
-- อัตรา PPV ต่ำกว่ากลุ่ม autosomal trisomies โดยเฉพาะ monosomy X
-**หากหน่วยบริการจะรายงาน SCA ควร:**
-- ระบุขอบเขตบริการให้ชัดเจน
-- ได้รับความยินยอมแบบเฉพาะเจาะจง
-- มี genetic counseling รองรับอย่างครบถ้วน
-📌 สำหรับข้อมูลล่าสุดเกี่ยวกับสิทธิ์ สปสช. ควรตรวจสอบกับโรงพยาบาลหรือ สปสช. โดยตรง`,
-
-        "False positive และ false negative": `**ข้อจำกัดด้านความแม่นยำของ NIPT**
-**False Positive (ผิดปกติแต่ทารกปกติ):**
-- เกิดจาก confined placental mosaicism
-- Maternal chromosomal abnormality
-- Vanishing twin / Maternal malignancy
-**False Negative (ปกติแต่ทารกผิดปกติ):**
-- Fetal fraction ต่ำเกินไป
-- Mosaicism ระดับต่ำ
-- Rare variants บางชนิด
-**อัตราโดยประมาณ:**
-| ภาวะ | Sensitivity | Specificity |
-|------|-------------|-------------|
-| T21 | >99% | >99.9% |
-| T18 | ~97% | >99.9% |
-| T13 | ~90% | >99.9% |
-⚠️ **สรุป:** NIPT ดีมากแต่ไม่ 100% — ผล "ปกติ" ไม่ได้รับประกัน 100%`,
-      };
-
-      function NIPTCounsellingApp() {
-        const [selectedCategory, setSelectedCategory] = useState("");
-        const [selectedTopic, setSelectedTopic] = useState("");
-        const [aiResponse, setAiResponse] = useState("");
-        const [isLoading, setIsLoading] = useState(false);
-        const [customQuestion, setCustomQuestion] = useState("");
-        const [chatHistory, setChatHistory] = useState([]);
-        const [activeTab, setActiveTab] = useState("guided");
-
-        const getResponse = async (question, context = "") => {
-          setIsLoading(true);
-          setAiResponse("");
-          const builtIn = KNOWLEDGE_BASE[question];
-          try {
-            const systemPrompt = `คุณเป็น genetic counselor ผู้เชี่ยวชาญด้าน NIPT (Non-Invasive Prenatal Testing)\nให้คำปรึกษาเป็นภาษาไทยที่เข้าใจง่าย ชัดเจน และเห็นอกเห็นใจ\nใช้ข้อมูลทางการแพทย์ที่ถูกต้องและทันสมัย\nจัดรูปแบบคำตอบให้อ่านง่าย ใช้ bullet points และ emoji ที่เหมาะสม\nเสมอย้ำว่าควรปรึกษาแพทย์สำหรับกรณีเฉพาะบุคคล`;
-            const userMsg = context ? `หัวข้อ: ${context}\nคำถาม: ${question}` : question;
-            const res = await fetch("/api/chat", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                model: "claude-sonnet-4-6",
-                max_tokens: 1000,
-                system: systemPrompt,
-                messages: [{ role: "user", content: userMsg }],
-              }),
-            });
-            const data = await res.json();
-            if (data.error || !data.content) {
-              // API returned an error (e.g. missing key, wrong model) — fall back to built-in
-              const fallback = builtIn || `⚠️ API Error: ${data.error?.message || JSON.stringify(data)}`;
-              setAiResponse(fallback);
-              return fallback;
-            }
-            const text = data.content[0].text;
-            setAiResponse(text);
-            return text;
-          } catch {
-            const fallback = builtIn || "ขออภัย ไม่สามารถเชื่อมต่อได้ในขณะนี้ กรุณาลองใหม่อีกครั้ง";
-            setAiResponse(fallback);
-            return fallback;
-          } finally {
-            setIsLoading(false);
-          }
-        };
-
-        const handleTopicSelect = async (topic) => {
-          setSelectedTopic(topic);
-          await getResponse(topic, selectedCategory);
-        };
-
-        const handleCustomQuestion = async () => {
-          if (!customQuestion.trim()) return;
-          const q = customQuestion;
-          setCustomQuestion("");
-          const answer = await getResponse(q);
-          setChatHistory((prev) => [...prev, { q, a: answer }]);
-        };
-
-        const formatResponse = (text) => {
-          if (!text) return null;
-          return text.split("\n").map((line, i) => {
-            if (line.startsWith("**") && line.endsWith("**")) {
-              return <p key={i} style={{ fontWeight: "bold", color: "#81e6d9", marginTop: 12, marginBottom: 4 }}>{line.replace(/\*\*/g, "")}</p>;
-            }
-            if (line.includes("**")) {
-              const parts = line.split(/\*\*(.*?)\*\*/g);
-              return <p key={i} style={{ margin: "4px 0" }}>{parts.map((p, j) => j % 2 === 1 ? <strong key={j} style={{ color: "#81e6d9" }}>{p}</strong> : p)}</p>;
-            }
-            if (line.startsWith("- ") || line.startsWith("• ")) {
-              return <li key={i} style={{ marginLeft: 16, margin: "2px 0" }}>{line.slice(2)}</li>;
-            }
-            if (line.trim() === "") return <br key={i} />;
-            return <p key={i} style={{ margin: "4px 0" }}>{line}</p>;
-          });
-        };
-
-        const quickAccess = [
-          "NIPT คืออะไร",
-          "Genetic counselor คืออะไร",
-          "พื้นฐานชีววิทยา: fetal fraction และ cell-free DNA",
-          "ผล High Risk หมายความว่าอะไร",
-          "ตรวจได้ตั้งแต่กี่สัปดาห์",
-        ];
-
-        return (
-          <div style={{ minHeight: "100vh", background: "linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)", fontFamily: "'Georgia', serif", color: "#e2e8f0" }}>
-            {/* Header */}
-            <div style={{ background: "rgba(0,0,0,0.4)", borderBottom: "1px solid rgba(56,178,172,0.3)", padding: "20px 24px" }}>
-              <div style={{ maxWidth: 900, margin: "0 auto" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                  <span style={{ fontSize: 36 }}>🧬</span>
-                  <div>
-                    <h1 style={{ fontSize: 22, fontWeight: "bold", color: "#81e6d9", margin: 0, letterSpacing: 1 }}>NIPT Genetic Counselling</h1>
-                    <p style={{ fontSize: 13, color: "#90cdf4", margin: 0 }}>ระบบให้คำปรึกษาการตรวจคัดกรองโครโมโซมทารกในครรภ์</p>
-                  </div>
-                </div>
-                <div style={{ display: "flex", gap: 8, marginTop: 16 }}>
-                  {["guided", "chat"].map((tab) => (
-                    <button key={tab} onClick={() => setActiveTab(tab)} style={{ padding: "8px 20px", borderRadius: 20, border: "none", cursor: "pointer", fontSize: 13, fontWeight: "bold", background: activeTab === tab ? "linear-gradient(135deg, #319795, #2b6cb0)" : "rgba(255,255,255,0.1)", color: activeTab === tab ? "#fff" : "#a0aec0", transition: "all 0.2s" }}>
-                      {tab === "guided" ? "📋 เมนูหัวข้อ" : "💬 ถามอิสระ"}
-                    </button>
-                  ))}
-                </div>
-              </div>
+        <div id="panel-body">
+          <!-- Empty state -->
+          <div id="empty-state">
+            <div id="empty-dna">
+              <canvas id="dna-large" width="180" height="240" style="width:180px;height:240px;filter:drop-shadow(0px 4px 16px rgba(0,212,255,0.3))"></canvas>
             </div>
-
-            <div style={{ maxWidth: 900, margin: "0 auto", padding: "24px 16px" }}>
-              {activeTab === "guided" && (
-                <div style={{ display: "grid", gridTemplateColumns: "300px 1fr", gap: 20 }}>
-                  {/* Left Panel */}
-                  <div>
-                    <div style={{ marginBottom: 16 }}>
-                      <label style={{ fontSize: 12, color: "#90cdf4", display: "block", marginBottom: 6 }}>เลือกหมวดหมู่</label>
-                      <select value={selectedCategory} onChange={(e) => { setSelectedCategory(e.target.value); setSelectedTopic(""); setAiResponse(""); }} style={{ width: "100%", padding: "10px 12px", background: "rgba(0,0,0,0.4)", border: "1px solid rgba(56,178,172,0.4)", borderRadius: 8, color: "#e2e8f0", fontSize: 14, cursor: "pointer" }}>
-                        <option value="">-- เลือกหมวดหมู่ --</option>
-                        {Object.keys(TOPICS).map((cat) => (
-                          <option key={cat} value={cat}>{TOPICS[cat].icon} {cat}</option>
-                        ))}
-                      </select>
-                    </div>
-                    {selectedCategory && (
-                      <div>
-                        <label style={{ fontSize: 12, color: "#90cdf4", display: "block", marginBottom: 8 }}>เลือกหัวข้อย่อย</label>
-                        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                          {TOPICS[selectedCategory].subtopics.map((topic) => (
-                            <button key={topic} onClick={() => handleTopicSelect(topic)} style={{ padding: "9px 12px", background: selectedTopic === topic ? "linear-gradient(135deg, #2c7a7b, #2b6cb0)" : "rgba(255,255,255,0.06)", border: selectedTopic === topic ? "1px solid #81e6d9" : "1px solid rgba(255,255,255,0.1)", borderRadius: 8, color: selectedTopic === topic ? "#e6fffa" : "#cbd5e0", fontSize: 13, textAlign: "left", cursor: "pointer" }}>
-                              {topic}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                    {!selectedCategory && (
-                      <div>
-                        <p style={{ fontSize: 12, color: "#90cdf4", marginBottom: 10 }}>🔖 เข้าถึงด่วน</p>
-                        {quickAccess.map((q) => (
-                          <button key={q} onClick={() => handleTopicSelect(q)} style={{ display: "block", width: "100%", padding: "8px 10px", marginBottom: 6, background: "rgba(56,178,172,0.1)", border: "1px solid rgba(56,178,172,0.2)", borderRadius: 8, color: "#81e6d9", fontSize: 12, textAlign: "left", cursor: "pointer" }}>
-                            → {q}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Right Panel */}
-                  <div style={{ background: "rgba(0,0,0,0.3)", border: "1px solid rgba(56,178,172,0.2)", borderRadius: 12, padding: 20, minHeight: 400 }}>
-                    {isLoading && (
-                      <div style={{ textAlign: "center", paddingTop: 80 }}>
-                        <div style={{ width: 40, height: 40, border: "3px solid rgba(56,178,172,0.3)", borderTop: "3px solid #81e6d9", borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto 16px" }} />
-                        <p style={{ color: "#81e6d9", fontSize: 14 }}>กำลังค้นหาข้อมูล...</p>
-                        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
-                      </div>
-                    )}
-                    {!isLoading && !aiResponse && (
-                      <div style={{ textAlign: "center", paddingTop: 60, color: "#718096" }}>
-                        <p style={{ fontSize: 40 }}>🧬</p>
-                        <p style={{ fontSize: 15 }}>เลือกหมวดหมู่และหัวข้อ</p>
-                        <p style={{ fontSize: 13 }}>เพื่อเริ่มการให้คำปรึกษา NIPT</p>
-                      </div>
-                    )}
-                    {!isLoading && aiResponse && (
-                      <div>
-                        <div style={{ background: "rgba(56,178,172,0.1)", border: "1px solid rgba(56,178,172,0.3)", borderRadius: 8, padding: "8px 14px", marginBottom: 16, fontSize: 13, color: "#81e6d9" }}>
-                          📌 {selectedTopic}
-                        </div>
-                        <div style={{ fontSize: 14, lineHeight: 1.8, color: "#e2e8f0" }}>
-                          {formatResponse(aiResponse)}
-                        </div>
-                        <div style={{ marginTop: 20, padding: "10px 14px", background: "rgba(237,137,54,0.1)", border: "1px solid rgba(237,137,54,0.3)", borderRadius: 8, fontSize: 12, color: "#fbd38d" }}>
-                          ⚕️ ข้อมูลนี้เพื่อการศึกษา ควรปรึกษาแพทย์หรือ genetic counselor สำหรับกรณีเฉพาะบุคคล
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {activeTab === "chat" && (
-                <div>
-                  <div style={{ background: "rgba(0,0,0,0.3)", border: "1px solid rgba(56,178,172,0.2)", borderRadius: 12, padding: 20, minHeight: 300, maxHeight: 420, overflowY: "auto", marginBottom: 16 }}>
-                    {chatHistory.length === 0 && !isLoading && (
-                      <div style={{ textAlign: "center", color: "#718096", paddingTop: 60 }}>
-                        <p style={{ fontSize: 32 }}>💬</p>
-                        <p>พิมพ์คำถามด้านล่างเพื่อเริ่มการสนทนา</p>
-                        <p style={{ fontSize: 13 }}>ตัวอย่าง: "fetal fraction ต่ำมีผลอย่างไรต่อ NIPT?"</p>
-                      </div>
-                    )}
-                    {chatHistory.map((item, i) => (
-                      <div key={i} style={{ marginBottom: 20 }}>
-                        <div style={{ background: "rgba(56,178,172,0.15)", borderRadius: "12px 12px 4px 12px", padding: "10px 14px", marginBottom: 8, fontSize: 14, color: "#e6fffa", marginLeft: "20%" }}>{item.q}</div>
-                        <div style={{ background: "rgba(255,255,255,0.05)", borderRadius: "4px 12px 12px 12px", padding: "10px 14px", fontSize: 14, lineHeight: 1.8, marginRight: "10%" }}>{formatResponse(item.a)}</div>
-                      </div>
-                    ))}
-                    {isLoading && (
-                      <div style={{ display: "flex", gap: 6, padding: 10 }}>
-                        {[0,1,2].map((i) => <div key={i} style={{ width: 8, height: 8, background: "#81e6d9", borderRadius: "50%", animation: `bounce 1s ease-in-out ${i * 0.2}s infinite` }} />)}
-                        <style>{`@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }`}</style>
-                      </div>
-                    )}
-                  </div>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 12 }}>
-                    {[
-                      "fetal fraction ต่ำมีผลอย่างไร?",
-                      "Genetic counselor ต่างจากแพทย์ทั่วไปอย่างไร?",
-                      "ผล No Call ต้องทำอะไรต่อ?",
-                      "PPV แปลว่าอะไรในทางปฏิบัติ?",
-                    ].map((q) => (
-                      <button key={q} onClick={() => setCustomQuestion(q)} style={{ padding: "6px 12px", background: "rgba(56,178,172,0.1)", border: "1px solid rgba(56,178,172,0.3)", borderRadius: 20, color: "#81e6d9", fontSize: 12, cursor: "pointer" }}>{q}</button>
-                    ))}
-                  </div>
-                  <div style={{ display: "flex", gap: 10 }}>
-                    <input value={customQuestion} onChange={(e) => setCustomQuestion(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleCustomQuestion()} placeholder="พิมพ์คำถามเกี่ยวกับ NIPT..." style={{ flex: 1, padding: "12px 16px", background: "rgba(0,0,0,0.4)", border: "1px solid rgba(56,178,172,0.4)", borderRadius: 10, color: "#e2e8f0", fontSize: 14, outline: "none" }} />
-                    <button onClick={handleCustomQuestion} disabled={isLoading || !customQuestion.trim()} style={{ padding: "12px 20px", background: isLoading ? "rgba(56,178,172,0.3)" : "linear-gradient(135deg, #319795, #2b6cb0)", border: "none", borderRadius: 10, color: "#fff", fontSize: 14, cursor: isLoading ? "not-allowed" : "pointer", fontWeight: "bold" }}>ส่ง →</button>
-                  </div>
-                </div>
-              )}
-
-              <div style={{ marginTop: 24, padding: "12px 16px", background: "rgba(0,0,0,0.2)", borderRadius: 8, fontSize: 11, color: "#718096", textAlign: "center" }}>
-                ข้อมูลนี้จัดทำเพื่อการศึกษาและเป็นแนวทางเบื้องต้นเท่านั้น ไม่สามารถทดแทนการปรึกษาแพทย์หรือ genetic counselor ที่มีใบอนุญาต
-              </div>
+            <h3 style="color:#e2e8f0;font-size:20px;font-weight:500;margin-top:24px">เลือกหมวดหมู่และหัวข้อ</h3>
+            <p style="color:#64748b;font-size:14px;margin-top:8px">เพื่อเริ่มการให้คำปรึกษา NIPT</p>
+          </div>
+          <!-- Loading state -->
+          <div id="loading-state">
+            <div id="spinner"></div>
+            <p style="margin-top:24px;color:#22d3ee;font-size:16px;font-weight:500">กำลังวิเคราะห์ข้อมูล...</p>
+            <p style="color:#64748b;font-size:13px;margin-top:4px">ประมวลผลโดย Claude AI</p>
+          </div>
+          <!-- Answer state -->
+          <div id="answer-state">
+            <div id="answer-text" style="font-size:15px;color:#e2e8f0"></div>
+            <div style="margin-top:40px;padding:16px;background:rgba(245,158,11,0.05);border-left:4px solid #f59e0b;border-radius:0 8px 8px 0">
+              <p style="color:#fbbf24;font-size:13px;margin:0;display:flex;align-items:center;gap:8px">
+                <span style="font-size:18px">⚠️</span> ข้อมูลนี้จัดทำเพื่อการศึกษาเบื้องต้น ไม่สามารถทดแทนการวินิจฉัยของแพทย์ได้
+              </p>
             </div>
           </div>
-        );
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CHAT MODE ── -->
+  <div id="chat-view">
+    <div id="chat-container">
+      <div class="glass-panel" id="chat-panel">
+
+        <div id="chat-messages">
+          <!-- Empty prompt -->
+          <div id="chat-empty" style="margin:auto;text-align:center;color:#64748b">
+            <div style="font-size:48px;margin-bottom:16px">💬</div>
+            <h3 style="font-size:18px;color:#cbd5e1;font-weight:500">สอบถามข้อมูล NIPT เพิ่มเติม</h3>
+            <p style="font-size:14px;margin-top:8px">พิมพ์คำถามของคุณที่ช่องด้านล่าง</p>
+          </div>
+          <!-- Messages injected here -->
+          <div id="chat-msgs"></div>
+          <!-- Typing indicator -->
+          <div id="typing" style="display:none;align-self:flex-start;padding:12px 16px;background:rgba(255,255,255,0.02);border-radius:16px;flex-direction:row;gap:8px">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+          </div>
+          <div id="chat-end"></div>
+        </div>
+
+        <div id="chat-input-area">
+          <!-- Suggested chips -->
+          <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+            <button class="glass-btn" onclick="setQ('NIPT กับ quad screen ต่างกันอย่างไร?')"
+              style="padding:6px 14px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);border-radius:20px;color:#22d3ee;font-size:12px;font-family:'Kanit',sans-serif">
+              NIPT กับ quad screen ต่างกันอย่างไร?
+            </button>
+            <button class="glass-btn" onclick="setQ('ครรภ์แฝดตรวจได้ไหม?')"
+              style="padding:6px 14px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);border-radius:20px;color:#22d3ee;font-size:12px;font-family:'Kanit',sans-serif">
+              ครรภ์แฝดตรวจได้ไหม?
+            </button>
+            <button class="glass-btn" onclick="setQ('ผล No Call คืออะไร?')"
+              style="padding:6px 14px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);border-radius:20px;color:#22d3ee;font-size:12px;font-family:'Kanit',sans-serif">
+              ผล No Call คืออะไร?
+            </button>
+          </div>
+          <!-- Input row -->
+          <div style="display:flex;gap:12px">
+            <input id="chat-input" type="text" placeholder="พิมพ์คำถามเกี่ยวกับ NIPT..."
+              onkeydown="if(event.key==='Enter')handleSend()"
+              style="flex:1;padding:14px 20px;background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.1);border-radius:12px;color:#f8fafc;font-size:14px;font-family:'Kanit',sans-serif;outline:none;box-shadow:inset 0 2px 4px rgba(0,0,0,0.2)"/>
+            <button id="send-btn" class="glass-btn" onclick="handleSend()"
+              style="padding:0 24px;background:linear-gradient(135deg,#06b6d4,#2563eb);border-radius:12px;color:#fff;font-weight:500;font-size:14px;font-family:'Kanit',sans-serif;min-height:48px">
+              ส่งข้อความ
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer id="footer">
+  <p style="margin:0;font-size:12px;color:#64748b">
+    © ศูนย์จีโนมิกส์ทางการแพทย์ (Center for Medical Genomics) • ข้อมูลนี้เพื่อการศึกษา ไม่สามารถทดแทนการวินิจฉัยทางการแพทย์
+  </p>
+</footer>
+
+<!-- ═══════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════ -->
+<script>
+/* ── Data (exact from React) ── */
+const TOPICS = {
+  "ความหมายของ NIPT":    { icon:"🧬", subtopics:["NIPT คืออะไร","หลักการทำงานของ NIPT","ความแตกต่างจาก invasive testing","ข้อบ่งชี้ในการตรวจ NIPT","Genetic counselor คืออะไร","พื้นฐานชีววิทยา: fetal fraction และ cell-free DNA"] },
+  "การแปลผล NIPT":        { icon:"📊", subtopics:["ผล High Risk หมายความว่าอะไร","ผล Low Risk หมายความว่าอะไร","ผล No Call / Failed","PPV และ NPV คืออะไร","ความแม่นยำของการตรวจ"] },
+  "โครโมโซมที่ตรวจพบ":   { icon:"🔬", subtopics:["Trisomy 21 (Down syndrome)","Trisomy 18 (Edwards syndrome)","Trisomy 13 (Patau syndrome)","Sex chromosome aneuploidies","Microdeletions","Rare autosomal trisomies"] },
+  "ขั้นตอนหลังผลผิดปกติ":{ icon:"🏥", subtopics:["ควรทำอะไรต่อเมื่อผล High Risk","Amniocentesis คืออะไร","CVS คืออะไร","การตัดสินใจหลังการตรวจยืนยัน","การส่งต่อผู้เชี่ยวชาญ"] },
+  "ข้อจำกัดของ NIPT":    { icon:"⚠️", subtopics:["False positive และ false negative","Vanishing twin syndrome","Confined placental mosaicism","Maternal malignancy","กรณีที่ NIPT ไม่เหมาะสม"] },
+  "คำถามที่พบบ่อย":      { icon:"❓", subtopics:["ตรวจได้ตั้งแต่กี่สัปดาห์","ครรภ์แฝดตรวจได้หรือไม่","IVF มีผลต่อการตรวจหรือไม่","ผล NIPT บอกเพศทารกได้หรือไม่","ค่าใช้จ่ายและการเบิกจ่าย"] },
+};
+const QUICK = ["NIPT คืออะไร","Genetic counselor คืออะไร","พื้นฐานชีววิทยา: fetal fraction และ cell-free DNA","ผล High Risk หมายความว่าอะไร","ตรวจได้ตั้งแต่กี่สัปดาห์"];
+const SYSTEM = `คุณเป็น genetic counselor ผู้เชี่ยวชาญด้าน NIPT ประจำศูนย์จีโนมิกส์ทางการแพทย์
+ให้คำปรึกษาเป็นภาษาไทยที่ชัดเจน เป็นวิทยาศาสตร์ และเข้าใจง่าย
+ใช้ข้อมูลทางการแพทย์ที่ถูกต้องและทันสมัย จัดรูปแบบให้อ่านง่าย
+ย้ำเสมอว่าควรปรึกษาแพทย์หรือ genetic counselor สำหรับกรณีเฉพาะบุคคล`;
+
+let currentCategory = "";
+let currentTopic    = "";
+
+/* ══════════════════════════════════════════════
+   DNAHelix — exact port of React component
+   (Z-sorting, glow, blink sparkles, same params)
+══════════════════════════════════════════════ */
+class DNAHelix {
+  constructor(canvas) {
+    this.canvas   = canvas;
+    this.ctx      = canvas.getContext("2d");
+    this.W        = canvas.width;
+    this.H        = canvas.height;
+    // Scale factors to match viewBox="0 0 300 400"
+    this.scaleX   = this.W / 300;
+    this.scaleY   = this.H / 400;
+    this.time     = 0;
+    this.raf      = null;
+  }
+
+  /* translate from SVG coords to canvas coords */
+  sx(x){ return x * this.scaleX; }
+  sy(y){ return y * this.scaleY; }
+  sw(w){ return w * this.scaleX; }
+
+  draw() {
+    const { ctx, time, W, H } = this;
+    ctx.clearRect(0, 0, W, H);
+
+    const numBases = 40;
+    const radius   = 65;
+    const height   = 320;  // SVG units
+
+    /* collect items exactly as React does */
+    const items = [];
+
+    /* bg glow (z = -1000) */
+    items.push({ z:-1000, type:"bgGlow" });
+
+    for (let i = 0; i < numBases; i++) {
+      const t  = (i / (numBases - 1)) * Math.PI * 5;
+      const y  = 40 + (i / (numBases - 1)) * height;   // SVG y
+      const a1 = t + time;
+      const a2 = t + time + Math.PI;
+      const x1 = Math.cos(a1) * radius;
+      const z1 = Math.sin(a1) * radius;
+      const x2 = Math.cos(a2) * radius;
+      const z2 = Math.sin(a2) * radius;
+      const cx1 = 150 + x1;
+      const cx2 = 150 + x2;
+      const scale1 = (z1 + radius) / (radius * 2);
+      const scale2 = (z2 + radius) / (radius * 2);
+
+      /* rungs every 2nd base */
+      if (i % 2 === 0) {
+        const zRung    = (z1 + z2) / 2;
+        const rungScale = (scale1 + scale2) / 2;
+        items.push({ z: zRung, type:"rung", cx1, cx2, y, rungScale });
       }
 
-      const root = ReactDOM.createRoot(document.getElementById("root"));
-      root.render(<NIPTCounsellingApp />);
-    </script>
-  </body>
+      /* backbone */
+      if (i > 0) {
+        const pi   = i - 1;
+        const pt   = (pi / (numBases - 1)) * Math.PI * 5;
+        const py   = 40 + (pi / (numBases - 1)) * height;
+        const pa1  = pt + time;
+        const pa2  = pt + time + Math.PI;
+        const pcx1 = 150 + Math.cos(pa1) * radius;
+        const pz1  = Math.sin(pa1) * radius;
+        const pcx2 = 150 + Math.cos(pa2) * radius;
+        const pz2  = Math.sin(pa2) * radius;
+        const az1  = (z1 + pz1) / 2;
+        const az2  = (z2 + pz2) / 2;
+        const s1   = (az1 + radius) / (radius * 2);
+        const s2   = (az2 + radius) / (radius * 2);
+        items.push({ z:az1, type:"bone1", x1:pcx1, y1:py, x2:cx1, y2:y, s:s1 });
+        items.push({ z:az2, type:"bone2", x1:pcx2, y1:py, x2:cx2, y2:y, s:s2 });
+      }
+
+      /* dots */
+      const blink1 = Math.sin(time * 5 + i) > 0.8 && scale1 > 0.8 ? 1.5 : 1;
+      const blink2 = Math.sin(time * 5 + i + Math.PI) > 0.8 && scale2 > 0.8 ? 1.5 : 1;
+      items.push({ z:z1+1, type:"dot1", cx:cx1, y, scale:scale1, blink:blink1 });
+      items.push({ z:z2+1, type:"dot2", cx:cx2, y, scale:scale2, blink:blink2 });
+    }
+
+    /* sparkles */
+    for (let j = 0; j < 15; j++) {
+      const py     = (time * 15 + j * 30) % 400;
+      const px     = 150 + Math.sin(time * 0.5 + j * 123) * 120;
+      const pz     = Math.cos(time * 0.8 + j * 321) * 100;
+      const pScale = (pz + 100) / 200;
+      const pBlink = Math.sin(time * 8 + j * 45) > 0.6 ? 1 : 0.2;
+      items.push({ z:pz, type:"sparkle", cx:px, y:py, scale:pScale, blink:pBlink });
+    }
+
+    /* Z-sort ascending (back to front) */
+    items.sort((a, b) => a.z - b.z);
+
+    /* draw each item */
+    for (const it of items) {
+      if (it.type === "bgGlow") {
+        const grd = ctx.createRadialGradient(
+          this.sx(150), this.sy(200), 0,
+          this.sx(150), this.sy(200), this.sx(120)
+        );
+        grd.addColorStop(0, "rgba(0,212,255,0.25)");
+        grd.addColorStop(1, "rgba(0,212,255,0)");
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.ellipse(this.sx(150), this.sy(200), this.sx(120), this.sy(180), 0, 0, Math.PI*2);
+        ctx.fill();
+
+      } else if (it.type === "rung") {
+        ctx.save();
+        ctx.strokeStyle = `rgba(255,255,255,${0.1 + it.rungScale * 0.7})`;
+        ctx.lineWidth   = this.sw(1 + it.rungScale * 2.5);
+        ctx.globalAlpha = 0.1 + it.rungScale * 0.7;
+        ctx.beginPath();
+        ctx.moveTo(this.sx(it.cx1), this.sy(it.y));
+        ctx.lineTo(this.sx(it.cx2), this.sy(it.y));
+        ctx.stroke();
+        ctx.restore();
+
+      } else if (it.type === "bone1") {
+        ctx.save();
+        ctx.shadowColor = "#00d4ff";
+        ctx.shadowBlur  = this.sw(5);
+        ctx.strokeStyle = `rgba(0,212,255,${0.2 + it.s * 0.8})`;
+        ctx.lineWidth   = this.sw(2 + it.s * 5);
+        ctx.lineCap     = "round";
+        ctx.beginPath();
+        ctx.moveTo(this.sx(it.x1), this.sy(it.y1));
+        ctx.lineTo(this.sx(it.x2), this.sy(it.y2));
+        ctx.stroke();
+        ctx.restore();
+
+      } else if (it.type === "bone2") {
+        ctx.save();
+        ctx.shadowColor = "#ff4da6";
+        ctx.shadowBlur  = this.sw(5);
+        ctx.strokeStyle = `rgba(255,77,166,${0.2 + it.s * 0.8})`;
+        ctx.lineWidth   = this.sw(2 + it.s * 5);
+        ctx.lineCap     = "round";
+        ctx.beginPath();
+        ctx.moveTo(this.sx(it.x1), this.sy(it.y1));
+        ctx.lineTo(this.sx(it.x2), this.sy(it.y2));
+        ctx.stroke();
+        ctx.restore();
+
+      } else if (it.type === "dot1") {
+        const r    = this.sw((1.5 + it.scale * 2) * it.blink);
+        const isBig = it.blink > 1;
+        ctx.save();
+        ctx.shadowColor = isBig ? "#ffffff" : "#00d4ff";
+        ctx.shadowBlur  = isBig ? this.sw(10) : this.sw(5);
+        ctx.fillStyle   = isBig ? "#ffffff" : `rgba(0,212,255,${0.4 + it.scale * 0.6})`;
+        ctx.globalAlpha = 0.4 + it.scale * 0.6;
+        ctx.beginPath();
+        ctx.arc(this.sx(it.cx), this.sy(it.y), r, 0, Math.PI*2);
+        ctx.fill();
+        ctx.restore();
+
+      } else if (it.type === "dot2") {
+        const r    = this.sw((1.5 + it.scale * 2) * it.blink);
+        const isBig = it.blink > 1;
+        ctx.save();
+        ctx.shadowColor = isBig ? "#ffffff" : "#ff4da6";
+        ctx.shadowBlur  = isBig ? this.sw(10) : this.sw(5);
+        ctx.fillStyle   = isBig ? "#ffffff" : `rgba(255,77,166,${0.4 + it.scale * 0.6})`;
+        ctx.globalAlpha = 0.4 + it.scale * 0.6;
+        ctx.beginPath();
+        ctx.arc(this.sx(it.cx), this.sy(it.y), r, 0, Math.PI*2);
+        ctx.fill();
+        ctx.restore();
+
+      } else if (it.type === "sparkle") {
+        const r = this.sw(1 + it.scale * 2.5);
+        ctx.save();
+        ctx.shadowColor = "#ffffff";
+        ctx.shadowBlur  = this.sw(10);
+        ctx.fillStyle   = "#ffffff";
+        ctx.globalAlpha = it.blink * it.scale * 0.8;
+        ctx.beginPath();
+        ctx.arc(this.sx(it.cx), this.sy(it.y), r, 0, Math.PI*2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+  }
+
+  start() {
+    const loop = () => {
+      this.time += 0.02;
+      this.draw();
+      this.raf = requestAnimationFrame(loop);
+    };
+    this.raf = requestAnimationFrame(loop);
+  }
+  stop() { if (this.raf) cancelAnimationFrame(this.raf); }
+}
+
+/* ── Init both DNA canvases ── */
+let dnaSmall, dnaLarge;
+function initDNA() {
+  dnaSmall = new DNAHelix(document.getElementById("dna-small"));
+  dnaSmall.start();
+  dnaLarge = new DNAHelix(document.getElementById("dna-large"));
+  dnaLarge.start();
+}
+
+/* ── Build quick-access list ── */
+function buildQuick() {
+  const list = document.getElementById("quick-list");
+  QUICK.forEach(q => {
+    const btn = document.createElement("button");
+    btn.className = "glass-btn";
+    btn.style.cssText = "width:100%;padding:12px 14px;text-align:left;border-radius:10px;font-size:13px;font-family:'Kanit',sans-serif;background:rgba(255,255,255,0.02);color:#e2e8f0;display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,0.05)";
+    btn.innerHTML = `<span>${q}</span><span style="color:#ec4899;font-size:16px">→</span>`;
+    btn.onclick   = () => askTopic(q, "");
+    list.appendChild(btn);
+  });
+}
+
+/* ── Tab switching ── */
+function switchTab(tab) {
+  const isGuided = tab === "guided";
+  document.getElementById("guided-view").style.display = isGuided ? "block" : "none";
+  document.getElementById("chat-view").style.display   = isGuided ? "none"  : "block";
+  const tg = document.getElementById("tab-guided");
+  const tc = document.getElementById("tab-chat");
+  if (isGuided) {
+    tg.style.background = "rgba(6,182,212,0.15)"; tg.style.color = "#22d3ee"; tg.style.boxShadow = "inset 0 0 0 1px rgba(6,182,212,0.4),0 4px 12px rgba(0,0,0,0.2)";
+    tc.style.background = "rgba(255,255,255,0.03)"; tc.style.color = "#94a3b8"; tc.style.boxShadow = "inset 0 0 0 1px rgba(255,255,255,0.05)";
+  } else {
+    tc.style.background = "rgba(6,182,212,0.15)"; tc.style.color = "#22d3ee"; tc.style.boxShadow = "inset 0 0 0 1px rgba(6,182,212,0.4),0 4px 12px rgba(0,0,0,0.2)";
+    tg.style.background = "rgba(255,255,255,0.03)"; tg.style.color = "#94a3b8"; tg.style.boxShadow = "inset 0 0 0 1px rgba(255,255,255,0.05)";
+  }
+}
+
+/* ── Category change ── */
+function onCategoryChange() {
+  const cat = document.getElementById("cat-select").value;
+  currentCategory = cat;
+  currentTopic    = "";
+  document.getElementById("panel-topic").textContent = "";
+  showEmpty();
+
+  if (!cat) {
+    document.getElementById("subtopic-panel").style.display = "none";
+    document.getElementById("quick-panel").style.display    = "block";
+    return;
+  }
+  document.getElementById("quick-panel").style.display    = "none";
+  document.getElementById("subtopic-panel").style.display = "block";
+
+  const list = document.getElementById("subtopic-list");
+  list.innerHTML = "";
+  TOPICS[cat].subtopics.forEach(t => {
+    const btn = document.createElement("button");
+    btn.className = "topic-btn";
+    btn.textContent = t;
+    btn.dataset.t   = t;
+    btn.style.cssText = `width:100%;padding:10px 14px;text-align:left;border-radius:8px;font-size:14px;font-family:'Kanit',sans-serif;background:transparent;color:#cbd5e1;border-left:3px solid transparent;font-weight:400;outline:none`;
+    btn.onclick = () => {
+      document.querySelectorAll(".topic-btn").forEach(b => {
+        b.style.background = "transparent"; b.style.color = "#cbd5e1";
+        b.style.borderLeftColor = "transparent"; b.style.fontWeight = "400";
+      });
+      btn.style.background = "rgba(6,182,212,0.1)"; btn.style.color = "#22d3ee";
+      btn.style.borderLeftColor = "#06b6d4"; btn.style.fontWeight = "500";
+      askTopic(t, cat);
+    };
+    list.appendChild(btn);
+  });
+}
+
+/* ── Claude API (exponential backoff, same as React) ── */
+async function callClaude(userPrompt) {
+  const delays = [1000, 2000, 4000, 8000, 16000];
+  for (let i = 0; i < 5; i++) {
+    try {
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model:      "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system:     SYSTEM,
+          messages:   [{ role: "user", content: userPrompt }],
+        }),
+      });
+      if (res.ok) {
+        const d = await res.json();
+        return d.content?.[0]?.text || "ไม่สามารถโหลดข้อมูลได้";
+      }
+      throw new Error("API Error");
+    } catch {
+      if (i === 4) break;
+      await new Promise(r => setTimeout(r, delays[i]));
+    }
+  }
+  return "ขออภัย ไม่สามารถเชื่อมต่อได้ในขณะนี้ โปรดลองใหม่อีกครั้ง";
+}
+
+/* ── Format markdown → HTML (exact same logic as React fmt()) ── */
+function fmt(text) {
+  return text.split("\n").map(line => {
+    if (!line.trim())
+      return `<div style="height:8px"></div>`;
+    if (line.startsWith("**") && line.endsWith("**"))
+      return `<h4 class="ans-h">${line.replace(/\*\*/g,"")}</h4>`;
+    if (line.includes("**"))
+      return `<p class="ans-p">${line.replace(/\*\*(.*?)\*\*/g,'<strong class="ans-strong">$1</strong>')}</p>`;
+    if (line.startsWith("- ") || line.startsWith("• "))
+      return `<li class="ans-li">${line.slice(2)}</li>`;
+    return `<p class="ans-p">${line}</p>`;
+  }).join("");
+}
+
+/* ── State helpers ── */
+function showEmpty() {
+  document.getElementById("empty-state").style.display   = "flex";
+  document.getElementById("loading-state").style.display = "none";
+  document.getElementById("answer-state").style.display  = "none";
+}
+function showLoading() {
+  document.getElementById("empty-state").style.display   = "none";
+  document.getElementById("loading-state").style.display = "flex";
+  document.getElementById("answer-state").style.display  = "none";
+}
+function showAnswer(html) {
+  document.getElementById("empty-state").style.display   = "none";
+  document.getElementById("loading-state").style.display = "none";
+  document.getElementById("answer-text").innerHTML        = html;
+  document.getElementById("answer-state").style.display  = "block";
+}
+
+/* ── Guided mode ask ── */
+async function askTopic(t, cat) {
+  currentTopic = t;
+  document.getElementById("panel-topic").textContent = t;
+  showLoading();
+  const prompt = cat ? `หมวด: ${cat}\nคำถาม: ${t}` : t;
+  const text   = await callClaude(prompt);
+  showAnswer(fmt(text));
+}
+
+/* ── Chat mode ── */
+function setQ(q) {
+  document.getElementById("chat-input").value = q;
+  document.getElementById("chat-input").focus();
+}
+
+async function handleSend() {
+  const inp = document.getElementById("chat-input");
+  const q   = inp.value.trim();
+  if (!q) return;
+  inp.value     = "";
+  inp.disabled  = true;
+  const sendBtn = document.getElementById("send-btn");
+  sendBtn.style.opacity = "0.5";
+
+  document.getElementById("chat-empty").style.display = "none";
+
+  /* user bubble */
+  const msgs = document.getElementById("chat-msgs");
+  const uDiv = document.createElement("div");
+  uDiv.className = "chat-user-bubble";
+  uDiv.textContent = q;
+  msgs.appendChild(uDiv);
+
+  /* typing indicator */
+  const ty = document.getElementById("typing");
+  ty.style.display = "flex";
+  scrollEnd();
+
+  const answer = await callClaude(q);
+
+  ty.style.display = "none";
+
+  /* AI bubble */
+  const aDiv = document.createElement("div");
+  aDiv.className   = "chat-ai-bubble";
+  aDiv.innerHTML   = fmt(answer);
+  msgs.appendChild(aDiv);
+
+  inp.disabled          = false;
+  sendBtn.style.opacity = "1";
+  inp.focus();
+  scrollEnd();
+}
+
+function scrollEnd() {
+  document.getElementById("chat-end").scrollIntoView({ behavior:"smooth" });
+}
+
+/* ── Boot ── */
+window.addEventListener("DOMContentLoaded", () => {
+  buildQuick();
+  initDNA();
+});
+</script>
+</body>
 </html>
